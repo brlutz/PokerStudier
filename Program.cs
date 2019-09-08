@@ -18,7 +18,6 @@ namespace PokerStudier
 
     public class PokerParser
     {
-        public const string HeroName = "PlayTheBlues4U";
         public List<List<string>> RawHands = new List<List<string>>();
         public List<HandHistory> HandHistories = new List<HandHistory>();
 
@@ -55,7 +54,7 @@ namespace PokerStudier
                 this.RawHands = hands;
             }
 
-            ParseHands(15);
+            ParseHands();
 
             DisplayHands();
 
@@ -68,6 +67,13 @@ namespace PokerStudier
                 Console.WriteLine("# "+hh.HandNumber);
                 Console.WriteLine("Hero Played :" + hh.Hand.RawHand);
                 Console.WriteLine("Hero started with : $"+ hh.HeroStartMoney.ToString());
+                Console.WriteLine("Stakes are: " + hh.Stakes );
+                Console.WriteLine("Big Blind is: $" + hh.BigBlind.ToString());
+                Console.WriteLine("Small Blind is: $" + hh.SmallBlind.ToString());
+                if(hh.BlindPaid != null){ Console.WriteLine("Paid the "+hh.BlindPaid);}
+                Console.WriteLine("Hero Put in Pot: " + hh.HeroMoneyPutInPotTotal);
+                Console.WriteLine("Hero won: $" + hh.HeroWinnings);
+                Console.WriteLine("Hero diffed " + (hh.HeroWinnings - hh.HeroMoneyPutInPotTotal).ToString());
             }
         }
 
@@ -76,7 +82,8 @@ namespace PokerStudier
             int counter = 0;
             foreach (List<string> rawHand in this.RawHands)
             {
-                this.HandHistories.Add(ParseHand(rawHand));
+                HandHistory hh = new HandHistory(rawHand, "PlayTheBlues4U");
+                this.HandHistories.Add(hh.ParseHand());
                 counter ++;
 
                 if(handsToParse.HasValue && counter > handsToParse.Value)
@@ -86,106 +93,6 @@ namespace PokerStudier
             }
 
         }
-
-        public HandHistory ParseHand(List<string> hand)
-        {
-            HandHistory hh = new HandHistory();
-            List<string> lines = hand;
-
-            // Get hand history, game type and game stakes
-            hh.HandNumber = GetHandNumber(lines[0]);
-            hh.GameType = GetGameType(lines[0]);
-            hh.Stakes = GetGameStakes(lines[0]);
-
-
-            // Get Hero starting amount
-            hh.HeroStartMoney = GetHeroStartMoney(lines);
-            //hh.HeroEndMoney = GetHeroEndMoney(lines);
-
-            hh.Hand = new Hand(GetHeroHand(lines));
-
-            return hh;
-
-        }
-
-        private string GetHeroHand(List<string> lines)
-        {
-            for (int i = 5; i < lines.Count; i++)
-            {
-                string line = lines[i];
-
-                if (line.StartsWith("*** HOLE CARDS ***"))
-                {
-                    line = lines[i + 1];
-                    if (line.Contains(HeroName))
-                    {
-                        string pattern = "\\[\\S\\S \\S\\S]";
-                        string match = Regex.Match(line, pattern).Value;
-                        match = match.Replace("[", "").Replace("]", "");
-                        return match;
-                    }
-                }
-
-            }
-
-            throw new InvalidDataException();
-        }
-
-        private decimal GetHeroEndMoney(List<string> lines)
-        {
-            throw new NotImplementedException();
-        }
-
-        private decimal GetHeroStartMoney(List<string> lines)
-        {
-
-            for (int i = 2; i < lines.Count; i++)
-            {
-                string line = lines[i];
-
-                if (line.StartsWith("***"))
-                {
-                    break;
-                }
-
-                if (line.Contains(HeroName))
-                {
-                    string pattern = "(\\$\\S*)";
-                    string match = Regex.Match(line, pattern).Value;
-                    match = match.Replace("$", "");
-                    return Convert.ToDecimal(match);
-                }
-
-            }
-
-            throw new InvalidDataException();
-        }
-
-        public string GetHandNumber(string line)
-        {
-            string pattern = "#\\d*:";
-            string match = Regex.Match(line, pattern).Value;
-            return match.Substring(1, match.Length - 2);
-        }
-
-        public string GetGameType(string line)
-        {
-            if (line.Contains("Hold'em No Limit"))
-            {
-                return "Hold'em No Limit";
-            }
-
-            throw new ArgumentOutOfRangeException();
-        }
-
-        public string GetGameStakes(string line)
-        {
-            string pattern = "(\\$\\S*)";
-            string match = Regex.Match(line, pattern).Value;
-            return match;
-        }
-
-
 
     }
 }
