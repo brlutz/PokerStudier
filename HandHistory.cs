@@ -60,7 +60,7 @@ public class HandHistory
     {
         get
         {
-            return this.HeroEndMoney - this.HeroStartMoney;
+            return this.HeroWinnings - this.HeroMoneyPutInPotTotal;
         }
     }
 
