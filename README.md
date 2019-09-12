@@ -8,6 +8,8 @@ I'm going to keep this database free for the moment and try to do any reads from
 # Currently Implimented
 * Hands being read in and rough parsing
 
+![alt text]( "Logo Title Text 1")
+
 # Initial Scope
 
 * Range Analyser for Hero (position agnostic)
