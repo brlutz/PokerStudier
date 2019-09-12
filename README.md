@@ -8,7 +8,7 @@ I'm going to keep this database free for the moment and try to do any reads from
 # Currently Implimented
 * Hands being read in and rough parsing
 
-![alt text]( "Logo Title Text 1")
+![Example Image](https://raw.githubusercontent.com/brlutz/PokerStudier/master/example.JPG "Example")
 
 # Initial Scope
 
