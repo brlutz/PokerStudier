@@ -4,6 +4,15 @@
     ViewData["Title"] = "Home Page";
     int count = 0;
 }
+
+@functions {
+    string getColor(decimal value)
+    {
+        if(value == 0){ return "hsl(210, 100%, 20%)";}
+        string hue = ((1-(1-value))*120).ToString();
+        return $"hsl("+hue+",100%,50%)";
+    }
+}
     <link type="text/css" rel="stylesheet" href="css/markup.css" media="screen,projection" />
 
 <div class="text-center">
@@ -14,8 +23,8 @@
             {
                 count = 0;
             }
-            <div class="box">@key</div>
-            <div> @Model.Results[key].WinPercent </div>
+            
+            <div style="background-color: @getColor(@Model.Results[key].WinPercent)" class="box">@key</div>
             count++;
         }
         </div>
