@@ -1,0 +1,32 @@
+.col.grid-example {
+    border: 1px solid #eee;
+    margin: 7px 0;
+    text-align: center;
+    line-height: 50px;
+    font-size: 28px;
+    background-color: tomato;
+    color: white;
+    padding: 0;
+}
+
+body {
+    margin: 0px;
+  }
+  
+  .box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 90%;
+  }
+  
+  
+  .wrapper {
+    width: 1260px;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(13,40px);
+    grid-template-rows: 40px 40px 40px;
+    grid-auto-flow: row;
+  }

@@ -1,0 +1,24 @@
+﻿@model ResultsViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    int count = 0;
+}
+    <link type="text/css" rel="stylesheet" href="css/markup.css" media="screen,projection" />
+
+<div class="text-center">
+  <div class="wrapper">
+        @foreach (string key in Model.Results.Keys)
+        {
+            if(count > 12)
+            {
+                count = 0;
+            }
+            <div class="box">@key</div>
+            <div> @Model.Results[key].WinPercent </div>
+            count++;
+        }
+        </div>
+    
+    </div>
+</div>
