@@ -14,11 +14,10 @@ namespace PokerStudier
 
         public void ReadInFile(string fileName)
         {
-            const string textFile = "HH1.txt";
             //Console.WriteLine("Hello World!");
 
             // Read file using StreamReader. Reads file line by line  
-            using (StreamReader file = new StreamReader(textFile))
+            using (StreamReader file = new StreamReader(fileName))
             {
                 int counter = 0;
                 string ln;
@@ -42,7 +41,7 @@ namespace PokerStudier
                 file.Close();
                 //Console.WriteLine($"File has {counter} lines.");
 
-                this.RawHands = hands;
+                this.RawHands.AddRange(hands);
             }
 
             ParseHands();

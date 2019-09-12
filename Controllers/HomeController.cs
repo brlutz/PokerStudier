@@ -14,10 +14,14 @@ namespace PokerStudier1.Controllers
         public IActionResult Index()
         {
 
-            const string textFile = "HH1.txt";
-            PokerParser p = new PokerParser();
-            p.ReadInFile(textFile);
+            List<string> textFiles = new List<string>(){ "HH1.txt", "HH2.txt"};
 
+            PokerParser p = new PokerParser();
+            foreach(string file in textFiles)
+            {
+                p.ReadInFile(file);
+            }
+            
             PokerAnalyser a = new PokerAnalyser(p.HandHistories);
 
              return View(new ResultsViewModel(a));
