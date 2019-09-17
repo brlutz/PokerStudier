@@ -50,6 +50,7 @@ public class HandClassification
         foreach (HandHistory hh in handHistories)
         {
             string key = ClassifyHand(hh.Hand.RawHand);
+            string position = GetPosition(hh.Hand.RawHand);
             this.Classification[key].TotalCount++;
 
             if (hh.HeroMoneyPutInPotTotal > 0 && hh.BlindPaid != null)
@@ -63,6 +64,11 @@ public class HandClassification
             }
 
         }
+    }
+
+    private string GetPosition(string rawHand)
+    {
+        return rawHand;
     }
 
     public void PrintClassification()
