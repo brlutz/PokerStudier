@@ -6,19 +6,46 @@
 }
 
 @functions {
+
+     
+
     string getColor(decimal value)
     {
         if(value == 0){ return "hsl(210, 100%, 20%)";}
         string hue = ((1-(1-value))*120).ToString();
         return $"hsl("+hue+",100%,50%)";
     }
+
 }
+
+<script type="text/javascript">
+
+
+    
+    function filter()
+    {
+    var url = "/";
+    var positionFilter = document.getElementById("position").value;
+            
+    console.log("positionFilter: ", positionFilter);        
+    if(positionFilter !== "" && positionFilter !== "empty")
+    {
+        url+="?Position="+positionFilter;
+    }
+    console.log(url);
+    window.location = url;
+    }
+
+</script>
+
+
     <link type="text/css" rel="stylesheet" href="css/markup.css" media="screen,projection" />
 
 <div class="text-center">
   <div class="wrapper">
         @foreach (string key in Model.Results.Keys)
         {
+            
             if(count > 12)
             {
                 count = 0;
@@ -33,7 +60,21 @@
             </div>
             count++;
         }
-        </div>
+
     
     </div>
+
+
+          Position: <select type="text" id="position" value=@Model.Filters.Position>
+              <option value="empty" ></option>
+  <option id="Lojack" value="Lojack" >Lojack</option>
+  <option id="Hijack" value="Hijack">Hijack</option>
+  <option id="Cutoff" value="Cutoff">Cutoff</option>
+  <option id="Button" value="Button">Button</option>
+  <option id="SmallBlind" value="SmallBlind">SmallBlind</option>
+  <option id="BigBlind" value="BigBlind">BigBlind</option>
+</select>
+
+
+        <button onclick="filter()">Filter</button>
 </div>

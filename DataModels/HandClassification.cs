@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using PokerStudier1.Models;
 
 public class HandClassification
 {
@@ -38,17 +39,22 @@ public class HandClassification
     }
 
 
-    public HandClassification(List<HandHistory> handHistories)
+    public HandClassification(List<HandHistory> handHistories, Filter f)
     {
         this.handHistories = handHistories;
         PopulateClassification();
-        ClassifyHands(handHistories);
+        ClassifyHands(handHistories, f);
     }
 
-    private void ClassifyHands(List<HandHistory> handHistories)
+    private void ClassifyHands(List<HandHistory> handHistories, Filter f)
     {
         foreach (HandHistory hh in handHistories)
         {
+            if(f.Position != null)
+            {
+                if(hh.Position != f.Position) {continue;}
+            }
+
             string key = ClassifyHand(hh.Hand.RawHand);
             string position = GetPosition(hh.Hand.RawHand);
             this.Classification[key].TotalCount++;

@@ -91,34 +91,43 @@ public class HandHistory
 
     private string GetHeroPosition(List<string> lines)
     {
-        string button = "Seat #\d";   
+        string button = "Seat #\\d";   
 
-        string[] positionKeys = {"Lojack", "Hijack", "Cutoff", "Button", "BigB", "Small"};
+        string[] positionKeys = { "Button", "SmallBlind", "BigBlind", "Lojack", "Hijack", "Cutoff"};
         string pattern = "Seat #\\d";
         string match = Regex.Match(lines[1], pattern).Value;
         button = match.Replace("#","");
 
-        List<string> positions = new List<string>();
+        List<int> positions = new List<int>();
         int buttonPosition = -1;
-        for(int i = 2; i<11; i++ )
+        int heroPosition = -1;
+        for(int i = 2; i <11; i++ )
         {
             if(lines[i].StartsWith("Seat"))
             {
-                positions.Add(lines[i].Split(" ")[3]);
+              int positionNumber = Convert.ToInt16(lines[i].Replace(":", "").Split(" ")[1]);
+
+                positions.Add(positionNumber);
 
                 if(lines[i].StartsWith(button))
                 {
-                    
+                    buttonPosition = positions.Count;
+                }
+
+                if(lines[i].Contains(HeroName))
+                {
+                    heroPosition =  positions.Count;
                 }
             }
         }
 
+        // TODO: Fix bug here
+        // if offset is 1-0, then you're sb
+        string heroPositionString = "";
+        int diffBetweenHeroAndButton = heroPosition - buttonPosition;
+        heroPositionString = positionKeys[Math.Abs(diffBetweenHeroAndButton)];
 
-
-
-
-
-        return match;
+        return heroPositionString;
     }
 
     private string GetHeroHand(List<string> lines)
