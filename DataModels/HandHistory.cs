@@ -93,20 +93,27 @@ public class HandHistory
     {
         string button = "Seat #\d";   
 
-        string[] positionKeys = ["UTG","UTG+1" + "UTG+2", "Lojack", "Hijack", "Cutoff", "Button", "BigB", "Small"];
+        string[] positionKeys = {"Lojack", "Hijack", "Cutoff", "Button", "BigB", "Small"};
         string pattern = "Seat #\\d";
         string match = Regex.Match(lines[1], pattern).Value;
         button = match.Replace("#","");
 
         List<string> positions = new List<string>();
-
+        int buttonPosition = -1;
         for(int i = 2; i<11; i++ )
         {
             if(lines[i].StartsWith("Seat"))
             {
                 positions.Add(lines[i].Split(" ")[3]);
+
+                if(lines[i].StartsWith(button))
+                {
+                    
+                }
             }
         }
+
+
 
 
 
