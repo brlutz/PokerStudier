@@ -43,18 +43,28 @@ public class HandClassification
     {
         this.handHistories = handHistories;
         PopulateClassification();
-        ClassifyHands(handHistories, f);
+        ClassifyHands(handHistories);
+        FilterHands(handHistories, f);
     }
 
-    private void ClassifyHands(List<HandHistory> handHistories, Filter f)
+    private void FilterHands(List<HandHistory> handHistories, Filter f)
     {
         foreach (HandHistory hh in handHistories)
         {
-            if(f.Position != null)
+            if (f.Position != null)
             {
-                if(hh.Position != f.Position) {continue;}
+                if (hh.Position != f.Position) 
+                {
+                     handHistories.Remove(hh);
+                }
             }
+        }
+    }
 
+    private void ClassifyHands(List<HandHistory> handHistories)
+    {
+        foreach (HandHistory hh in handHistories)
+        {
             string key = ClassifyHand(hh.Hand.RawHand);
             string position = GetPosition(hh.Hand.RawHand);
             this.Classification[key].TotalCount++;
