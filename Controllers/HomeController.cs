@@ -11,9 +11,16 @@ namespace PokerStudier1.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string position)
         {
 
+
+             return View(ModelGetter(position));
+        }
+
+
+        private ResultsViewModel ModelGetter(string position)
+        {
             List<string> textFiles = new List<string>(){ "HH1.txt", "HH2.txt"};
 
             PokerParser p = new PokerParser();
@@ -21,10 +28,11 @@ namespace PokerStudier1.Controllers
             {
                 p.ReadInFile(file);
             }
-            
-            PokerAnalyser a = new PokerAnalyser(p.HandHistories);
+            Filter f = new Filter(position);
+            PokerAnalyser a = new PokerAnalyser(p.HandHistories, f);
 
-             return View(new ResultsViewModel(a));
+            
+            return new ResultsViewModel(a, f);
         }
 
         public IActionResult Privacy()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 public class HandHistory
@@ -83,9 +84,65 @@ public class HandHistory
         HeroEndMoney = GetHeroEndMoney(lines);
 
         Hand = new Hand(GetHeroHand(lines));
+        Position = GetHeroPosition(lines);
 
         return this;
 
+    }
+
+    private string GetHeroPosition(List<string> lines)
+    {
+        string button = "Seat #\\d";   
+
+        List<string> positionKeysBackward = new List<string>{ "Button", "Cutoff", "Hijack", "Lojack", "SmallBlind","BigBlind",} ;
+        List<string> positionKeys = new List<string>{ "Button", "SmallBlind", "BigBlind", "Cutoff","Hijack", "Lojack" };
+        string pattern = "Seat #\\d";
+        string match = Regex.Match(lines[1], pattern).Value;
+        button = match.Replace("#","");
+
+        List<int> positions = new List<int>();
+        int buttonPosition = -1;
+        int heroPosition = -1;
+        for(int i = 2; i <11; i++ )
+        {
+            if(lines[i].StartsWith("Seat"))
+            {
+              int positionNumber = Convert.ToInt16(lines[i].Replace(":", "").Split(" ")[1]);
+
+                positions.Add(positionNumber);
+
+                if(lines[i].StartsWith(button))
+                {
+                    buttonPosition = positions.Count;
+                }
+
+                if(lines[i].Contains(HeroName))
+                {
+                    heroPosition =  positions.Count;
+                }
+            }
+        }
+
+        // TODO: Fix bug here
+        // if offset is 1-0, then you're sb
+        positionKeys = positionKeys.Take(positions.Count).ToList();
+        positionKeysBackward = positionKeysBackward.Take(positions.Count).ToList();
+        string heroPositionString = "";
+        int diffBetweenHeroAndButton = heroPosition-buttonPosition;
+
+
+        if(diffBetweenHeroAndButton < 0)
+        {
+            
+             heroPositionString = positionKeysBackward[Math.Abs(diffBetweenHeroAndButton)];
+        }
+        else
+        {
+             heroPositionString = positionKeys[diffBetweenHeroAndButton];
+        }
+       
+
+        return heroPositionString;
     }
 
     private string GetHeroHand(List<string> lines)
