@@ -21,7 +21,7 @@ namespace PokerStudier1.Controllers
 
         private ResultsViewModel ModelGetter(string position)
         {
-            List<string> textFiles = new List<string>(){ "HH1.txt", "HH2.txt"};
+            List<string> textFiles = new List<string>(){ "HH1.txt", "HH2.txt", "HH3.txt"};
 
             PokerParser p = new PokerParser();
             foreach(string file in textFiles)
