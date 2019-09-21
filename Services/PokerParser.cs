@@ -74,8 +74,12 @@ namespace PokerStudier
             foreach (List<string> rawHand in this.RawHands)
             {
                 HandHistory hh = new HandHistory(rawHand, "PlayTheBlues4U");
-                this.HandHistories.Add(hh.ParseHand());
-                counter ++;
+                hh = hh.ParseHand();
+                if(!this.HandHistories.Exists(x=> x.HandNumber == hh.HandNumber))
+                {
+                    this.HandHistories.Add(hh);
+                    counter ++;
+                }
 
                 if(handsToParse.HasValue && counter > handsToParse.Value)
                 {

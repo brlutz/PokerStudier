@@ -84,6 +84,7 @@ public class HandHistory
         HeroEndMoney = GetHeroEndMoney(lines);
 
         Hand = new Hand(GetHeroHand(lines));
+
         Position = GetHeroPosition(lines);
 
         return this;
