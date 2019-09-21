@@ -21,50 +21,13 @@ namespace PokerStudier1.Models
 
         public Filter Filters {get;set;}
 
-        public ResultsViewModel()
+        public ResultsViewModel(Dictionary<string, ResultsObject> results, Filter filter)
         {
-            PopulateClassification();
-        }
 
-        public ResultsViewModel(PokerAnalyser a, Filter filter)
-        {
-            this.Analyser = a;
-            this.Results = a.GetClassification();
+            this.Results = results;
             Filters = filter;
 
         }
-
-        public List<string> Cards = new List<string>()
-        {
-        "A","K","Q","J","T","9","8","7","6","5","4","3","2"
-        };
-
-
-        private void PopulateClassification()
-        {
-            for (int i = 0; i < Cards.Count; i++)
-            {
-                for (int j = 0; j < Cards.Count; j++)
-                {
-                    string cardClass = "";
-                    if (i < j)
-                    {
-                        cardClass = Cards[i] + Cards[j] + "s";
-                    }
-                    else if (i > j)
-                    {
-                        cardClass = Cards[j] + Cards[i] + "o";
-                    }
-                    else if (i == j)
-                    {
-                        cardClass = Cards[j] + Cards[i];
-                    }
-
-                    Results[cardClass] = new ResultsObject();
-                }
-            }
-        }
-
 
         public string RequestId { get; set; }
 
