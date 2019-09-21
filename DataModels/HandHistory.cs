@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 public class HandHistory
@@ -93,7 +94,7 @@ public class HandHistory
     {
         string button = "Seat #\\d";   
 
-        string[] positionKeys = { "Button", "SmallBlind", "BigBlind", "Lojack", "Hijack", "Cutoff"};
+        List<string> positionKeys = new List<string>{ "Button", "SmallBlind", "BigBlind", "Lojack", "Hijack", "Cutoff"};
         string pattern = "Seat #\\d";
         string match = Regex.Match(lines[1], pattern).Value;
         button = match.Replace("#","");
@@ -123,9 +124,19 @@ public class HandHistory
 
         // TODO: Fix bug here
         // if offset is 1-0, then you're sb
+        positionKeys = positionKeys.Take(positions.Count).ToList();
         string heroPositionString = "";
         int diffBetweenHeroAndButton = heroPosition - buttonPosition;
-        heroPositionString = positionKeys[Math.Abs(diffBetweenHeroAndButton)];
+        if(diffBetweenHeroAndButton < 0)
+        {
+            
+             heroPositionString = positionKeys[positionKeys.Count - Math.Abs(diffBetweenHeroAndButton) - 1];
+        }
+        else
+        {
+             heroPositionString = positionKeys[diffBetweenHeroAndButton];
+        }
+       
 
         return heroPositionString;
     }
