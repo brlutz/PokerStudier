@@ -94,7 +94,8 @@ public class HandHistory
     {
         string button = "Seat #\\d";   
 
-        List<string> positionKeys = new List<string>{ "Button", "SmallBlind", "BigBlind", "Lojack", "Hijack", "Cutoff"};
+        List<string> positionKeysBackward = new List<string>{ "Button", "Cutoff", "Hijack", "Lojack", "SmallBlind","BigBlind",} ;
+        List<string> positionKeys = new List<string>{ "Button", "SmallBlind", "BigBlind", "Cutoff","Hijack", "Lojack" };
         string pattern = "Seat #\\d";
         string match = Regex.Match(lines[1], pattern).Value;
         button = match.Replace("#","");
@@ -125,12 +126,15 @@ public class HandHistory
         // TODO: Fix bug here
         // if offset is 1-0, then you're sb
         positionKeys = positionKeys.Take(positions.Count).ToList();
+        positionKeysBackward = positionKeysBackward.Take(positions.Count).ToList();
         string heroPositionString = "";
-        int diffBetweenHeroAndButton = heroPosition - buttonPosition;
+        int diffBetweenHeroAndButton = heroPosition-buttonPosition;
+
+
         if(diffBetweenHeroAndButton < 0)
         {
             
-             heroPositionString = positionKeys[positionKeys.Count - Math.Abs(diffBetweenHeroAndButton) - 1];
+             heroPositionString = positionKeysBackward[Math.Abs(diffBetweenHeroAndButton)];
         }
         else
         {
