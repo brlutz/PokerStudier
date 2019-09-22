@@ -21,7 +21,7 @@ namespace PokerStudier1.Models
 
         public Filter Filters {get;set;}
 
-        public ResultsViewModel(Dictionary<string, ResultsObject> results, Filter filter)
+        public ResultsViewModel(Dictionary<string, TotalResultsObject> results, Filter filter)
         {
 
             this.Results = results;
@@ -31,8 +31,7 @@ namespace PokerStudier1.Models
 
         public string RequestId { get; set; }
 
-        public Dictionary<string, ResultsObject> Results = new Dictionary<string, ResultsObject>();
-        private PokerAnalyser Analyser;
+        public Dictionary<string, TotalResultsObject> Results = new Dictionary<string, TotalResultsObject>();
 
         public string PositionFilter {get;set;}
     }

@@ -17,6 +17,8 @@ public class HandHistory
 
     public string HeroName { get; set; }
 
+    public string HandType {get;set;}
+
     public string HandNumber { get; set; }
     public string GameType { get; set; }
     public string NumberOfPlayer { get; set; }

@@ -9,10 +9,10 @@ namespace PokerStudier
     {
         private List<HandHistory> HandHistories;
 
-        private HandClassification Classification;
+        private HandClassifier Classification;
 
-        public Dictionary<string, ResultsObject> Results = new Dictionary<string, ResultsObject>();
-        
+        public Dictionary<string, TotalResultsObject> Results = new Dictionary<string, TotalResultsObject>();
+
         public List<string> Cards = new List<string>()
         {
         "A","K","Q","J","T","9","8","7","6","5","4","3","2"
@@ -21,12 +21,50 @@ namespace PokerStudier
         public PokerAnalyser(List<HandHistory> handHistories, Filter f)
         {
             this.HandHistories = handHistories;
-            Classification = new HandClassification(this.HandHistories, f);
-            PopulateResultsContainter();
-
+            Classification = new HandClassifier(this.HandHistories, f);
+            this.HandHistories = Classification.GetClassifiedHandHistories();
+            this.HandHistories = FilterHandHistories(this.HandHistories, f);
+            GetStatsForClassification(Classification);
         }
 
-        private void PopulateResultsContainter()
+        private List<HandHistory> FilterHandHistories(List<HandHistory> handHistories, Filter f)
+        {
+            for (int i = handHistories.Count - 1; i >= 0; i--)
+            {
+                if (f.Position != null)
+                {
+                    if (handHistories[i].Position != f.Position)
+                    {
+                        handHistories.RemoveAt(i);
+                    }
+                }
+            }
+
+            return handHistories;
+        }
+
+        private void GetStatsForClassification(HandClassifier classification)
+        {
+            PopulateClassification();
+            foreach (HandHistory hh in Classification.GetClassifiedHandHistories())
+            {
+                string key = hh.HandType;
+                string position = hh.Position;
+                this.Results[key].TotalCount++;
+
+                if (hh.HeroMoneyPutInPotTotal > 0 && hh.BlindPaid != null)
+                {
+                    this.Results[key].InvolvedCount++;
+                }
+
+                if (hh.HeroEarnings > 0)
+                {
+                    this.Results[key].WinCount++;
+                }
+            }
+        }
+
+        private void PopulateClassification()
         {
             for (int i = 0; i < Cards.Count; i++)
             {
@@ -46,7 +84,7 @@ namespace PokerStudier
                         cardClass = Cards[j] + Cards[i];
                     }
 
-                    Results[cardClass] = new ResultsObject();
+                    Results[cardClass] = new TotalResultsObject();
                 }
             }
         }
@@ -54,8 +92,7 @@ namespace PokerStudier
 
 
 
-
-        public Dictionary<string, ResultsObject> GetResults()
+        public Dictionary<string, TotalResultsObject> GetResults()
         {
             return this.Results;
         }
@@ -63,6 +100,6 @@ namespace PokerStudier
 
 
 
-        
+
     }
 }

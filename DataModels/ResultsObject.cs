@@ -1,8 +1,10 @@
-public class ResultsObject
+public class TotalResultsObject
 {
     public int TotalCount { get; set; }
     public int WinCount { get; set; }
     public int InvolvedCount { get; set; }
+
+
 
     private decimal? _winDecimal = null;
     public decimal WinDecimal {
