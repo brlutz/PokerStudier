@@ -15,11 +15,19 @@ namespace PokerStudier1.Controllers
         {
 
 
-             return View(ModelGetter(position));
+             return View(GetWholeRangeAnaylsisModelGetter(position));
+        }
+
+        public IActionResult HandOverview(string hand)
+        {
+
+            throw new NotImplementedException();
+            // return View(ModelGetter(position));
         }
 
 
-        private ResultsViewModel ModelGetter(string position)
+
+        private ResultsViewModel GetWholeRangeAnaylsisModelGetter(string position)
         {
             List<string> textFiles = new List<string>(){ "HH1.txt", "HH2.txt", "HH3.txt"};
 
@@ -32,7 +40,7 @@ namespace PokerStudier1.Controllers
             PokerAnalyser a = new PokerAnalyser(p.HandHistories, f);
 
             
-            return new ResultsViewModel(a, f);
+            return new ResultsViewModel(a.GetResults(), f);
         }
 
         public IActionResult Privacy()

@@ -45,27 +45,6 @@ namespace PokerStudier
             }
 
             ParseHands();
-
-            DisplayHands();
-
-        }
-
-        private void DisplayHands()
-        {
-            return;
-            foreach(HandHistory hh in this.HandHistories)
-            {
-                Console.WriteLine("# "+hh.HandNumber);
-                Console.WriteLine("Hero Played :" + hh.Hand.RawHand);
-                Console.WriteLine("Hero started with : $"+ hh.HeroStartMoney.ToString());
-                Console.WriteLine("Stakes are: " + hh.Stakes );
-                Console.WriteLine("Big Blind is: $" + hh.BigBlind.ToString());
-                Console.WriteLine("Small Blind is: $" + hh.SmallBlind.ToString());
-                if(hh.BlindPaid != null){ Console.WriteLine("Paid the "+hh.BlindPaid);}
-                Console.WriteLine("Hero Put in Pot: " + hh.HeroMoneyPutInPotTotal);
-                Console.WriteLine("Hero won: $" + hh.HeroWinnings);
-                Console.WriteLine("Hero diffed " + (hh.HeroWinnings - hh.HeroMoneyPutInPotTotal).ToString());
-            }
         }
 
         public void ParseHands(int? handsToParse = null)
