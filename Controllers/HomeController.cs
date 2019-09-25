@@ -18,13 +18,28 @@ namespace PokerStudier1.Controllers
              return View(GetWholeRangeAnaylsisModelGetter(position));
         }
 
-        public IActionResult HandOverview(string hand)
+        [Route("/Hand/{hand}", Name = "Hand")]
+        public IActionResult Hand(string hand)
         {
-
-            throw new NotImplementedException();
+            return View(GetHandAnaylsisModelGetter(hand));
             // return View(ModelGetter(position));
         }
 
+        private HandOverviewViewModel GetHandAnaylsisModelGetter(string hand)
+        {
+            List<string> textFiles = new List<string>(){ "HH1.txt", "HH2.txt", "HH3.txt"};
+
+            PokerParser p = new PokerParser();
+            foreach(string file in textFiles)
+            {
+                p.ReadInFile(file);
+            }
+            Filter f = new Filter(null, hand);
+            PokerAnalyser a = new PokerAnalyser(p.HandHistories, f);
+
+            
+            return new HandOverviewViewModel(p.HandHistories, f);
+        }
 
 
         private ResultsViewModel GetWholeRangeAnaylsisModelGetter(string position)
@@ -36,7 +51,7 @@ namespace PokerStudier1.Controllers
             {
                 p.ReadInFile(file);
             }
-            Filter f = new Filter(position);
+            Filter f = new Filter(position, null);
             PokerAnalyser a = new PokerAnalyser(p.HandHistories, f);
 
             

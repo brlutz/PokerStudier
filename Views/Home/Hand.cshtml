@@ -1,0 +1,22 @@
+﻿@model HandOverviewViewModel
+
+@{
+    ViewData["Title"] = "Win Percentage";
+    int count = 0;
+    int totalCount = 0;
+}
+
+
+@Model.Hand
+
+        @foreach (HandHistory hh in Model.Hands)
+        {
+            <p>
+            
+            @foreach(string line in hh.RawHand)
+            {
+                <span>@line</span><br/>
+            }
+
+            </p>
+        }
