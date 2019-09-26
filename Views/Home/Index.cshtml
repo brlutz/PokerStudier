@@ -53,13 +53,12 @@
                 count = 0;
             }
             
-            <div style="background-color: @getColor(@Model.Results[key].WinDecimal)" class="box tooltip1">@key
+            <a asp-controller="Home"  asp-action="Hand" asp-route-hand="@key" style="background-color: @getColor(@Model.Results[key].WinDecimal)" class="box tooltip1">@key
                 <div class ="tooltiptext1">
                     <div>Hands: @Model.Results[key].TotalCount</div> 
                     <div>W%: @Model.Results[key].WinPercent</div> 
                 </div>
-
-            </div>
+            </a>
             count++;
         }
 
