@@ -13,6 +13,14 @@
         {
             <p>
             
+            @foreach(string action in hh.Actions)
+            {
+                <span>@action</span><br/>
+            }
+
+            </p>
+            <p>
+
             @foreach(string line in hh.RawHand)
             {
                 <span>@line</span><br/>
