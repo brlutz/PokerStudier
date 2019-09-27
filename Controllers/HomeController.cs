@@ -15,7 +15,7 @@ namespace PokerStudier1.Controllers
         {
 
 
-             return View(GetWholeRangeAnaylsisModelGetter(position));
+            return View(GetWholeRangeAnaylsisModelGetter(position));
         }
 
         [Route("/Hand/{hand}", Name = "Hand")]
@@ -27,34 +27,50 @@ namespace PokerStudier1.Controllers
 
         private HandOverviewViewModel GetHandAnaylsisModelGetter(string hand)
         {
-            List<string> textFiles = new List<string>(){ "HH1.txt", "HH2.txt", "HH3.txt"};
+            List<string> textFiles = new List<string>() { "HH1.txt", "HH2.txt", "HH3.txt" };
 
             PokerParser p = new PokerParser();
-            foreach(string file in textFiles)
+            foreach (string file in textFiles)
             {
                 p.ReadInFile(file);
             }
+
             Filter f = new Filter(null, hand);
             PokerAnalyser a = new PokerAnalyser(p.HandHistories, f);
+            List<string> actionOptions = new List<string>();
 
-            
             return new HandOverviewViewModel(p.HandHistories, f);
         }
 
 
         private ResultsViewModel GetWholeRangeAnaylsisModelGetter(string position)
         {
-            List<string> textFiles = new List<string>(){ "HH1.txt", "HH2.txt", "HH3.txt"};
+            List<string> textFiles = new List<string>() { "HH1.txt", "HH2.txt", "HH3.txt" };
 
             PokerParser p = new PokerParser();
-            foreach(string file in textFiles)
+            foreach (string file in textFiles)
             {
                 p.ReadInFile(file);
             }
             Filter f = new Filter(position, null);
             PokerAnalyser a = new PokerAnalyser(p.HandHistories, f);
+            List<string> actionOptions = new List<string>();
+            foreach(HandHistory hh in p.HandHistories)
+            {
+                actionOptions.AddRange(hh.Actions);
+                actionOptions = actionOptions.Distinct().ToList();
+            }
+            List<string> sortedActionOptions = new List<string>();
+            sortedActionOptions.AddRange(actionOptions.Where(x => x.Contains("BeforeFlop")).ToList());
+            sortedActionOptions.AddRange(actionOptions.Where(x => !x.Contains("Before") && x.Contains("Flop")).ToList());
+            sortedActionOptions.AddRange(actionOptions.Where(x => x.Contains("Turn")).ToList());
+            sortedActionOptions.AddRange(actionOptions.Where(x => x.Contains("River")).ToList());
 
-            
+
+
+            f.ActionOptions = sortedActionOptions;
+
+
             return new ResultsViewModel(a.GetResults(), f);
         }
 

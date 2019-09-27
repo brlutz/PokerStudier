@@ -18,6 +18,8 @@ namespace PokerStudier1.Models
             this.Hand = filter.Hand;
         }
 
+        public List<string> Actions = new List<string>();
+
         //public List<TotalResultsObject Hands = new List<TotalResultsObject>();
         public List<HandHistory> Hands = new List<HandHistory>();
         public Filter Filters {get;set;}

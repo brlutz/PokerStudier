@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Win Percentage";
     int count = 0;
+    int count2 = 0;
     int totalCount = 0;
 }
 
@@ -66,8 +67,8 @@
     </div>
 
 <div>Count: @totalCount</div>
-          Position: <select type="text" id="position" value=@Model.Filters.Position>
-              <option value="empty" ></option>
+    Position: <select type="text" id="position" value=@Model.Filters.Position>
+  <option value="empty" ></option>
   <option id="Lojack" value="Lojack" >Lojack</option>
   <option id="Hijack" value="Hijack">Hijack</option>
   <option id="Cutoff" value="Cutoff">Cutoff</option>
@@ -76,6 +77,20 @@
   <option id="BigBlind" value="BigBlind">BigBlind</option>
 </select>
 
+<br/>
 
+@foreach(string action in @Model.Actions)
+{
+    count2++;
+    <input type="checkbox" id=@action value=@action>@action
+    if(count2 == 5)
+    {
+        <br/>
+        count2 = 0;
+    }
+    
+}
+
+<br/>
         <button onclick="filter()">Filter</button>
 </div>

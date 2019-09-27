@@ -8,12 +8,19 @@ namespace PokerStudier1.Models
     public class Filter
     {
 
-        public Filter(string position, string hand)
+        public Filter(string position, string hand, List<string> actionOptions = null)
         {
             this.Position = position;
             this.Hand = hand;
+
+            if(actionOptions !=  null)
+            {
+                this.ActionOptions = actionOptions;
+            }
         }
        public string Position {get;set;}
+
+       public List<string> ActionOptions {get;set;}
 
        public string Hand {get;set;}
     }
@@ -29,6 +36,7 @@ namespace PokerStudier1.Models
 
             this.Results = results;
             Filters = filter;
+            Actions = filter.ActionOptions;
 
         }
 
@@ -37,6 +45,7 @@ namespace PokerStudier1.Models
         public Dictionary<string, TotalResultsObject> Results = new Dictionary<string, TotalResultsObject>();
         public Filter Filters {get;set;}
 
+        public List<string> Actions = new List<string>();
         public string PositionFilter {get;set;}
     }
 }
