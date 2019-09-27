@@ -7,16 +7,18 @@ I'm going to keep this database free for the moment and try to do any reads from
 
 # Currently Implimented
 * Hands being read in and rough parsing
+* Range Analyser for Hero with hero position filtering
+* Hand reviewer for hand types
+* Actions parsing for hero
+* Filter scaffold for future hero actions filtering
 
 ![Example Image](https://raw.githubusercontent.com/brlutz/PokerStudier/master/example.JPG "Example")
 
-# Initial Scope
-
-* Range Analyser for Hero (position agnostic)
-* Winnings Tracker for Hero (overall aka Green Line)
+# Currently being implimented
+* Filter by hero actions
 
 # Near Future scope
-* Range Analyser for Hero (position aware)
+*  Winnings Tracker for Hero (overall aka Green Line)
 * Winnings tracker for Hero (non-showdown aka Red Line)
 * Winnings tracker for Hero (showdown only aka Blue Line)
 
