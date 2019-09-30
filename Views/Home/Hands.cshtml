@@ -13,6 +13,11 @@
     <p>
         <span>@hh.HeroEarnings </span>
         <br/>
+    @foreach(string card in hh.FlopTurnRiverCards)
+    {
+        <span>@card </span>
+    }
+    <br/>
     @foreach(string line in hh.RawHand)
     {
         

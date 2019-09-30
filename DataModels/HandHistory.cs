@@ -71,16 +71,18 @@ public class HandHistory
 
     public List<string> Actions { get; set; }
 
+    public List<string> FlopTurnRiverCards {get;set;}
     public HandHistory ParseHand()
     {
 
         List<string> lines = RawHand;
-        
+
         // Get hand history, game type and game stakes
         HandNumber = GetHandNumber(lines[0]);
         GameType = GetGameType(lines[0]);
         Stakes = GetGameStakes(lines[0]);
         Actions = GetActions(lines);
+        FlopTurnRiverCards = GetFlopTurnRiverCards(lines);
 
         // Get Hero starting amount
         HeroStartMoney = GetHeroStartMoney(lines);
@@ -92,6 +94,43 @@ public class HandHistory
 
         return this;
 
+    }
+
+    private List<string> GetFlopTurnRiverCards(List<string> lines)
+    {
+        List<string> flopTurnRiver = new List<string>();
+
+        foreach(string line in lines)
+        {
+
+            if (flopTurnRiver.Count < 1 && line.StartsWith("*** FLOP ***"))
+            {
+                string pattern = "\\[.{0,11}\\]";
+                string match = Regex.Match(line, pattern).Value;
+                match = match.Replace("[", "").Replace("]","");
+                flopTurnRiver.AddRange(match.Split(" "));
+                continue;
+            }
+            else if (flopTurnRiver.Count > 2 && line.StartsWith("*** TURN ***"))
+            {
+                string pattern = "\\[.{0,2}\\]";
+                string match = Regex.Match(line, pattern).Value;
+                match = match.Replace("[", "").Replace("]","");
+                flopTurnRiver.Add(match);
+                continue;
+            }
+            else if (flopTurnRiver.Count > 3 && line.StartsWith("*** RIVER *** "))
+            {
+                string pattern = "\\[.{0,2}\\]";
+                string match = Regex.Match(line, pattern).Value;
+                match = match.Replace("[", "").Replace("]","");
+                flopTurnRiver.Add(match);
+                continue;
+            }
+
+            
+        }
+        return flopTurnRiver;
     }
 
     private List<string> GetActions(List<string> lines)
