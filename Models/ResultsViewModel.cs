@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using PokerStudier;
+using PokerStudier.DataModels;
 
 namespace PokerStudier1.Models
 {
 
     public class Filter
     {
-
         public Filter(string position, string hand, List<string> actionOptions = null, string orderByHeroEarnings = null)
         {
             this.Position = position;
@@ -34,12 +34,13 @@ namespace PokerStudier1.Models
 
 
 
-        public ResultsViewModel(Dictionary<string, TotalResultsObject> results, Filter filter)
+        public ResultsViewModel(Dictionary<string, TotalResultsObject> results, HUDStats hudStats, Filter filter)
         {
 
             this.Results = results;
             Filters = filter;
             Actions = filter.ActionOptions;
+            this.HUDStats = hudStats;
 
         }
 
@@ -50,5 +51,9 @@ namespace PokerStudier1.Models
 
         public List<string> Actions = new List<string>();
         public string PositionFilter {get;set;}
+
+        public HUDStats HUDStats {get;set;}
+
+
     }
 }

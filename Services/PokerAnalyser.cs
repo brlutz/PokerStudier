@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using PokerStudier.DataModels;
 using PokerStudier1.Models;
 
 namespace PokerStudier
@@ -10,6 +11,8 @@ namespace PokerStudier
         private List<HandHistory> HandHistories;
 
         private HandClassifier Classification;
+
+        public HUDStats HUDStats;
 
         public Dictionary<string, TotalResultsObject> Results = new Dictionary<string, TotalResultsObject>();
 
@@ -25,6 +28,7 @@ namespace PokerStudier
             this.HandHistories = Classification.GetClassifiedHandHistories();
             this.HandHistories = FilterHandHistories(this.HandHistories, f);
             GetStatsForClassification(Classification);
+            this.HUDStats = new HUDStats(this.HandHistories);
         }
 
         private List<HandHistory> FilterHandHistories(List<HandHistory> handHistories, Filter f)

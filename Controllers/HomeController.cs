@@ -95,7 +95,7 @@ namespace PokerStudier1.Controllers
             f.ActionOptions = sortedActionOptions;
 
 
-            return new ResultsViewModel(a.GetResults(), f);
+            return new ResultsViewModel(a.GetResults(), a.HUDStats, f);
         }
 
         public IActionResult Privacy()
