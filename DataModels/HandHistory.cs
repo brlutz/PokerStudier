@@ -408,11 +408,6 @@ public class HandHistory
         return Convert.ToDecimal(match.Replace("calls $", ""));
     }
 
-    private void FindWinnings(List<string> lines)
-    {
-        throw new NotImplementedException();
-    }
-
     private string FindIfBlindsPaid(List<string> lines)
     {
         foreach (string line in lines)
