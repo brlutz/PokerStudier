@@ -62,6 +62,10 @@ namespace PokerStudier1
                 routes.MapRoute(
                 name: "Hand",
                 template: "{controller=Home}/{action=Hand}/{hand?}");
+
+                routes.MapRoute(
+                name: "Hands",
+                template: "{controller=Home}/{action=Hands}");
             });
         }
     }

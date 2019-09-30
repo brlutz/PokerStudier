@@ -25,6 +25,13 @@ namespace PokerStudier1.Controllers
             // return View(ModelGetter(position));
         }
 
+        [Route("/Hands", Name = "Hands")]
+        public IActionResult Hands(string hand)
+        {
+            return View(GetHandsAnaylsisModelGetter());
+            // return View(ModelGetter(position));
+        }
+
         private HandOverviewViewModel GetHandAnaylsisModelGetter(string hand)
         {
             List<string> textFiles = new List<string>() { "HH1.txt", "HH2.txt", "HH3.txt" };
@@ -40,6 +47,23 @@ namespace PokerStudier1.Controllers
             List<string> actionOptions = new List<string>();
 
             return new HandOverviewViewModel(p.HandHistories, f);
+        }
+
+        private HandsOverviewViewModel GetHandsAnaylsisModelGetter()
+        {
+            List<string> textFiles = new List<string>() { "HH1.txt", "HH2.txt", "HH3.txt" };
+
+            PokerParser p = new PokerParser();
+            foreach (string file in textFiles)
+            {
+                p.ReadInFile(file);
+            }
+
+            Filter f = new Filter(null, null );
+            PokerAnalyser a = new PokerAnalyser(p.HandHistories, f);
+            List<string> actionOptions = new List<string>();
+
+            return new HandsOverviewViewModel(p.HandHistories, f, new PaginationSettings() {PageSize = 100});
         }
 
 
