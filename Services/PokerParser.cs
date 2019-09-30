@@ -1,5 +1,5 @@
 
-    using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,17 +52,20 @@ namespace PokerStudier
             int counter = 0;
             foreach (List<string> rawHand in this.RawHands)
             {
-                HandHistory hh = new HandHistory(rawHand, "PlayTheBlues4U");
-                hh = hh.ParseHand();
-                if(!this.HandHistories.Exists(x=> x.HandNumber == hh.HandNumber))
+                if (!rawHand[0].Contains("Tournament"))
                 {
-                    this.HandHistories.Add(hh);
-                    counter ++;
-                }
+                    HandHistory hh = new HandHistory(rawHand, "PlayTheBlues4U");
+                    hh = hh.ParseHand();
+                    if (!this.HandHistories.Exists(x => x.HandNumber == hh.HandNumber))
+                    {
+                        this.HandHistories.Add(hh);
+                        counter++;
+                    }
 
-                if(handsToParse.HasValue && counter > handsToParse.Value)
-                {
-                    break;
+                    if (handsToParse.HasValue && counter > handsToParse.Value)
+                    {
+                        break;
+                    }
                 }
             }
 

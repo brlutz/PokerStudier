@@ -8,10 +8,11 @@ namespace PokerStudier1.Models
     public class Filter
     {
 
-        public Filter(string position, string hand, List<string> actionOptions = null)
+        public Filter(string position, string hand, List<string> actionOptions = null, string orderByHeroEarnings = null)
         {
             this.Position = position;
             this.Hand = hand;
+            this.OrderByHeroEarnings = orderByHeroEarnings;
 
             if(actionOptions !=  null)
             {
@@ -19,6 +20,8 @@ namespace PokerStudier1.Models
             }
         }
        public string Position {get;set;}
+
+       public string OrderByHeroEarnings {get;set;}
 
        public List<string> ActionOptions {get;set;}
 

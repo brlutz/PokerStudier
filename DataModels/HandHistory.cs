@@ -75,7 +75,7 @@ public class HandHistory
     {
 
         List<string> lines = RawHand;
-
+        
         // Get hand history, game type and game stakes
         HandNumber = GetHandNumber(lines[0]);
         GameType = GetGameType(lines[0]);

@@ -36,6 +36,7 @@ public class HandClassifier
         {
             hh.HandType = ClassifyHandType(hh.Hand.RawHand);
             string position = GetPosition(hh.Hand.RawHand);
+            
         }
     }
 

@@ -7,11 +7,15 @@
 }
 
 
+
 @foreach (HandHistory hh in Model.Hands)
 {
     <p>
+        <span>@hh.HeroEarnings </span>
+        <br/>
     @foreach(string line in hh.RawHand)
     {
+        
         <span>@line</span><br/>
     }
     </p>

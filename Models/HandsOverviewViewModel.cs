@@ -14,6 +14,12 @@ namespace PokerStudier1.Models
         {
             this.Pagination = pagination;
             this.Hands = hh;
+            this.Filters = filter;
+            if(this.Filters.OrderByHeroEarnings == "Losses")
+            {
+                this.Hands = this.Hands.OrderBy(x => x.HeroEarnings).ToList();
+            }
+            this.Hands.Take(this.Pagination.PageSize);
         }
 
         public List<string> Actions = new List<string>();
