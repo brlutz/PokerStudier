@@ -67,8 +67,9 @@
     </div>
 
 <div>Count: @totalCount</div> 
-<div>VPIP: @Model.HUDStats.VPIP </div>
-    Position: <select type="text" id="position" value=@Model.Filters.Position>
+<div>VPIP: @Model.HUDStats.VPIP (~0.20 is suggested) </div>
+<div>PFR: @Model.HUDStats.PFR (~0.17 is suggested)</div>
+Position: <select type="text" id="position" value=@Model.Filters.Position>
   <option value="empty" ></option>
   <option id="Lojack" value="Lojack" >Lojack</option>
   <option id="Hijack" value="Hijack">Hijack</option>
