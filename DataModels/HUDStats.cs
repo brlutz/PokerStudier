@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PokerStudier.DataModels
 {
@@ -9,11 +10,29 @@ namespace PokerStudier.DataModels
         public decimal VPIP {get;set;}
         public decimal PFR {get;set;}
 
+        public decimal AF {get;set;}
+
         public HUDStats(List<HandHistory> handHistories)
         {
             this.handHistories = handHistories;
             this.VPIP = CalculateVPIP(this.handHistories);
             this.PFR = CalculatePFR(this.handHistories);
+            this.AF = CalculateAF(this.handHistories);
+        }
+
+        private decimal CalculateAF(List<HandHistory> handHistories)
+        {
+            decimal af = 0;
+            int aggressiveCount = 0;
+            int passiveCount = 0;
+            foreach(HandHistory hh in handHistories)
+            {
+                aggressiveCount += hh.Actions.Where(x=> x.Contains("Bet") || x.Contains("Raise")).Count();
+                passiveCount += hh.Actions.Where(x=> x.Contains("Bet")).Count();
+            }
+            af = (decimal)aggressiveCount / (decimal)passiveCount;
+
+            return Math.Round(af, 2);
         }
 
         private decimal CalculatePFR(List<HandHistory> handHistories)

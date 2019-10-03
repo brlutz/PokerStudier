@@ -17,7 +17,7 @@ namespace PokerStudier1.Models
             this.Filters = filter;
             if(this.Filters.OrderByHeroEarnings == "Losses")
             {
-                this.Hands = this.Hands.OrderBy(x => x.HeroEarnings).ToList();
+                this.Hands = this.Hands.OrderBy(x => Math.Abs(x.HeroEarnings)).Reverse().ToList();
             }
             this.Hands.Take(this.Pagination.PageSize);
         }

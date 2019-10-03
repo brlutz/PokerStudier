@@ -34,7 +34,7 @@ namespace PokerStudier1.Controllers
 
         private HandOverviewViewModel GetHandAnaylsisModelGetter(string hand)
         {
-            List<string> textFiles = new List<string>() { "HH1.txt", "HH2.txt", "HH3.txt", "HH4.txt" };
+            List<string> textFiles = GetHandHistoryFiles();
 
             PokerParser p = new PokerParser();
             foreach (string file in textFiles)
@@ -51,8 +51,7 @@ namespace PokerStudier1.Controllers
 
         private HandsOverviewViewModel GetHandsAnaylsisModelGetter()
         {
-            List<string> textFiles = new List<string>() { "HH1.txt", "HH2.txt", "HH3.txt", "HH4.txt" };
-
+            List<string> textFiles = GetHandHistoryFiles();
             PokerParser p = new PokerParser();
             foreach (string file in textFiles)
             {
@@ -66,10 +65,16 @@ namespace PokerStudier1.Controllers
             return new HandsOverviewViewModel(p.HandHistories, f, new PaginationSettings() {PageSize = 100});
         }
 
+        private List<string> GetHandHistoryFiles()
+        {
+              List<string> textFiles = new List<string>() { "HHs/HH1.txt", "HHs/HH2.txt", "HHs/HH3.txt", "HHs/HH4.txt", "HHs/HH5.txt" };
+
+              return textFiles;
+        }
 
         private ResultsViewModel GetWholeRangeAnaylsisModelGetter(string position)
         {
-            List<string> textFiles = new List<string>() { "HH1.txt", "HH2.txt", "HH3.txt" };
+            List<string> textFiles = GetHandHistoryFiles();
 
             PokerParser p = new PokerParser();
             foreach (string file in textFiles)
