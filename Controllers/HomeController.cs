@@ -34,6 +34,16 @@ namespace PokerStudier1.Controllers
             // return View(ModelGetter(position));
         }
 
+        public IActionResult Player(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult Players(string searchText)
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         public IActionResult Privacy()
