@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 public class PlayerHandHistory
 {
 
-    public PlayerHandHistory(List<string> rawHandHistory, string playerName)
+    public PlayerHandHistory(string playerName)
     {
         PlayerName = playerName;
     }
@@ -20,47 +20,24 @@ public class PlayerHandHistory
     public string GameType { get; set; }
     public string NumberOfPlayer { get; set; }
 
-    private string stakes;
-
-    public string Stakes
-    {
-        get
-        {
-            return stakes;
-        }
-        set
-        {
-            stakes = value;
-
-            this.BigBlind = Convert.ToDecimal(Stakes.Split("/")[1].Replace("$", ""));
-            this.SmallBlind = Convert.ToDecimal(Stakes.Split("/")[0].Replace("$", ""));
-        }
-    }
-
-
-    public decimal BigBlind { get; internal set; }
-    public decimal SmallBlind { get; internal set; }
-
-    public string BlindPaid { get; internal set; }
     public string DateTime { get; set; }
 
     public string Button { get; set; }
 
     public Hand Hand { get; set; }
 
-    public decimal HeroStartMoney { get; set; }
-    public decimal HeroWinnings { get; set; }
-    public decimal HeroEndMoney { get; set; }
+    public decimal PlayerStartMoney { get; set; }
+    public decimal PlayerWinnings { get; set; }
+    public decimal PlayerEndMoney { get; set; }
 
-    public decimal HeroMoneyPutInPotTotal { get; set; }
+    public decimal PlayerMoneyPutInPotTotal { get; set; }
 
-    public decimal Rake { get; set; }
 
-    public decimal HeroEarnings
+    public decimal PlayerEarnings
     {
         get
         {
-            return this.HeroWinnings - this.HeroMoneyPutInPotTotal;
+            return this.PlayerWinnings - this.PlayerMoneyPutInPotTotal;
         }
     }
 

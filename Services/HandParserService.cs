@@ -7,64 +7,29 @@ using System.Text.RegularExpressions;
 public class HandParserService
 {
 
-    public HandParserService(List<string> rawHandHistory, string heroName)
+    public HandParserService()
     {
-        RawHand = rawHandHistory;
-        HeroName = heroName;
+
     }
 
-    public List<string> RawHand { get; set; }
-
-    public string HeroName { get; set; }
-
-    public string HandType { get; set; }
-
-    public string HandNumber { get; set; }
-    public string GameType { get; set; }
-    public string NumberOfPlayer { get; set; }
-
-
-
-
-
-
-
-    public decimal BigBlind { get; internal set; }
-    public decimal SmallBlind { get; internal set; }
-
-    public string BlindPaid { get; internal set; }
-    public string DateTime { get; set; }
-
-    public string Button { get; set; }
-
-    public Hand Hand { get; set; }
-
-    public decimal HeroStartMoney { get; set; }
-    public decimal HeroWinnings { get; set; }
-    public decimal HeroEndMoney { get; set; }
-
-    public decimal HeroMoneyPutInPotTotal { get; set; }
-
-    public decimal Rake { get; set; }
-
-
-    public string Position { get; set; }
-
-    public List<string> Actions { get; set; }
-
-    public List<string> FlopTurnRiverCards {get;set;}
-    public HandHistory ParseHand()
+    public HandHistory ParseHand(List<string> rawHand)
     {
 
-        List<string> lines = RawHand;
+        List<string> lines = rawHand;
+
+        HandHistory hh = new HandHistory(rawHand);
 
         // Get hand history, game type and game stakes
-        HandNumber = GetHandNumber(lines[0]);
-        GameType = GetGameType(lines[0]);
-        Stakes = GetGameStakes(lines[0]);
-        Actions = GetActions(lines);
-        FlopTurnRiverCards = GetFlopTurnRiverCards(lines);
+        hh.HandNumber = GetHandNumber(lines[0]);
+        hh.GameType = GetGameType(lines[0]);
+        hh.Stakes = GetGameStakes(lines[0]);
 
+        hh.FlopTurnRiverCards = GetFlopTurnRiverCards(lines);
+
+        List<PlayerHandHistory> playerHandHistories = new List<PlayerHandHistory>();
+
+        playerHandHistories = GetPlayerHandHistories(rawHand);
+        Actions = GetActions(lines);
         // Get Hero starting amount
         HeroStartMoney = GetHeroStartMoney(lines);
         HeroEndMoney = GetHeroEndMoney(lines);
@@ -73,22 +38,89 @@ public class HandParserService
 
         Position = GetHeroPosition(lines);
 
-        return this;
+        return hh;
 
+    }
+
+    private List<PlayerHandHistory> GetPlayerHandHistories(List<string> rawHand)
+    {
+        List<PlayerHandHistory> phh = new List<PlayerHandHistory>();
+
+        phh.AddRange(GetPlayersAndPositions(rawHand));
+
+        return phh;
+
+    }
+
+    private IEnumerable<PlayerHandHistory> GetPlayersAndPositions(List<string> rawHand)
+    {
+        List<PlayerHandHistory> phh = new List<PlayerHandHistory>();
+
+        int playerStartLine = 2;
+        int count = 0;
+        string line = rawHand[playerStartLine + count];
+
+        string pattern = "Seat #\\d";
+        string match = Regex.Match(rawHand[1], pattern).Value;
+        string buttonSeat = match.Replace("#", "");
+        int buttonPosition = 0;
+
+        while (line.StartsWith("Seat "))
+        {
+            // Get the player name
+            string playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("(")).Trim();
+            PlayerHandHistory p = new PlayerHandHistory(playerName);
+
+            // get which player in the list is the button
+            if (line.StartsWith("Seat " + buttonSeat))
+            {
+                buttonPosition = phh.Count();
+            }
+
+            phh.Add(p);
+        }
+
+        GetPlayerPositions(ref phh, buttonPosition);
+
+
+        return phh;
+    }
+
+    private void GetPlayerPositions(ref List<PlayerHandHistory> phh, int buttonPosition)
+    {
+        List<string> positionKeysBackward = new List<string> { "Button", "Cutoff", "Hijack", "Lojack", "SmallBlind", "BigBlind", };
+        List<string> positionKeys = new List<string> { "Button", "SmallBlind", "BigBlind", "Cutoff", "Hijack", "Lojack" };
+        positionKeys = positionKeys.Take(phh.Count).ToList();
+        positionKeysBackward = positionKeysBackward.Take(phh.Count).ToList();
+
+        for (int i = 0; i < phh.Count(); i++)
+        {
+            int diffBetweenPlayerAndButton = i - buttonPosition;
+
+            if (diffBetweenPlayerAndButton < 0)
+            {
+
+                phh[i].Position = positionKeysBackward[Math.Abs(diffBetweenPlayerAndButton)];
+            }
+            else
+            {
+                phh[i].Position  = positionKeys[diffBetweenPlayerAndButton];
+            }
+
+        }
     }
 
     private List<string> GetFlopTurnRiverCards(List<string> lines)
     {
         List<string> flopTurnRiver = new List<string>();
 
-        foreach(string line in lines)
+        foreach (string line in lines)
         {
-
             if (flopTurnRiver.Count < 1 && line.StartsWith("*** FLOP ***"))
             {
                 string pattern = "\\[.{0,11}\\]";
                 string match = Regex.Match(line, pattern).Value;
-                match = match.Replace("[", "").Replace("]","");
+                match = match.Replace("[", "").Replace("]", "");
                 flopTurnRiver.AddRange(match.Split(" "));
                 continue;
             }
@@ -96,7 +128,7 @@ public class HandParserService
             {
                 string pattern = "\\[.{0,2}\\]";
                 string match = Regex.Match(line, pattern).Value;
-                match = match.Replace("[", "").Replace("]","");
+                match = match.Replace("[", "").Replace("]", "");
                 flopTurnRiver.Add(match);
                 continue;
             }
@@ -104,12 +136,12 @@ public class HandParserService
             {
                 string pattern = "\\[.{0,2}\\]";
                 string match = Regex.Match(line, pattern).Value;
-                match = match.Replace("[", "").Replace("]","");
+                match = match.Replace("[", "").Replace("]", "");
                 flopTurnRiver.Add(match);
                 continue;
             }
 
-            
+
         }
         return flopTurnRiver;
     }
@@ -119,35 +151,35 @@ public class HandParserService
         List<string> actions = new List<string>();
 
         string street = "";
-        for(int i = 0; i < lines.Count; i++)
+        for (int i = 0; i < lines.Count; i++)
         {
 
             // TODO: break this out in function with by ref boolean
-            if (lines[i].StartsWith("*** HOLE CARDS ***") )
+            if (lines[i].StartsWith("*** HOLE CARDS ***"))
             {
                 street = "BeforeFlop";
-                actions.AddRange(GetStreetActions(lines.Skip(i+1).ToList(), street));
+                actions.AddRange(GetStreetActions(lines.Skip(i + 1).ToList(), street));
                 continue;
             }
 
             if (lines[i].StartsWith("*** FLOP ***"))
             {
                 street = "Flop";
-                actions.AddRange(GetStreetActions(lines.Skip(i+1).ToList(), street));
+                actions.AddRange(GetStreetActions(lines.Skip(i + 1).ToList(), street));
                 continue;
             }
 
             if (lines[i].StartsWith("*** TURN ***"))
             {
                 street = "Turn";
-                actions.AddRange(GetStreetActions(lines.Skip(i+1).ToList(), street));
+                actions.AddRange(GetStreetActions(lines.Skip(i + 1).ToList(), street));
                 continue;
             }
 
             if (lines[i].StartsWith("*** RIVER *** "))
             {
                 street = "River";
-                actions.AddRange(GetStreetActions(lines.Skip(i+1).ToList(), street));
+                actions.AddRange(GetStreetActions(lines.Skip(i + 1).ToList(), street));
                 continue;
             }
 

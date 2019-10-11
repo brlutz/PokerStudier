@@ -13,6 +13,11 @@ public class HandHistory
         HeroName = heroName;
     }
 
+    public HandHistory(List<string> rawHandHistory)
+    {
+        RawHand = rawHandHistory;
+    }
+
     public List<string> RawHand { get; set; }
 
     public string HeroName { get; set; }
