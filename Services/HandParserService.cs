@@ -78,12 +78,67 @@ public class HandParserService
             }
 
             phh.Add(p);
+            count++;
+            line = rawHand[playerStartLine + count];
         }
 
         GetPlayerPositions(ref phh, buttonPosition);
 
 
+        GetHandActions(ref phh);
+
+
         return phh;
+    }
+
+    private void GetSmallBlind(ref List<PlayerHandHistory> phh, string line)
+    {
+        string smallBlindName = line.Split(';').First();
+        phh.Where(x => x.PlayerName == smallBlindName).Single().
+    }
+
+    private void GetBigBlind(ref List<PlayerHandHistory> phh, string line)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void GetHandActions(ref List<PlayerHandHistory> phh, List<string> rawHand)
+    {
+        int lineCount = 0;
+        bool startedHand = false;
+        foreach (string line in rawHand)
+        {
+            if (line.StartsWith("*** HOLE CARDS ***"))
+            {
+                break;
+            }
+            lineCount++;
+        }
+        
+        // Get rid of already processed stuff
+        rawHand = rawHand.Skip(lineCount).ToList();
+
+        //Get Hole cards
+        phh.Where(x => rawHand[0].Contains(x.PlayerName)).Single().HoleCards = GetHoleCards(rawHand[0]);
+        rawHand = rawHand.Skip(1).ToList();
+
+        GetStreetActions(rawHand, HandActions.PreFlop);
+        foreach(string line in rawHand)
+        {
+            if(line.StartsWith(***))
+            {
+
+            }
+        }
+    }
+
+    private string GetHoleCards( string line)
+    {
+        string pattern = "\\[\\S\\S \\S\\S]";
+        string match = Regex.Match(line, pattern).Value;
+        match = match.Replace("[", "").Replace("]", "");
+        return match;
+
     }
 
     private void GetPlayerPositions(ref List<PlayerHandHistory> phh, int buttonPosition)
@@ -104,7 +159,7 @@ public class HandParserService
             }
             else
             {
-                phh[i].Position  = positionKeys[diffBetweenPlayerAndButton];
+                phh[i].Position = positionKeys[diffBetweenPlayerAndButton];
             }
 
         }
@@ -197,6 +252,8 @@ public class HandParserService
         {
             if (line.StartsWith("***") || line.StartsWith("Uncalled")) { break; }
 
+            string player = GetPlayerNameFromActionLine(line);
+            Action action = GetPlayerActionFromActionLine(line);
             if (line.Contains("raise") && !line.Contains(HeroName))
             {
                 raiseCount++;
@@ -254,6 +311,38 @@ public class HandParserService
 
         return actions;
 
+    }
+
+    private Action GetPlayerActionFromActionLine(string line)
+    {
+        Action a = new Action();
+
+        if(line.Contains(HandActions.Fold.ToLower()))
+        {
+            a.HandAction = HandActions.Fold;
+        }
+        
+        if(line.Contains(HandActions.Raise.ToLower()))
+        {
+            a.HandAction = HandActions.Raise;
+            string[] actionStuff = line.Skip(line.IndexOf(":")).ToString().Trim().Split(" ");
+            a.RaiseAmount = actionStuff[1];
+            a.TotalAmount = actionStuff[3]; 
+        }
+
+        if(line.Contains(HandActions.Call.ToLower()))
+        {
+            a.HandAction = HandActions.Call;
+            string[] actionStuff = line.Skip(line.IndexOf(":")).ToString().Trim().Split(" ");
+            a.TotalAmount = actionStuff[1]; 
+        }
+
+        return a;
+    }
+
+    private string GetPlayerNameFromActionLine(string line)
+    {
+        return line.Split(":")[0];
     }
 
     private string GetHeroPosition(List<string> lines)

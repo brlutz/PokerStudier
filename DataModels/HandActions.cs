@@ -34,9 +34,9 @@ public static class HandActions
 
     
     public static readonly string Bet = "Bet";
-    public static readonly string Raised = "Raised";
+    public static readonly string Raise = "Raise";
 
-    public static readonly string BeforeFlop = "BeforeFlop";
+    public static readonly string PreFlop = "PreFlop";
     public static readonly string Flop = "Flop";
     public static readonly string Turn = "Turn";
 

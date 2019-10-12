@@ -15,6 +15,7 @@ public class PlayerHandHistory
     public string PlayerName { get; set; }
 
     public string HandType { get; set; }
+    public string HoleCards {get;set;}
 
     public string HandNumber { get; set; }
     public string GameType { get; set; }
