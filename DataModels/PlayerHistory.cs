@@ -44,7 +44,7 @@ public class PlayerHandHistory
 
     public string Position { get; set; }
 
-    public List<string> Actions { get; set; }
+    public List<Action> Actions { get; set; }
 
     public List<string> FlopTurnRiverCards {get;set;}
     public HandHistory ParseHand()

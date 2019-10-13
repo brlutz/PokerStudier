@@ -114,25 +114,59 @@ public class HandParserService
             }
             lineCount++;
         }
-        
+
         // Get rid of already processed stuff
         rawHand = rawHand.Skip(lineCount).ToList();
 
         //Get Hole cards
         phh.Where(x => rawHand[0].Contains(x.PlayerName)).Single().HoleCards = GetHoleCards(rawHand[0]);
         rawHand = rawHand.Skip(1).ToList();
-
-        GetStreetActions(rawHand, HandActions.PreFlop);
-        foreach(string line in rawHand)
+        
+        // TODO BEN START HERE
+        for(int i = 0; string line in rawHand)
         {
-            if(line.StartsWith(***))
+            lineCount++;
+            if (line.StartsWith("*** HOLE CARDS ***"))
             {
-
+                rawHand.
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand, HandActions.PreFlop);
+                foreach (string key in actions.Keys)
+                {
+                    phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
+                }
+                continue;
+            }
+            else if (line.StartsWith("*** FLOP ***"))
+            {
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand, HandActions.Flop);
+                foreach (string key in actions.Keys)
+                {
+                    phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
+                }
+                continue;
+            }
+            else if (line.StartsWith("*** TURN ***"))
+            {
+                Dictionary<string, List<Action>> actions =  GetStreetActions(rawHand, HandActions.Turn);
+                foreach (string key in actions.Keys)
+                {
+                    phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
+                }
+                continue;
+            }
+            else if (line.StartsWith("*** RIVER *** "))
+            {
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand, HandActions.River);
+                foreach (string key in actions.Keys)
+                {
+                    phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
+                }
+                break;
             }
         }
     }
 
-    private string GetHoleCards( string line)
+    private string GetHoleCards(string line)
     {
         string pattern = "\\[\\S\\S \\S\\S]";
         string match = Regex.Match(line, pattern).Value;
@@ -210,33 +244,7 @@ public class HandParserService
         {
 
             // TODO: break this out in function with by ref boolean
-            if (lines[i].StartsWith("*** HOLE CARDS ***"))
-            {
-                street = "BeforeFlop";
-                actions.AddRange(GetStreetActions(lines.Skip(i + 1).ToList(), street));
-                continue;
-            }
 
-            if (lines[i].StartsWith("*** FLOP ***"))
-            {
-                street = "Flop";
-                actions.AddRange(GetStreetActions(lines.Skip(i + 1).ToList(), street));
-                continue;
-            }
-
-            if (lines[i].StartsWith("*** TURN ***"))
-            {
-                street = "Turn";
-                actions.AddRange(GetStreetActions(lines.Skip(i + 1).ToList(), street));
-                continue;
-            }
-
-            if (lines[i].StartsWith("*** RIVER *** "))
-            {
-                street = "River";
-                actions.AddRange(GetStreetActions(lines.Skip(i + 1).ToList(), street));
-                continue;
-            }
 
 
         }
@@ -244,97 +252,61 @@ public class HandParserService
         return actions;
     }
 
-    private List<string> GetStreetActions(List<string> lines, string round)
+    private Dictionary<string, List<Action>> GetStreetActions(List<string> lines, string round)
     {
-        List<string> actions = new List<string>();
-        int raiseCount = 0;
+        Dictionary<string, List<Action>> actions = new Dictionary<string, List<Action>>();
+        int raiseCount = (round == HandActions.PreFlop ? 1 : 0);
         foreach (string line in lines)
         {
             if (line.StartsWith("***") || line.StartsWith("Uncalled")) { break; }
 
             string player = GetPlayerNameFromActionLine(line);
             Action action = GetPlayerActionFromActionLine(line);
-            if (line.Contains("raise") && !line.Contains(HeroName))
+            action.Round = round;
+            action.RaiseCount = raiseCount;
+            if (action.HandAction == HandActions.Raise)
             {
                 raiseCount++;
             }
-
-            if (line.Contains(HeroName) && line.Contains("calls"))
+            else if (action.HandAction == HandActions.Call)
             {
-                if (round == HandActions.BeforeFlop && raiseCount == 0)
+                // swap check for limp if stuff is preflop
+                if (raiseCount == 1 && round == HandActions.PreFlop)
                 {
-                    actions.Add(HandActions.Limped + round);
+                    action.HandAction = HandActions.Limped;
                 }
-                else if (raiseCount == 1)
-                {
-                    actions.Add(HandActions.Limped + round);
-                }
-                else if (raiseCount > 1)
-                {
-                    actions.Add(HandActions.Call + raiseCount + "bet" + round);
-                }
-
             }
-            else if (line.Contains(HeroName) && line.Contains("raise"))
-            {
-
-                actions.Add(HandActions.Raised + raiseCount + "bet" + round);
-
-            }
-            else if (line.Contains(HeroName) && line.Contains("bet"))
-            {
-
-                actions.Add(HandActions.Bet + round);
-            }
-            else if (line.Contains(HeroName) && line.Contains("check"))
-            {
-
-                actions.Add(HandActions.Check + round);
-            }
-            else if (line.Contains(HeroName) && line.Contains("fold"))
-            {
-                if (raiseCount > 0)
-                {
-                    actions.Add(HandActions.Fold + "to" + raiseCount + "raise" + round);
-                }
-                else
-                {
-                    actions.Add(HandActions.Fold + round);
-                }
-
-            }
-
+            actions[player].Add(action);
 
         }
 
-
-
         return actions;
-
     }
 
     private Action GetPlayerActionFromActionLine(string line)
     {
         Action a = new Action();
 
-        if(line.Contains(HandActions.Fold.ToLower()))
+        if (line.Contains(HandActions.Fold.ToLower()))
         {
             a.HandAction = HandActions.Fold;
         }
-        
-        if(line.Contains(HandActions.Raise.ToLower()))
+        else if (line.Contains(HandActions.Raise.ToLower()))
         {
             a.HandAction = HandActions.Raise;
             string[] actionStuff = line.Skip(line.IndexOf(":")).ToString().Trim().Split(" ");
             a.RaiseAmount = actionStuff[1];
-            a.TotalAmount = actionStuff[3]; 
+            a.TotalAmount = actionStuff[3];
         }
-
-        if(line.Contains(HandActions.Call.ToLower()))
+        else if (line.Contains(HandActions.Call.ToLower()))
         {
             a.HandAction = HandActions.Call;
             string[] actionStuff = line.Skip(line.IndexOf(":")).ToString().Trim().Split(" ");
-            a.TotalAmount = actionStuff[1]; 
+            a.TotalAmount = actionStuff[1];
+        }
+        else if (line.Contains(HandActions.Check.ToLower()))
+        {
+            a.HandAction = HandActions.Check;
         }
 
         return a;
