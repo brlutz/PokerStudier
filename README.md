@@ -15,7 +15,7 @@ I'm going to keep this database free for the moment and try to do any reads from
 ![Example Image](https://raw.githubusercontent.com/brlutz/PokerStudier/master/example.JPG "Example")
 
 # Currently being implimented
-* Filter by hero actions
+* Really big refactor happening in "EnemyActions" branch. This should provide similar functionality to existing stuff, but will provide a more generic approach to parsing hands that should allow the ability to see ranges/hands for any enemy. This is a pretty big rewite and is currently ongoing. Hope to have that sorted by 10/20ish.
 
 # Near Future scope
 *  Winnings Tracker for Hero (overall aka Green Line)
