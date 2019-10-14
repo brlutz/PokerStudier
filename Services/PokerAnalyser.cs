@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using PokerStudier.DataModels;
 using PokerStudier1.Models;
 
@@ -10,7 +11,7 @@ namespace PokerStudier
     {
         private List<HandHistory> HandHistories;
 
-        private HandClassifier Classification;
+        private RangeChart RangeChart;
 
         public HUDStats HUDStats;
 
@@ -21,18 +22,19 @@ namespace PokerStudier
         "A","K","Q","J","T","9","8","7","6","5","4","3","2"
         };
 
-        public PokerAnalyser(List<HandHistory> handHistories, Filter f)
+        public PokerAnalyser(List<HandHistory> handHistories, Filter f, string playerName)
         {
             this.HandHistories = handHistories;
-            Classification = new HandClassifier(this.HandHistories, f);
-            this.HandHistories = Classification.GetClassifiedHandHistories();
-            this.HandHistories = FilterHandHistories(this.HandHistories, f);
-            GetStatsForClassification(Classification);
-            this.HUDStats = new HUDStats(this.HandHistories);
+            RangeChart = new RangeChart(this.HandHistories, f, playerName);
+            this.HandHistories = RangeChart.GetHandHistories();
+            //this.HandHistories = FilterHandHistories(this.HandHistories, f);
+            GetStatsForRangeChart(RangeChart, playerName);
+            this.HUDStats = new HUDStats(this.HandHistories, playerName);
         }
 
         private List<HandHistory> FilterHandHistories(List<HandHistory> handHistories, Filter f)
         {
+            /* 
             for (int i = handHistories.Count - 1; i >= 0; i--)
             {
                 if (f.Position != null)
@@ -43,27 +45,33 @@ namespace PokerStudier
                     }
                 }
             }
-
+            */
             return handHistories;
         }
 
-        private void GetStatsForClassification(HandClassifier classification)
+        private void GetStatsForRangeChart(RangeChart range, string playerName)
         {
             PopulateClassification();
-            foreach (HandHistory hh in Classification.GetClassifiedHandHistories())
+
+            foreach (HandHistory hh in RangeChart.GetHandHistories())
             {
-                string key = hh.HandType;
-                string position = hh.Position;
-                this.Results[key].TotalCount++;
+                PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
 
-                if (hh.HeroMoneyPutInPotTotal > 0 && hh.BlindPaid != null)
+                if (phh != null)
                 {
-                    this.Results[key].InvolvedCount++;
-                }
+                    string key = phh.HandType;
+                    string position = phh.Position;
+                    this.Results[key].TotalCount++;
 
-                if (hh.HeroEarnings > 0)
-                {
-                    this.Results[key].WinCount++;
+                    if (phh.MoneyPutInPotTotal > 0 && !phh.WasBlindPaid())
+                    {
+                        this.Results[key].InvolvedCount++;
+                    }
+
+                    if (phh.Earnings > 0)
+                    {
+                        this.Results[key].WinCount++;
+                    }
                 }
             }
         }

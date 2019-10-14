@@ -29,14 +29,14 @@ public class HandParserService
         List<PlayerHandHistory> playerHandHistories = new List<PlayerHandHistory>();
 
         playerHandHistories = GetPlayerHandHistories(rawHand);
-        Actions = GetActions(lines);
+        //Actions = GetActions(lines);
         // Get Hero starting amount
-        HeroStartMoney = GetHeroStartMoney(lines);
-        HeroEndMoney = GetHeroEndMoney(lines);
+        //HeroStartMoney = GetHeroStartMoney(lines);
+        //HeroEndMoney = GetHeroEndMoney(lines);
 
-        Hand = new Hand(GetHeroHand(lines));
+         // = new Hand(GetHeroHand(lines));
 
-        Position = GetHeroPosition(lines);
+        // Position = GetHeroPosition(lines);
 
         return hh;
 
@@ -85,8 +85,8 @@ public class HandParserService
         GetPlayerPositions(ref phh, buttonPosition);
 
 
-        GetHandActions(ref phh);
-
+        GetHandActions(ref phh, rawHand);
+        
 
         return phh;
     }
@@ -94,7 +94,9 @@ public class HandParserService
     private void GetSmallBlind(ref List<PlayerHandHistory> phh, string line)
     {
         string smallBlindName = line.Split(';').First();
-        phh.Where(x => x.PlayerName == smallBlindName).Single().
+       
+       // say where someone paid the blinds;
+        // phh.Where(x => x.PlayerName == smallBlindName).Single().
     }
 
     private void GetBigBlind(ref List<PlayerHandHistory> phh, string line)
@@ -105,7 +107,6 @@ public class HandParserService
     private void GetHandActions(ref List<PlayerHandHistory> phh, List<string> rawHand)
     {
         int lineCount = 0;
-        bool startedHand = false;
         foreach (string line in rawHand)
         {
             if (line.StartsWith("*** HOLE CARDS ***"))
@@ -122,14 +123,14 @@ public class HandParserService
         phh.Where(x => rawHand[0].Contains(x.PlayerName)).Single().HoleCards = GetHoleCards(rawHand[0]);
         rawHand = rawHand.Skip(1).ToList();
         
-        // TODO BEN START HERE
-        for(int i = 0; string line in rawHand)
+        for(int i = 0; i < rawHand.Count(); i++)
         {
             lineCount++;
+            string line = rawHand[i];
+
             if (line.StartsWith("*** HOLE CARDS ***"))
             {
-                rawHand.
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand, HandActions.PreFlop);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i).ToList(), HandActions.PreFlop);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -138,7 +139,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** FLOP ***"))
             {
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand, HandActions.Flop);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i).ToList(), HandActions.Flop);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -147,7 +148,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** TURN ***"))
             {
-                Dictionary<string, List<Action>> actions =  GetStreetActions(rawHand, HandActions.Turn);
+                Dictionary<string, List<Action>> actions =  GetStreetActions(rawHand.Skip(i).ToList(), HandActions.Turn);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -156,7 +157,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** RIVER *** "))
             {
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand, HandActions.River);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i).ToList(), HandActions.River);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -235,22 +236,6 @@ public class HandParserService
         return flopTurnRiver;
     }
 
-    private List<string> GetActions(List<string> lines)
-    {
-        List<string> actions = new List<string>();
-
-        string street = "";
-        for (int i = 0; i < lines.Count; i++)
-        {
-
-            // TODO: break this out in function with by ref boolean
-
-
-
-        }
-
-        return actions;
-    }
 
     private Dictionary<string, List<Action>> GetStreetActions(List<string> lines, string round)
     {
@@ -317,142 +302,7 @@ public class HandParserService
         return line.Split(":")[0];
     }
 
-    private string GetHeroPosition(List<string> lines)
-    {
-        string button = "Seat #\\d";
 
-        List<string> positionKeysBackward = new List<string> { "Button", "Cutoff", "Hijack", "Lojack", "SmallBlind", "BigBlind", };
-        List<string> positionKeys = new List<string> { "Button", "SmallBlind", "BigBlind", "Cutoff", "Hijack", "Lojack" };
-        string pattern = "Seat #\\d";
-        string match = Regex.Match(lines[1], pattern).Value;
-        button = match.Replace("#", "");
-
-        List<int> positions = new List<int>();
-        int buttonPosition = -1;
-        int heroPosition = -1;
-        for (int i = 2; i < 11; i++)
-        {
-            if (lines[i].StartsWith("Seat"))
-            {
-                int positionNumber = Convert.ToInt16(lines[i].Replace(":", "").Split(" ")[1]);
-
-                positions.Add(positionNumber);
-
-                if (lines[i].StartsWith(button))
-                {
-                    buttonPosition = positions.Count;
-                }
-
-                if (lines[i].Contains(HeroName))
-                {
-                    heroPosition = positions.Count;
-                }
-            }
-        }
-
-        // TODO: Fix bug here
-        // if offset is 1-0, then you're sb
-        positionKeys = positionKeys.Take(positions.Count).ToList();
-        positionKeysBackward = positionKeysBackward.Take(positions.Count).ToList();
-        string heroPositionString = "";
-        int diffBetweenHeroAndButton = heroPosition - buttonPosition;
-
-
-        if (diffBetweenHeroAndButton < 0)
-        {
-
-            heroPositionString = positionKeysBackward[Math.Abs(diffBetweenHeroAndButton)];
-        }
-        else
-        {
-            heroPositionString = positionKeys[diffBetweenHeroAndButton];
-        }
-
-
-        return heroPositionString;
-    }
-
-    private string GetHeroHand(List<string> lines)
-    {
-        for (int i = 5; i < lines.Count; i++)
-        {
-            string line = lines[i];
-
-            if (line.StartsWith("*** HOLE CARDS ***"))
-            {
-                line = lines[i + 1];
-                if (line.Contains(HeroName))
-                {
-                    string pattern = "\\[\\S\\S \\S\\S]";
-                    string match = Regex.Match(line, pattern).Value;
-                    match = match.Replace("[", "").Replace("]", "");
-                    return match;
-                }
-            }
-
-        }
-
-        throw new InvalidDataException();
-    }
-
-    private decimal GetHeroEndMoney(List<string> lines)
-    {
-        BlindPaid = FindIfBlindsPaid(lines);
-        if (BlindPaid == "big") { HeroMoneyPutInPotTotal += BigBlind; }
-        if (BlindPaid == "small") { HeroMoneyPutInPotTotal += SmallBlind; }
-
-        HeroMoneyPutInPotTotal += FindBets();
-        HeroWinnings += HeroFindWinnings(lines);
-
-        return HeroWinnings - HeroMoneyPutInPotTotal;
-    }
-
-    private decimal HeroFindWinnings(List<string> lines)
-    {
-        decimal winnings = 0;
-        foreach (string line in lines)
-        {
-            string pattern = "PlayTheBlues4U collected \\$\\S*";
-            string match = Regex.Match(line, pattern).Value;
-            if (match == "") { continue; }
-            winnings += Convert.ToDecimal(match.Replace("PlayTheBlues4U collected $", ""));
-        }
-
-        return winnings;
-    }
-
-    private decimal FindBets()
-    {
-        decimal sumOfMoney = 0;
-        foreach (string line in RawHand)
-        {
-            if (line.Contains("PlayTheBlues4U: raises"))
-            {
-                sumOfMoney += ParseRaise(line);
-                continue;
-            }
-
-            if (line.Contains("PlayTheBlues4U: calls"))
-            {
-                sumOfMoney += ParseCall(line);
-                continue;
-            }
-
-            if (line.Contains("PlayTheBlues4U: bets"))
-            {
-                sumOfMoney += ParseBet(line);
-                continue;
-            }
-
-            if (line.Contains("returned to PlayTheBlues4U"))
-            {
-                sumOfMoney -= ParseReturned(line);
-            }
-
-        }
-
-        return sumOfMoney;
-    }
 
     private decimal ParseReturned(string line)
     {
@@ -461,53 +311,8 @@ public class HandParserService
         return Convert.ToDecimal(match.Replace("Uncalled bet ($", "").Replace(")", ""));
     }
 
-    private decimal ParseRaise(string line)
-    {
-        string pattern = "to \\$\\S*";
-        string match = Regex.Match(line, pattern).Value;
-        return Convert.ToDecimal(match.Replace("to $", ""));
-    }
 
-    private decimal ParseBet(string line)
-    {
-        string pattern = "bets \\$\\S*";
-        string match = Regex.Match(line, pattern).Value;
-        return Convert.ToDecimal(match.Replace("bets $", ""));
-    }
-
-    private decimal ParseCall(string line)
-    {
-        string pattern = "calls \\$\\S*";
-        string match = Regex.Match(line, pattern).Value;
-        return Convert.ToDecimal(match.Replace("calls $", ""));
-    }
-
-    private string FindIfBlindsPaid(List<string> lines)
-    {
-        foreach (string line in lines)
-        {
-            if (line.StartsWith("*** HOLE CARDS ***"))
-            {
-                break;
-            }
-            else if (line.Contains("PlayTheBlues4U: posts"))
-            {
-                if (line.Contains("small"))
-                {
-                    return "small";
-                }
-
-                if (line.Contains("big"))
-                {
-                    return "big";
-                }
-            }
-        }
-
-        return null;
-    }
-
-    private decimal GetHeroStartMoney(List<string> lines)
+    private decimal GetPlayerStartMoney(List<string> lines, string playerName)
     {
 
         for (int i = 2; i < lines.Count; i++)
@@ -519,7 +324,7 @@ public class HandParserService
                 break;
             }
 
-            if (line.Contains(HeroName))
+            if (line.Contains(playerName))
             {
                 string pattern = "(\\$\\S*)";
                 string match = Regex.Match(line, pattern).Value;
@@ -559,19 +364,5 @@ public class HandParserService
 
 
 
-
-}
-
-public class Hand
-{
-    public Hand(string rawHand)
-    {
-        this.RawHand = rawHand;
-    }
-    public string RawHand { get; set; }
-}
-
-public class Player
-{
 
 }

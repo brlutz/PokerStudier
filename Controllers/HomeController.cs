@@ -11,27 +11,32 @@ namespace PokerStudier1.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index(string position)
+        public IActionResult Index(string position, string playerName = "PlayTheBlues4U")
         {
             
             ViewModelService s = new ViewModelService();
-            return View(s.GetWholeRangeAnaylsisModelGetter(position));
+            return View(s.GetWholeRangeAnaylsisModelGetter(playerName, position));
         }
 
+
         [Route("/Hand/{hand}", Name = "Hand")]
-        public IActionResult Hand(string hand)
+        public IActionResult Hand(string hand, string playerName = "PlayTheBlues4U")
         {
+            return null;
+            /* 
             ViewModelService s = new ViewModelService();
             return View(s.GetHandAnaylsisModelGetter(hand));
-            // return View(ModelGetter(position));
+            */
+
         }
 
         [Route("/Hands", Name = "Hands")]
-        public IActionResult Hands(string hand)
+        public IActionResult Hands(string hand, string playerName = "PlayTheBlues4U")
         {
+           return null;
             ViewModelService s = new ViewModelService();
-            return View(s.GetHandsAnaylsisModelGetter());
-            // return View(ModelGetter(position));
+            // return View(s.GetHandsAnaylsisModelGetter());
+
         }
 
         public IActionResult Player(string name)

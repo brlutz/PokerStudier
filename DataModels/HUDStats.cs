@@ -4,67 +4,106 @@ using System.Linq;
 
 namespace PokerStudier.DataModels
 {
+
+
+
     public class HUDStats
     {
         private List<HandHistory> handHistories;
-        public decimal VPIP {get;set;}
-        public decimal PFR {get;set;}
+        public decimal VPIP { get; set; }
+        public decimal PFR { get; set; }
 
-        public decimal AF {get;set;}
+        public decimal AF { get; set; }
 
-        public HUDStats(List<HandHistory> handHistories)
+        public HUDStats(List<HandHistory> handHistories, string playerName)
         {
             this.handHistories = handHistories;
-            this.VPIP = CalculateVPIP(this.handHistories);
-            this.PFR = CalculatePFR(this.handHistories);
-            this.AF = CalculateAF(this.handHistories);
+            this.VPIP = CalculateVPIP(this.handHistories, playerName);
+            this.PFR = CalculatePFR(this.handHistories, playerName);
+            this.AF = CalculateAF(this.handHistories, playerName);
         }
 
-        private decimal CalculateAF(List<HandHistory> handHistories)
+        private decimal CalculateAF(List<HandHistory> handHistories, string playerName)
         {
             decimal af = 0;
             int aggressiveCount = 0;
             int passiveCount = 0;
-            foreach(HandHistory hh in handHistories)
+            int totalCount = 0;
+            foreach (HandHistory hh in handHistories)
             {
-                aggressiveCount += hh.Actions.Where(x=> x.Contains("Bet") || x.Contains("Raise")).Count();
-                passiveCount += hh.Actions.Where(x=> x.Contains("Bet")).Count();
+                PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
+                if (phh is null)
+                {
+                    continue;
+                }
+                else
+                {
+                    totalCount++;
+                    aggressiveCount += phh.Actions.Where(x => x.HandAction.Contains("Bet") || x.HandAction.Contains("Raise")).Count();
+                    passiveCount += phh.Actions.Where(x => x.HandAction.Contains("Bet")).Count();
+                    
+                }
+
+
             }
             af = (decimal)aggressiveCount / (decimal)passiveCount;
 
             return Math.Round(af, 2);
         }
 
-        private decimal CalculatePFR(List<HandHistory> handHistories)
+        private decimal CalculatePFR(List<HandHistory> handHistories, string playerName)
         {
             decimal pfr = 0;
-            foreach(HandHistory hh in handHistories)
+            int totalHandsActive = 0;
+            foreach (HandHistory hh in handHistories)
             {
-                if(hh.Actions.Exists(x => x.Contains("BeforeFlop") && x.Contains("Raise")))
+                PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
+                if (phh is null)
                 {
-                    pfr++;
+                    continue;
+                }
+                else
+                {
+                    totalHandsActive++;
+                    if (phh.Actions.Exists(x => x.HandAction.Contains("BeforeFlop") && !x.HandAction.Contains("Raise")))
+                    {
+                        pfr++;
+                    }
                 }
             }
-            pfr = pfr / handHistories.Count;
+            pfr = pfr / totalHandsActive;
 
             return Math.Round(pfr, 2);
         }
 
-        private decimal CalculateVPIP(List<HandHistory> handHistories)
+        private decimal CalculateVPIP(List<HandHistory> handHistories, string playerName)
         {
             decimal vpip = 0;
-            foreach(HandHistory hh in handHistories)
+            int totalHandsActive = 0;
+            foreach (HandHistory hh in handHistories)
             {
-                if(hh.Actions.Exists(x => x.Contains("BeforeFlop") && !x.Contains("Fold")))
+                PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
+                if (phh is null)
                 {
-                    vpip++;
+                    continue;
                 }
+                else
+                {
+                    totalHandsActive++;
+                    if (phh.Actions.Exists(x => x.HandAction.Contains("BeforeFlop") && !x.HandAction.Contains("Fold")))
+                    {
+                        vpip++;
+                    }
+                }
+
+
+
             }
-            vpip = vpip / handHistories.Count;
+            vpip = vpip / totalHandsActive;
 
             return Math.Round(vpip, 2);
         }
 
-        
+
     }
 }

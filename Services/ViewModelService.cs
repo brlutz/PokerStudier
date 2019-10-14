@@ -10,6 +10,7 @@ namespace PokerStudier
 {
     public class ViewModelService
     {
+        /* 
         public HandsOverviewViewModel GetHandsAnaylsisModelGetter()
         {
             List<string> textFiles = GetHandHistoryFiles();
@@ -25,6 +26,7 @@ namespace PokerStudier
 
             return new HandsOverviewViewModel(p.HandHistories, f, new PaginationSettings() { PageSize = 100 });
         }
+        */
 
         public List<string> GetHandHistoryFiles()
         {
@@ -32,7 +34,7 @@ namespace PokerStudier
 
             return textFiles;
         }
-        public ResultsViewModel GetWholeRangeAnaylsisModelGetter(string position)
+        public ResultsViewModel GetWholeRangeAnaylsisModelGetter(string playerName,string position)
         {
             List<string> textFiles = GetHandHistoryFiles();
 
@@ -42,18 +44,18 @@ namespace PokerStudier
                 p.ReadInFile(file);
             }
             Filter f = new Filter(position, null);
-            PokerAnalyser a = new PokerAnalyser(p.HandHistories, f);
-            List<string> actionOptions = new List<string>();
+            PokerAnalyser a = new PokerAnalyser(p.HandHistories, f, playerName);
+            List<Action> actionOptions = new List<Action>();
             foreach (HandHistory hh in p.HandHistories)
             {
-                actionOptions.AddRange(hh.Actions);
+                actionOptions.AddRange(hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault()?.Actions);
                 actionOptions = actionOptions.Distinct().ToList();
             }
             List<string> sortedActionOptions = new List<string>();
-            sortedActionOptions.AddRange(actionOptions.Where(x => x.Contains("BeforeFlop")).ToList());
-            sortedActionOptions.AddRange(actionOptions.Where(x => !x.Contains("Before") && x.Contains("Flop")).ToList());
-            sortedActionOptions.AddRange(actionOptions.Where(x => x.Contains("Turn")).ToList());
-            sortedActionOptions.AddRange(actionOptions.Where(x => x.Contains("River")).ToList());
+            //sortedActionOptions.AddRange(actionOptions.Where(x => x.HandAction.Contains("BeforeFlop")).ToList());
+            //sortedActionOptions.AddRange(actionOptions.Where(x => !x.Contains("Before") && x.Contains("Flop")).ToList());
+            //sortedActionOptions.AddRange(actionOptions.Where(x => x.Contains("Turn")).ToList());
+            //sortedActionOptions.AddRange(actionOptions.Where(x => x.Contains("River")).ToList());
 
 
 
@@ -63,6 +65,7 @@ namespace PokerStudier
             return new ResultsViewModel(a.GetResults(), a.HUDStats, f);
         }
 
+        /* 
         public HandOverviewViewModel GetHandAnaylsisModelGetter(string hand)
         {
             List<string> textFiles = GetHandHistoryFiles();
@@ -79,6 +82,7 @@ namespace PokerStudier
 
             return new HandOverviewViewModel(p.HandHistories, f);
         }
+        */
 
 
     }
