@@ -46,7 +46,7 @@ namespace PokerStudier.DataModels
 
 
             }
-            af = (decimal)aggressiveCount / (decimal)passiveCount;
+            af = passiveCount == 0 ? 1000 : (decimal)aggressiveCount / (decimal)passiveCount;
 
             return Math.Round(af, 2);
         }
@@ -71,7 +71,7 @@ namespace PokerStudier.DataModels
                     }
                 }
             }
-            pfr = pfr / totalHandsActive;
+            pfr = totalHandsActive == 0 ? 0 : pfr / totalHandsActive;
 
             return Math.Round(pfr, 2);
         }
@@ -99,7 +99,7 @@ namespace PokerStudier.DataModels
 
 
             }
-            vpip = vpip / totalHandsActive;
+            vpip =  totalHandsActive == 0 ? 0 : vpip / totalHandsActive;
 
             return Math.Round(vpip, 2);
         }

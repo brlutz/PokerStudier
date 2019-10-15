@@ -68,11 +68,11 @@ public class HandParserService
         while (line.StartsWith("Seat "))
         {
             // Get the player name
-            string playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("(")).Trim();
+            string playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("(")-line.IndexOf(":")-1).Trim();
             PlayerHandHistory p = new PlayerHandHistory(playerName);
 
             // get which player in the list is the button
-            if (line.StartsWith("Seat " + buttonSeat))
+            if (line.StartsWith(buttonSeat))
             {
                 buttonPosition = phh.Count();
             }
@@ -109,11 +109,12 @@ public class HandParserService
         int lineCount = 0;
         foreach (string line in rawHand)
         {
+            lineCount++;
             if (line.StartsWith("*** HOLE CARDS ***"))
             {
                 break;
             }
-            lineCount++;
+            
         }
 
         // Get rid of already processed stuff
@@ -189,8 +190,9 @@ public class HandParserService
 
             if (diffBetweenPlayerAndButton < 0)
             {
-
-                phh[i].Position = positionKeysBackward[Math.Abs(diffBetweenPlayerAndButton)];
+                // bug?
+                phh[i].Position = positionKeys[positionKeys.Count() + diffBetweenPlayerAndButton];
+                //phh[i].Position = positionKeysBackward[Math.Abs(diffBetweenPlayerAndButton)];
             }
             else
             {

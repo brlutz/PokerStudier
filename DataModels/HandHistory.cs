@@ -7,11 +7,6 @@ using System.Text.RegularExpressions;
 public class HandHistory
 {
 
-    public HandHistory(List<string> rawHandHistory, string heroName)
-    {
-        RawHand = rawHandHistory;
-        HeroName = heroName;
-    }
 
     public HandHistory(List<string> rawHandHistory)
     {

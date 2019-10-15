@@ -56,7 +56,7 @@ namespace PokerStudier
             {
                 if (!rawHand[0].Contains("Tournament"))
                 {
-                    HandHistory hh = new HandHistory(rawHand, "PlayTheBlues4U");
+                    HandHistory hh = new HandHistory(rawHand);
                     hh = s.ParseHand(rawHand);
                     if (!this.HandHistories.Exists(x => x.HandNumber == hh.HandNumber))
                     {
