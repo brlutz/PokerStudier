@@ -8,9 +8,9 @@ public class Action
 {
   public string HandAction {get;set;}
 
-  public string RaiseAmount {get;set;}
+  public decimal RaiseAmount {get;set;}
 
-  public string TotalAmount {get;set;}
+  public decimal TotalAmount {get;set;}
 
   public int RaiseCount {get;set;}
 

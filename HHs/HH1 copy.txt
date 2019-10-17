@@ -1,3 +1,374 @@
+*********** # 1 **************
+PokerStars Hand #203492936567:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:52:22 ET
+Table 'Scorpius' 6-max Seat #4 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 4: PlayTheBlues4U ($6 in chips)
+Seat 5: zepped88 ($3.48 in chips)
+zepped88: posts small blind $0.02
+Reignerrr: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [Jc 8s]
+PlayTheBlues4U: folds
+zepped88: folds
+Uncalled bet ($0.03) returned to Reignerrr
+Reignerrr collected $0.04 from pot
+Reignerrr: doesn't show hand
+*** SUMMARY ***
+Total pot $0.04 | Rake $0
+Seat 2: Reignerrr (big blind) collected ($0.04)
+Seat 4: PlayTheBlues4U (button) folded before Flop (didn't bet)
+Seat 5: zepped88 (small blind) folded before Flop
+
+
+*********** # 2 **************
+PokerStars Hand #203492936520:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:51:48 ET
+Table 'Scorpius' 6-max Seat #2 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 4: PlayTheBlues4U ($6.40 in chips)
+Seat 5: zepped88 ($3.12 in chips)
+PlayTheBlues4U: posts small blind $0.02
+zepped88: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [4s As]
+Reignerrr: folds
+PlayTheBlues4U: raises $0.05 to $0.10
+zepped88: calls $0.05
+*** FLOP *** [5h Th 7h]
+PlayTheBlues4U: bets $0.10
+zepped88: calls $0.10
+*** TURN *** [5h Th 7h] [3h]
+PlayTheBlues4U: bets $0.20
+zepped88: calls $0.20
+*** RIVER *** [5h Th 7h 3h] [Ah]
+PlayTheBlues4U: checks
+zepped88: checks
+*** SHOW DOWN ***
+PlayTheBlues4U: shows [4s As] (a flush, Ace high)
+zepped88: shows [9h Ac] (a flush, Ace high - Nine higher)
+zepped88 collected $0.76 from pot
+*** SUMMARY ***
+Total pot $0.80 | Rake $0.04
+Board [5h Th 7h 3h Ah]
+Seat 2: Reignerrr (button) folded before Flop (didn't bet)
+Seat 4: PlayTheBlues4U (small blind) showed [4s As] and lost with a flush, Ace high
+Seat 5: zepped88 (big blind) showed [9h Ac] and won ($0.76) with a flush, Ace high
+
+
+*********** # 3 **************
+PokerStars Hand #203492936494:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:51:23 ET
+Table 'Scorpius' 6-max Seat #5 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 4: PlayTheBlues4U ($6.45 in chips)
+Seat 5: zepped88 ($3.06 in chips)
+Reignerrr: posts small blind $0.02
+PlayTheBlues4U: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [6d Jc]
+zepped88: calls $0.05
+Reignerrr: folds
+PlayTheBlues4U: checks
+*** FLOP *** [7c 3c 4h]
+PlayTheBlues4U: checks
+zepped88: bets $0.05
+PlayTheBlues4U: folds
+Uncalled bet ($0.05) returned to zepped88
+zepped88 collected $0.11 from pot
+zepped88: doesn't show hand
+*** SUMMARY ***
+Total pot $0.12 | Rake $0.01
+Board [7c 3c 4h]
+Seat 2: Reignerrr (small blind) folded before Flop
+Seat 4: PlayTheBlues4U (big blind) folded on the Flop
+Seat 5: zepped88 (button) collected ($0.11)
+
+
+*********** # 4 **************
+PokerStars Hand #203492936422:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:50:26 ET
+Table 'Scorpius' 6-max Seat #4 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 4: PlayTheBlues4U ($6.03 in chips)
+Seat 5: zepped88 ($3.08 in chips)
+Seat 6: marimba 104 ($5.70 in chips)
+zepped88: posts small blind $0.02
+marimba 104: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [3s Ad]
+Reignerrr: folds
+PlayTheBlues4U: calls $0.05
+zepped88: folds
+marimba 104: checks
+*** FLOP *** [6h 3d Ah]
+marimba 104: checks
+PlayTheBlues4U: bets $0.10
+marimba 104: calls $0.10
+*** TURN *** [6h 3d Ah] [5d]
+marimba 104: checks
+PlayTheBlues4U: bets $0.30
+marimba 104: calls $0.30
+*** RIVER *** [6h 3d Ah 5d] [Jd]
+marimba 104: checks
+PlayTheBlues4U: bets $0.50
+marimba 104: folds
+Uncalled bet ($0.50) returned to PlayTheBlues4U
+marimba 104 leaves the table
+PlayTheBlues4U collected $0.87 from pot
+PlayTheBlues4U: doesn't show hand
+*** SUMMARY ***
+Total pot $0.92 | Rake $0.05
+Board [6h 3d Ah 5d Jd]
+Seat 2: Reignerrr folded before Flop (didn't bet)
+Seat 4: PlayTheBlues4U (button) collected ($0.87)
+Seat 5: zepped88 (small blind) folded before Flop
+Seat 6: marimba 104 (big blind) folded on the River
+
+
+*********** # 5 **************
+PokerStars Hand #203492936350:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:49:21 ET
+Table 'Scorpius' 6-max Seat #2 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 3: oldhippieVii ($5.35 in chips)
+Seat 4: PlayTheBlues4U ($6.08 in chips)
+Seat 5: zepped88 ($3.08 in chips)
+Seat 6: marimba 104 ($6.05 in chips)
+oldhippieVii: posts small blind $0.02
+PlayTheBlues4U: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [8d 3c]
+zepped88: folds
+marimba 104: calls $0.05
+Reignerrr: folds
+oldhippieVii: calls $0.03
+PlayTheBlues4U: checks
+*** FLOP *** [Ah Td Qs]
+oldhippieVii: checks
+PlayTheBlues4U: checks
+marimba 104: bets $0.15
+oldhippieVii: calls $0.15
+PlayTheBlues4U: folds
+*** TURN *** [Ah Td Qs] [3s]
+oldhippieVii: checks
+marimba 104: bets $0.15
+oldhippieVii: calls $0.15
+*** RIVER *** [Ah Td Qs 3s] [Kc]
+oldhippieVii: checks
+marimba 104: checks
+*** SHOW DOWN ***
+oldhippieVii: shows [Th Ks] (two pair, Kings and Tens)
+marimba 104: mucks hand
+oldhippieVii collected $0.71 from pot
+*** SUMMARY ***
+Total pot $0.75 | Rake $0.04
+Board [Ah Td Qs 3s Kc]
+Seat 2: Reignerrr (button) folded before Flop (didn't bet)
+Seat 3: oldhippieVii (small blind) showed [Th Ks] and won ($0.71) with two pair, Kings and Tens
+Seat 4: PlayTheBlues4U (big blind) folded on the Flop
+Seat 5: zepped88 folded before Flop (didn't bet)
+Seat 6: marimba 104 mucked [As 5d]
+
+
+*********** # 6 **************
+PokerStars Hand #203492936340:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:49:13 ET
+Table 'Scorpius' 6-max Seat #6 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 3: oldhippieVii ($5.33 in chips)
+Seat 4: PlayTheBlues4U ($6.08 in chips)
+Seat 5: zepped88 ($3.08 in chips)
+Seat 6: marimba 104 ($6.05 in chips)
+Reignerrr: posts small blind $0.02
+oldhippieVii: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [3h 9c]
+PlayTheBlues4U: folds
+zepped88: folds
+marimba 104: folds
+Reignerrr: folds
+Uncalled bet ($0.03) returned to oldhippieVii
+oldhippieVii collected $0.04 from pot
+oldhippieVii: doesn't show hand
+*** SUMMARY ***
+Total pot $0.04 | Rake $0
+Seat 2: Reignerrr (small blind) folded before Flop
+Seat 3: oldhippieVii (big blind) collected ($0.04)
+Seat 4: PlayTheBlues4U folded before Flop (didn't bet)
+Seat 5: zepped88 folded before Flop (didn't bet)
+Seat 6: marimba 104 (button) folded before Flop (didn't bet)
+
+
+*********** # 7 **************
+PokerStars Hand #203492936289:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:48:38 ET
+Table 'Scorpius' 6-max Seat #5 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 3: oldhippieVii ($5.27 in chips)
+Seat 4: PlayTheBlues4U ($6.08 in chips)
+Seat 5: zepped88 ($3.08 in chips)
+Seat 6: marimba 104 ($6.07 in chips)
+marimba 104: posts small blind $0.02
+Reignerrr: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [Kd 5h]
+oldhippieVii: calls $0.05
+PlayTheBlues4U: folds
+zepped88: folds
+marimba 104: folds
+Reignerrr: checks
+*** FLOP *** [5c 3c 2d]
+Reignerrr: checks
+oldhippieVii: bets $0.11
+Reignerrr: folds
+Uncalled bet ($0.11) returned to oldhippieVii
+oldhippieVii collected $0.11 from pot
+oldhippieVii: doesn't show hand
+*** SUMMARY ***
+Total pot $0.12 | Rake $0.01
+Board [5c 3c 2d]
+Seat 2: Reignerrr (big blind) folded on the Flop
+Seat 3: oldhippieVii collected ($0.11)
+Seat 4: PlayTheBlues4U folded before Flop (didn't bet)
+Seat 5: zepped88 (button) folded before Flop (didn't bet)
+Seat 6: marimba 104 (small blind) folded before Flop
+
+
+*********** # 8 **************
+PokerStars Hand #203492936272:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:48:22 ET
+Table 'Scorpius' 6-max Seat #4 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 3: oldhippieVii ($5.27 in chips)
+Seat 4: PlayTheBlues4U ($6.01 in chips)
+Seat 5: zepped88 ($3.10 in chips)
+Seat 6: marimba 104 ($6.12 in chips)
+zepped88: posts small blind $0.02
+marimba 104: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [Qd Th]
+Reignerrr: folds
+oldhippieVii: folds
+PlayTheBlues4U: raises $0.10 to $0.15
+zepped88: folds
+marimba 104: folds
+Uncalled bet ($0.10) returned to PlayTheBlues4U
+PlayTheBlues4U collected $0.12 from pot
+PlayTheBlues4U: doesn't show hand
+*** SUMMARY ***
+Total pot $0.12 | Rake $0
+Seat 2: Reignerrr folded before Flop (didn't bet)
+Seat 3: oldhippieVii folded before Flop (didn't bet)
+Seat 4: PlayTheBlues4U (button) collected ($0.12)
+Seat 5: zepped88 (small blind) folded before Flop
+Seat 6: marimba 104 (big blind) folded before Flop
+
+
+*********** # 9 **************
+PokerStars Hand #203492936247:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:48:04 ET
+Table 'Scorpius' 6-max Seat #3 is the button
+Seat 2: Reignerrr ($5 in chips)
+Seat 3: oldhippieVii ($5.27 in chips)
+Seat 4: PlayTheBlues4U ($6.03 in chips)
+Seat 5: zepped88 ($3.15 in chips)
+Seat 6: marimba 104 ($6.06 in chips)
+PlayTheBlues4U: posts small blind $0.02
+zepped88: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [7c 5h]
+marimba 104: calls $0.05
+Reignerrr: folds
+oldhippieVii: folds
+PlayTheBlues4U: folds
+zepped88: checks
+*** FLOP *** [9d Jh 6s]
+zepped88: checks
+marimba 104: bets $0.15
+zepped88: folds
+Uncalled bet ($0.15) returned to marimba 104
+marimba 104 collected $0.11 from pot
+marimba 104: doesn't show hand
+*** SUMMARY ***
+Total pot $0.12 | Rake $0.01
+Board [9d Jh 6s]
+Seat 2: Reignerrr folded before Flop (didn't bet)
+Seat 3: oldhippieVii (button) folded before Flop (didn't bet)
+Seat 4: PlayTheBlues4U (small blind) folded before Flop
+Seat 5: zepped88 (big blind) folded on the Flop
+Seat 6: marimba 104 collected ($0.11)
+
+
+*********** # 10 **************
+PokerStars Hand #203492936226:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:47:50 ET
+Table 'Scorpius' 6-max Seat #2 is the button
+Seat 1: R@ngers94 ($4.45 in chips)
+Seat 2: Reignerrr ($5 in chips)
+Seat 3: oldhippieVii ($5.29 in chips)
+Seat 4: PlayTheBlues4U ($6.08 in chips)
+Seat 5: zepped88 ($3.08 in chips)
+Seat 6: marimba 104 ($6.06 in chips)
+oldhippieVii: posts small blind $0.02
+PlayTheBlues4U: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [4c Qh]
+zepped88: raises $0.05 to $0.10
+marimba 104: folds
+R@ngers94: folds
+Reignerrr: folds
+oldhippieVii: folds
+PlayTheBlues4U: folds
+Uncalled bet ($0.05) returned to zepped88
+R@ngers94 leaves the table
+zepped88 collected $0.12 from pot
+zepped88: doesn't show hand
+*** SUMMARY ***
+Total pot $0.12 | Rake $0
+Seat 1: R@ngers94 folded before Flop (didn't bet)
+Seat 2: Reignerrr (button) folded before Flop (didn't bet)
+Seat 3: oldhippieVii (small blind) folded before Flop
+Seat 4: PlayTheBlues4U (big blind) folded before Flop
+Seat 5: zepped88 collected ($0.12)
+Seat 6: marimba 104 folded before Flop (didn't bet)
+
+
+*********** # 11 **************
+PokerStars Hand #203492936153:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:47:01 ET
+Table 'Scorpius' 6-max Seat #1 is the button
+Seat 1: R@ngers94 ($4.50 in chips)
+Seat 2: Reignerrr ($5 in chips)
+Seat 3: oldhippieVii ($5.34 in chips)
+Seat 4: PlayTheBlues4U ($6.08 in chips)
+Seat 5: zepped88 ($3.13 in chips)
+Seat 6: marimba 104 ($5.90 in chips)
+Reignerrr: posts small blind $0.02
+oldhippieVii: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [7s 2h]
+PlayTheBlues4U: folds
+zepped88: calls $0.05
+marimba 104: calls $0.05
+R@ngers94: calls $0.05
+Reignerrr: folds
+oldhippieVii: checks
+*** FLOP *** [Kc Tc 9d]
+oldhippieVii: checks
+zepped88: checks
+marimba 104: checks
+R@ngers94: checks
+*** TURN *** [Kc Tc 9d] [4s]
+oldhippieVii: checks
+zepped88: checks
+marimba 104: bets $0.10
+R@ngers94: folds
+oldhippieVii: folds
+zepped88: folds
+Uncalled bet ($0.10) returned to marimba 104
+marimba 104 collected $0.21 from pot
+marimba 104: doesn't show hand
+*** SUMMARY ***
+Total pot $0.22 | Rake $0.01
+Board [Kc Tc 9d 4s]
+Seat 1: R@ngers94 (button) folded on the Turn
+Seat 2: Reignerrr (small blind) folded before Flop
+Seat 3: oldhippieVii (big blind) folded on the Turn
+Seat 4: PlayTheBlues4U folded before Flop (didn't bet)
+Seat 5: zepped88 folded on the Turn
+Seat 6: marimba 104 collected ($0.21)
+
+
 *********** # 12 **************
 PokerStars Hand #203492936030:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:45:24 ET
 Table 'Scorpius' 6-max Seat #6 is the button

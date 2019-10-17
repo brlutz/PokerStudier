@@ -245,7 +245,11 @@ public class HandParserService
         foreach (string line in lines)
         {
             if (line.StartsWith("***") || line.StartsWith("Uncalled")) { break; }
-
+            if (line.Contains("has timed out")) {continue;}
+            if (line.Contains("leaves the table")) {continue;}
+            if (line.Contains("joins the table")) {continue;}
+            if (line.Contains("is disconnected")) {continue;}
+            if (line.Contains("said, \"")){continue;}
             string player = GetPlayerNameFromActionLine(line);
             Action action = GetPlayerActionFromActionLine(line);
             action.Round = round;
@@ -287,15 +291,20 @@ public class HandParserService
         else if (line.Contains(HandActions.Raise.ToLower()))
         {
             a.HandAction = HandActions.Raise;
-            string[] actionStuff = line.Skip(line.IndexOf(":")).ToString().Trim().Split(" ");
-            a.RaiseAmount = actionStuff[1];
-            a.TotalAmount = actionStuff[3];
+            int indexOfSplit = line.IndexOf(":");
+            string actionStuffString = line.Substring(indexOfSplit+1, line.Length - indexOfSplit -1);
+            string[] actionStuff = actionStuffString.Trim().Split(" ");
+            
+            a.RaiseAmount = Convert.ToDecimal(actionStuff[1].Replace("$",""));
+            a.TotalAmount = Convert.ToDecimal(actionStuff[3].Replace("$",""));
         }
         else if (line.Contains(HandActions.Call.ToLower()))
         {
             a.HandAction = HandActions.Call;
-            string[] actionStuff = line.Skip(line.IndexOf(":")).ToString().Trim().Split(" ");
-            a.TotalAmount = actionStuff[1];
+            int indexOfSplit = line.IndexOf(":");
+            string actionStuffString = line.Substring(indexOfSplit+1, line.Length - indexOfSplit -1);
+            string[] actionStuff = actionStuffString.Trim().Split(" ");
+            a.TotalAmount = Convert.ToDecimal(actionStuff[1].Replace("$",""));
         }
         else if (line.Contains(HandActions.Check.ToLower()))
         {
