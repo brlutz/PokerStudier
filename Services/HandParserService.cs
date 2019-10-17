@@ -126,10 +126,9 @@ public class HandParserService
         
         for(int i = 0; i < rawHand.Count(); i++)
         {
-            lineCount++;
             string line = rawHand[i];
 
-            if (line.StartsWith("*** HOLE CARDS ***"))
+            if (i == 0)
             {
                 Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i).ToList(), HandActions.PreFlop);
                 foreach (string key in actions.Keys)
@@ -262,6 +261,13 @@ public class HandParserService
                 {
                     action.HandAction = HandActions.Limped;
                 }
+            }
+
+            List<Action> a = new List<Action>();
+            if(!actions.TryGetValue(player, out a))
+            {
+                actions.Add(player, a);
+                actions[player] = new List<Action>();
             }
             actions[player].Add(action);
 

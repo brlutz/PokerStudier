@@ -10,6 +10,7 @@ public class PlayerHandHistory
     public PlayerHandHistory(string playerName)
     {
         PlayerName = playerName;
+        this.Actions = new List<Action>();
     }
 
 
