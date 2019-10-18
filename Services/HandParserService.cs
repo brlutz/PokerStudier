@@ -26,9 +26,7 @@ public class HandParserService
 
         hh.FlopTurnRiverCards = GetFlopTurnRiverCards(lines);
 
-        List<PlayerHandHistory> playerHandHistories = new List<PlayerHandHistory>();
-
-        playerHandHistories = GetPlayerHandHistories(rawHand);
+        hh.PlayerHandHistories = GetPlayerHandHistories(rawHand);
         //Actions = GetActions(lines);
         // Get Hero starting amount
         //HeroStartMoney = GetHeroStartMoney(lines);
