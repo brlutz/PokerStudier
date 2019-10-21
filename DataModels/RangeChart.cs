@@ -75,12 +75,14 @@ public class RangeChart
                         if (phh.MoneyPutInPotTotal > 0 && !phh.WasBlindPaid())
                         {
                             this.Results[key].InvolvedCount++;
+
+                            if (phh.Earnings > 0)
+                            {
+                                this.Results[key].WinCount++;
+                            }
                         }
 
-                        if (phh.Earnings > 0)
-                        {
-                            this.Results[key].WinCount++;
-                        }
+
                     }
                 }
             }

@@ -276,6 +276,7 @@ public class HandParserService
             if (line.Contains("leaves the table")) { continue; }
             if (line.Contains("joins the table")) { continue; }
             if (line.Contains("is disconnected")) { continue; }
+            if (line.Contains("is connected")) { continue; }
             if (line.Contains("said, \"")) { continue; }
             string player = GetPlayerNameFromActionLine(line);
             Action action = GetPlayerActionFromActionLine(line);
