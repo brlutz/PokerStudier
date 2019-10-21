@@ -32,7 +32,7 @@ public class HandParserService
         //HeroStartMoney = GetHeroStartMoney(lines);
         //HeroEndMoney = GetHeroEndMoney(lines);
 
-         // = new Hand(GetHeroHand(lines));
+        // = new Hand(GetHeroHand(lines));
 
         // Position = GetHeroPosition(lines);
 
@@ -66,8 +66,14 @@ public class HandParserService
         while (line.StartsWith("Seat "))
         {
             // Get the player name
-            string playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("(")-line.IndexOf(":")-1).Trim();
+            string playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("(") - line.IndexOf(":") - 1).Trim();
             PlayerHandHistory p = new PlayerHandHistory(playerName);
+            int moneyStart = line.IndexOf("($") + 2;
+            int moneyEnd = line.IndexOf(" in chips)");
+            string moneyString = line.Substring(moneyStart, moneyEnd - moneyStart);
+            decimal startMoney = Convert.ToDecimal(moneyString);
+            p.StartMoney = startMoney;
+
 
             // get which player in the list is the button
             if (line.StartsWith(buttonSeat))
@@ -84,7 +90,7 @@ public class HandParserService
 
 
         GetHandActions(ref phh, rawHand);
-        
+
 
         return phh;
     }
@@ -92,8 +98,8 @@ public class HandParserService
     private void GetSmallBlind(ref List<PlayerHandHistory> phh, string line)
     {
         string smallBlindName = line.Split(';').First();
-       
-       // say where someone paid the blinds;
+
+        // say where someone paid the blinds;
         // phh.Where(x => x.PlayerName == smallBlindName).Single().
     }
 
@@ -112,7 +118,7 @@ public class HandParserService
             {
                 break;
             }
-            
+
         }
 
         // Get rid of already processed stuff
@@ -121,10 +127,33 @@ public class HandParserService
         //Get Hole cards
         phh.Where(x => rawHand[0].Contains(x.PlayerName)).Single().HoleCards = GetHoleCards(rawHand[0]);
         rawHand = rawHand.Skip(1).ToList();
-        
-        for(int i = 0; i < rawHand.Count(); i++)
+
+        for (int i = 0; i < rawHand.Count(); i++)
         {
             string line = rawHand[i];
+
+            if (line.StartsWith("Uncalled"))
+            {
+                int playerNameStart = line.IndexOf("returned to") + 11;
+
+                string playerName = line.Substring(playerNameStart, line.Length - playerNameStart).Trim();
+                int moneyStart = line.IndexOf("($") + 2;
+                int moneyEnd = line.IndexOf(") ");
+                string moneyString = line.Substring(moneyStart, moneyEnd - moneyStart);
+                decimal returnedMoney = Convert.ToDecimal(moneyString);
+
+                phh.Where(x => x.PlayerName == playerName).Single().ReturnedMoney = returnedMoney;
+            }
+
+            if (line.Contains("collected $"))
+            {
+                // all of this is garbage and should be regex
+                int nameEnds = line.IndexOf("collected $");
+                string playerName = line.Substring(0, nameEnds).Trim();
+                string moneyString = Regex.Match(line, "\\$\\d+\\.\\d\\d").Groups[0].Value.Replace("$","");
+                decimal winnings = Convert.ToDecimal(moneyString);
+                phh.Where(x => x.PlayerName == playerName).Single().Winnings = winnings;
+            }
 
             if (i == 0)
             {
@@ -146,7 +175,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** TURN ***"))
             {
-                Dictionary<string, List<Action>> actions =  GetStreetActions(rawHand.Skip(i).ToList(), HandActions.Turn);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i).ToList(), HandActions.Turn);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -160,7 +189,7 @@ public class HandParserService
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
                 }
-                break;
+                continue;
             }
         }
     }
@@ -243,11 +272,11 @@ public class HandParserService
         foreach (string line in lines)
         {
             if (line.StartsWith("***") || line.StartsWith("Uncalled")) { break; }
-            if (line.Contains("has timed out")) {continue;}
-            if (line.Contains("leaves the table")) {continue;}
-            if (line.Contains("joins the table")) {continue;}
-            if (line.Contains("is disconnected")) {continue;}
-            if (line.Contains("said, \"")){continue;}
+            if (line.Contains("has timed out")) { continue; }
+            if (line.Contains("leaves the table")) { continue; }
+            if (line.Contains("joins the table")) { continue; }
+            if (line.Contains("is disconnected")) { continue; }
+            if (line.Contains("said, \"")) { continue; }
             string player = GetPlayerNameFromActionLine(line);
             Action action = GetPlayerActionFromActionLine(line);
             action.Round = round;
@@ -266,7 +295,7 @@ public class HandParserService
             }
 
             List<Action> a = new List<Action>();
-            if(!actions.TryGetValue(player, out a))
+            if (!actions.TryGetValue(player, out a))
             {
                 actions.Add(player, a);
                 actions[player] = new List<Action>();
@@ -290,19 +319,19 @@ public class HandParserService
         {
             a.HandAction = HandActions.Raise;
             int indexOfSplit = line.IndexOf(":");
-            string actionStuffString = line.Substring(indexOfSplit+1, line.Length - indexOfSplit -1);
+            string actionStuffString = line.Substring(indexOfSplit + 1, line.Length - indexOfSplit - 1);
             string[] actionStuff = actionStuffString.Trim().Split(" ");
-            
-            a.RaiseAmount = Convert.ToDecimal(actionStuff[1].Replace("$",""));
-            a.TotalAmount = Convert.ToDecimal(actionStuff[3].Replace("$",""));
+
+            a.RaiseAmount = Convert.ToDecimal(actionStuff[1].Replace("$", ""));
+            a.TotalAmount = Convert.ToDecimal(actionStuff[3].Replace("$", ""));
         }
         else if (line.Contains(HandActions.Call.ToLower()))
         {
             a.HandAction = HandActions.Call;
             int indexOfSplit = line.IndexOf(":");
-            string actionStuffString = line.Substring(indexOfSplit+1, line.Length - indexOfSplit -1);
+            string actionStuffString = line.Substring(indexOfSplit + 1, line.Length - indexOfSplit - 1);
             string[] actionStuff = actionStuffString.Trim().Split(" ");
-            a.TotalAmount = Convert.ToDecimal(actionStuff[1].Replace("$",""));
+            a.TotalAmount = Convert.ToDecimal(actionStuff[1].Replace("$", ""));
         }
         else if (line.Contains(HandActions.Check.ToLower()))
         {

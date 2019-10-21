@@ -87,10 +87,29 @@ public class PlayerHandHistory
     public Hand Hand { get; set; }
 
     public decimal StartMoney { get; set; }
-    public decimal Winnings { get; set; }
-    public decimal EndMoney { get; set; }
+    public decimal Winnings { get; set;}
 
-    public decimal MoneyPutInPotTotal { get; set; }
+    public decimal ReturnedMoney {get;set;}
+
+    private decimal moneyPutInPotTotal = -1;
+    public decimal MoneyPutInPotTotal { get
+    {
+        if(moneyPutInPotTotal >= 0)
+        {
+            return moneyPutInPotTotal;
+        }
+
+        foreach(Action a in Actions)
+        {
+            moneyPutInPotTotal += a.TotalAmount;
+        }
+
+        moneyPutInPotTotal -= ReturnedMoney;
+        return moneyPutInPotTotal;
+    }
+    }
+
+    
 
 
 

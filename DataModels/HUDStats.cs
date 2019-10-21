@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace PokerStudier.DataModels
 {
-
-
-
     public class HUDStats
     {
         private List<HandHistory> handHistories;
