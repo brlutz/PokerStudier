@@ -147,10 +147,12 @@ public class HandParserService
 
             if (line.Contains("collected $"))
             {
+                bool hasSidePot = false;
+                if(line.Contains("side pot") || line.Contains("main pot")) {hasSidePot = true;}
                 // all of this is garbage and should be regex
                 int nameEnds = line.IndexOf("collected $");
                 string playerName = line.Substring(0, nameEnds).Trim();
-                string moneyString = Regex.Match(line, "\\$\\d+\\.\\d\\d").Groups[0].Value.Replace("$","");
+                string moneyString = line.Split(" ").Reverse().Skip(hasSidePot ? 3 : 2).FirstOrDefault().Replace("$","");
                 decimal winnings = Convert.ToDecimal(moneyString);
                 phh.Where(x => x.PlayerName == playerName).Single().Winnings = winnings;
             }
@@ -277,6 +279,7 @@ public class HandParserService
             if (line.Contains("joins the table")) { continue; }
             if (line.Contains("is disconnected")) { continue; }
             if (line.Contains("is connected")) { continue; }
+            if (line.Contains("collected $")) {continue;}
             if (line.Contains("said, \"")) { continue; }
             string player = GetPlayerNameFromActionLine(line);
             Action action = GetPlayerActionFromActionLine(line);
