@@ -72,11 +72,12 @@ public class RangeChart
                         string position = phh.Position;
                         this.Results[key].TotalCount++;
 
-                        if (phh.MoneyPutInPotTotal > 0 && !phh.WasBlindPaid())
+                        // TODO: Fix blinds
+                        if (phh.MoneyPutInPotTotal > 0 || phh.ReturnedMoney > 0)//)
                         {
                             this.Results[key].InvolvedCount++;
 
-                            if (phh.Earnings > 0)
+                            if (phh.Earnings > 0 || phh.ReturnedMoney > 0)
                             {
                                 this.Results[key].WinCount++;
                             }

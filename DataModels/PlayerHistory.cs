@@ -91,12 +91,12 @@ public class PlayerHandHistory
 
     public decimal ReturnedMoney {get;set;}
 
-    private decimal? moneyPutInPotTotal = null;
+    private decimal moneyPutInPotTotal = -1;
     public decimal MoneyPutInPotTotal { get
     {
-        if(moneyPutInPotTotal.HasValue)
+        if(moneyPutInPotTotal >= 0)
         {
-            return moneyPutInPotTotal.Value;
+            return moneyPutInPotTotal;
         }
 
         moneyPutInPotTotal = 0;
@@ -106,7 +106,7 @@ public class PlayerHandHistory
         }
 
         moneyPutInPotTotal -= ReturnedMoney;
-        return moneyPutInPotTotal.Value;
+        return moneyPutInPotTotal;
     }
     }
 

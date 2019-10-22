@@ -281,6 +281,8 @@ public class HandParserService
             if (line.Contains("is connected")) { continue; }
             if (line.Contains("collected $")) {continue;}
             if (line.Contains("said, \"")) { continue; }
+            if (line.Contains("was removed from the table")) {continue;}
+            if (line.Contains("doesn't show hand")) {continue;}
             string player = GetPlayerNameFromActionLine(line);
             Action action = GetPlayerActionFromActionLine(line);
             action.Round = round;
