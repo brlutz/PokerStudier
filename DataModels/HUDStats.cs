@@ -62,7 +62,7 @@ namespace PokerStudier.DataModels
                 else
                 {
                     totalHandsActive++;
-                    if (phh.Actions.Exists(x => x.HandAction.Contains("BeforeFlop") && !x.HandAction.Contains("Raise")))
+                    if (phh.Actions.Exists(x => x.HandAction.Contains("BeforeFlop")  && !x.HandAction.Contains("Raise")))
                     {
                         pfr++;
                     }

@@ -168,7 +168,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** FLOP ***"))
             {
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i).ToList(), HandActions.Flop);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i+1).ToList(), HandActions.Flop);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -177,7 +177,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** TURN ***"))
             {
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i).ToList(), HandActions.Turn);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i+1).ToList(), HandActions.Turn);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -186,7 +186,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** RIVER *** "))
             {
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i).ToList(), HandActions.River);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i+1).ToList(), HandActions.River);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -341,6 +341,21 @@ public class HandParserService
         {
             a.HandAction = HandActions.Check;
         }
+        else if(line.Contains(HandActions.Bet.ToLower()))
+        {
+            a.HandAction = HandActions.Bet;
+            int indexOfSplit = line.IndexOf(":");
+            string actionStuffString = line.Substring(indexOfSplit + 1, line.Length - indexOfSplit - 1);
+            string[] actionStuff = actionStuffString.Trim().Split(" ");
+            a.TotalAmount = Convert.ToDecimal(actionStuff[1].Replace("$", ""));
+        }
+
+
+        if(a.HandAction is null)
+        {
+            throw new ArgumentNullException($"There should be some sort of action. Line: {line} ");
+        }
+
 
         return a;
     }

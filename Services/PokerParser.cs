@@ -39,6 +39,7 @@ namespace PokerStudier
                     counter++;
                 }
                 file.Close();
+                hands.Add(hand);
                 //Console.WriteLine($"File has {counter} lines.");
 
                 this.RawHands.AddRange(hands);
