@@ -1,205 +1,27 @@
-*********** # 16 **************
-PokerStars Hand #203492935812:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:42:31 ET
-Table 'Scorpius' 6-max Seat #2 is the button
-Seat 1: R@ngers94 ($4.41 in chips)
-Seat 2: Reignerrr ($5 in chips)
-Seat 3: oldhippieVii ($6.52 in chips)
-Seat 4: PlayTheBlues4U ($6.01 in chips)
-Seat 6: marimba 104 ($4.87 in chips)
-oldhippieVii: posts small blind $0.02
+*********** # 94 **************
+PokerStars Hand #203470995484:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/06 21:21:07 ET
+Table 'Icarus' 6-max Seat #6 is the button
+Seat 1: bobca1944 ($3.95 in chips)
+Seat 2: PlayTheBlues4U ($5.30 in chips)
+Seat 4: jjbenzky ($4.17 in chips)
+Seat 5: DeccaDan ($11.73 in chips)
+Seat 6: DemolishIT ($11.66 in chips)
+bobca1944: posts small blind $0.02
 PlayTheBlues4U: posts big blind $0.05
 *** HOLE CARDS ***
-Dealt to PlayTheBlues4U [7h Js]
-marimba 104: folds
-R@ngers94: calls $0.05
-Reignerrr: folds
-oldhippieVii: calls $0.03
-PlayTheBlues4U: checks
-*** FLOP *** [8c Ah Jd]
-oldhippieVii: checks
-PlayTheBlues4U: checks
-R@ngers94: checks
-*** TURN *** [8c Ah Jd] [2s]
-oldhippieVii: checks
-PlayTheBlues4U: bets $0.15
-R@ngers94: folds
-zepped88 joins the table at seat #5
-oldhippieVii: folds
-Uncalled bet ($0.15) returned to PlayTheBlues4U
-PlayTheBlues4U collected $0.14 from pot
-PlayTheBlues4U: doesn't show hand
-*** SUMMARY ***
-Total pot $0.15 | Rake $0.01
-Board [8c Ah Jd 2s]
-Seat 1: R@ngers94 folded on the Turn
-Seat 2: Reignerrr (button) folded before Flop (didn't bet)
-Seat 3: oldhippieVii (small blind) folded on the Turn
-Seat 4: PlayTheBlues4U (big blind) collected ($0.14)
-Seat 6: marimba 104 folded before Flop (didn't bet)
-
-*********** # 54 **************
-PokerStars Hand #203470998443:  Hold'em No Limit ($0.01/$0.02 USD) - 2019/09/06 21:36:27 ET
-Table 'Pegasus' 6-max Seat #2 is the button
-Seat 1: michelina44 ($0.52 in chips)
-Seat 2: WillDuane ($1.96 in chips)
-Seat 3: jjbenzky ($4 in chips)
-Seat 4: PlayTheBlues4U ($4.45 in chips)
-Seat 5: tsov252525 ($2.31 in chips)
-Seat 6: TheWalrus435 ($2.61 in chips)
-jjbenzky: posts small blind $0.01
-PlayTheBlues4U: posts big blind $0.02
-*** HOLE CARDS ***
-Dealt to PlayTheBlues4U [2d Qd]
-tsov252525: folds
-TheWalrus435: calls $0.02
-michelina44: folds
-WillDuane: calls $0.02
-jjbenzky: calls $0.01
-PlayTheBlues4U: checks
-*** FLOP *** [5d Jd 3d]
-jjbenzky: checks
-PlayTheBlues4U: bets $0.08
-TheWalrus435: folds
-WillDuane: folds
-jjbenzky: calls $0.08
-*** TURN *** [5d Jd 3d] [Ac]
-jjbenzky: checks
-PlayTheBlues4U: bets $0.22
-jjbenzky: calls $0.22
-*** RIVER *** [5d Jd 3d Ac] [Jh]
-jjbenzky: checks
-PlayTheBlues4U: bets $0.66
-jjbenzky: folds
-Uncalled bet ($0.66) returned to PlayTheBlues4U
-PlayTheBlues4U collected $0.65 from pot
-PlayTheBlues4U: doesn't show hand
-*** SUMMARY ***
-Total pot $0.68 | Rake $0.03
-Board [5d Jd 3d Ac Jh]
-Seat 1: michelina44 folded before Flop (didn't bet)
-Seat 2: WillDuane (button) folded on the Flop
-Seat 3: jjbenzky (small blind) folded on the River
-Seat 4: PlayTheBlues4U (big blind) collected ($0.65)
-Seat 5: tsov252525 folded before Flop (didn't bet)
-Seat 6: TheWalrus435 folded on the Flop
-
-*********** # 24 **************
-PokerStars Hand #203492935466:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/07 10:37:24 ET
-Table 'Scorpius' 6-max Seat #5 is the button
-Seat 1: R@ngers94 ($5.07 in chips)
-Seat 2: Reignerrr ($5 in chips)
-Seat 3: AJalexanderAJ ($8.60 in chips)
-Seat 4: PlayTheBlues4U ($5.40 in chips)
-Seat 5: joemli3 ($3.08 in chips)
-Seat 6: marimba 104 ($4.28 in chips)
-marimba 104: posts small blind $0.02
-R@ngers94: posts big blind $0.05
-*** HOLE CARDS ***
-Dealt to PlayTheBlues4U [8s 9s]
-Reignerrr: folds
-AJalexanderAJ: calls $0.05
-PlayTheBlues4U: raises $0.15 to $0.20
-joemli3: calls $0.20
-marimba 104: folds
-R@ngers94: folds
-AJalexanderAJ: calls $0.15
-*** FLOP *** [Qd 3s 3h]
-AJalexanderAJ: checks
-PlayTheBlues4U: bets $0.35
-joemli3: folds
-AJalexanderAJ: folds
-Uncalled bet ($0.35) returned to PlayTheBlues4U
-PlayTheBlues4U collected $0.64 from pot
-PlayTheBlues4U: doesn't show hand
-*** SUMMARY ***
-Total pot $0.67 | Rake $0.03
-Board [Qd 3s 3h]
-Seat 1: R@ngers94 (big blind) folded before Flop
-Seat 2: Reignerrr folded before Flop (didn't bet)
-Seat 3: AJalexanderAJ folded on the Flop
-Seat 4: PlayTheBlues4U collected ($0.64)
-Seat 5: joemli3 (button) folded on the Flop
-Seat 6: marimba 104 (small blind) folded before Flop
-
-*********** # 71 **************
-PokerStars Hand #203470997225:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/06 21:30:05 ET
-Table 'Icarus' 6-max Seat #1 is the button
-Seat 1: bobca1944 ($3.61 in chips)
-Seat 2: PlayTheBlues4U ($4.86 in chips)
-Seat 3: FishyFlopp ($5.94 in chips)
-Seat 5: DeccaDan ($12.48 in chips)
-Seat 6: DemolishIT ($10.86 in chips)
-PlayTheBlues4U: posts small blind $0.02
-FishyFlopp: posts big blind $0.05
-*** HOLE CARDS ***
-Dealt to PlayTheBlues4U [Qc Jd]
+Dealt to PlayTheBlues4U [3d Qs]
+jjbenzky: raises $0.09 to $0.14
 DeccaDan: folds
 DemolishIT: folds
 bobca1944: folds
-PlayTheBlues4U: calls $0.03
-FishyFlopp: raises $0.10 to $0.15
-PlayTheBlues4U: calls $0.10
-*** FLOP *** [Qd 4c 5c]
-PlayTheBlues4U: checks
-FishyFlopp: checks
-*** TURN *** [Qd 4c 5c] [3d]
-PlayTheBlues4U: bets $0.20
-FishyFlopp: calls $0.20
-*** RIVER *** [Qd 4c 5c 3d] [5s]
-PlayTheBlues4U: bets $0.35
-FishyFlopp: calls $0.35
-*** SHOW DOWN ***
-PlayTheBlues4U: shows [Qc Jd] (two pair, Queens and Fives)
-FishyFlopp: mucks hand
-PlayTheBlues4U collected $1.33 from pot
-*** SUMMARY ***
-Total pot $1.40 | Rake $0.07
-Board [Qd 4c 5c 3d 5s]
-Seat 1: bobca1944 (button) folded before Flop (didn't bet)
-Seat 2: PlayTheBlues4U (small blind) showed [Qc Jd] and won ($1.33) with two pair, Queens and Fives
-Seat 3: FishyFlopp (big blind) mucked [Ad Js]
-Seat 5: DeccaDan folded before Flop (didn't bet)
-Seat 6: DemolishIT folded before Flop (didn't bet)
-
-*********** # 77 **************
-PokerStars Hand #203470996717:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/06 21:27:22 ET
-Table 'Icarus' 6-max Seat #4 is the button
-Seat 1: bobca1944 ($3.68 in chips)
-Seat 2: PlayTheBlues4U ($5.36 in chips)
-Seat 3: FishyFlopp ($6.48 in chips)
-Seat 4: jjbenzky ($2.62 in chips)
-Seat 5: DeccaDan ($12.08 in chips)
-Seat 6: DemolishIT ($11.21 in chips)
-DeccaDan: posts small blind $0.02
-DemolishIT: posts big blind $0.05
-*** HOLE CARDS ***
-Dealt to PlayTheBlues4U [7c 5c]
-bobca1944: folds
-PlayTheBlues4U: raises $0.10 to $0.15
-FishyFlopp: folds
-jjbenzky: calls $0.15
-DeccaDan: calls $0.13
-DemolishIT: calls $0.10
-*** FLOP *** [5d Jh Jd]
-DeccaDan: checks
-DemolishIT: checks
-PlayTheBlues4U: bets $0.30
-jjbenzky: calls $0.30
-DeccaDan: folds
-DemolishIT: folds
-*** TURN *** [5d Jh Jd] [9c]
-PlayTheBlues4U: checks
-jjbenzky: bets $0.80
 PlayTheBlues4U: folds
-Uncalled bet ($0.80) returned to jjbenzky
-jjbenzky collected $1.14 from pot
+Uncalled bet ($0.09) returned to jjbenzky
+jjbenzky collected $0.12 from pot
 jjbenzky: doesn't show hand
 *** SUMMARY ***
-Total pot $1.20 | Rake $0.06
-Board [5d Jh Jd 9c]
-Seat 1: bobca1944 folded before Flop (didn't bet)
-Seat 2: PlayTheBlues4U folded on the Turn
-Seat 3: FishyFlopp folded before Flop (didn't bet)
-Seat 4: jjbenzky (button) collected ($1.14)
-Seat 5: DeccaDan (small blind) folded on the Flop
-Seat 6: DemolishIT (big blind) folded on the Flop
+Total pot $0.12 | Rake $0
+Seat 1: bobca1944 (small blind) folded before Flop
+Seat 2: PlayTheBlues4U (big blind) folded before Flop
+Seat 4: jjbenzky collected ($0.12)
+Seat 5: DeccaDan folded before Flop (didn't bet)
+Seat 6: DemolishIT (button) folded before Flop (didn't bet)
