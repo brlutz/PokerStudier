@@ -24,7 +24,7 @@ namespace PokerStudier
             PokerAnalyser a = new PokerAnalyser(p.HandHistories, playerName, f);
             List<string> actionOptions = new List<string>();
 
-            return new HandsOverviewViewModel(p.HandHistories, f, new PaginationSettings() { PageSize = 100 });
+            return new HandsOverviewViewModel(p.HandHistories, playerName, f, new PaginationSettings() { PageSize = 100 });
         }
         
 

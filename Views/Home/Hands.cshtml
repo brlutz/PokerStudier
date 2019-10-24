@@ -5,20 +5,20 @@
 }
 
 
-foreach (HandHistory hh in Model.Hands)
+@foreach (HandHistory hh in Model.Hands)
 {
     <p>
-        <span>hh.HeroEarnings </span>
+        <!--<span>hh.Where(x=>x.PlayerActions(y => y.PlayerName == Model.PlayerName).Earnings) </span>-->
         <br/>
-    foreach(string card in hh.FlopTurnRiverCards)
+    @foreach(string card in hh.FlopTurnRiverCards)
     {
-        <span>card </span>
+        <span>@card </span>
     }
     <br/>
-    foreach(string line in hh.RawHand)
+    @foreach(string line in hh.RawHand)
     {
         
-        <span>line</span><br/>
+        <span>@line</span><br/>
     }
     </p>
 }
