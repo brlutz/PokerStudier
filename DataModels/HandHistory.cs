@@ -63,8 +63,3 @@ public class Hand
     }
     public string RawHand { get; set; }
 }
-
-public class Player
-{
-
-}

@@ -30,8 +30,8 @@ namespace PokerStudier
 
         public List<string> GetHandHistoryFiles()
         {
-            //List<string> textFiles = new List<string>() { "HHs/HH1 copy.txt", "HHs/HH2.txt", "HHs/HH3.txt", "HHs/HH4.txt", "HHs/HH5.txt", "HHs/HH6.txt" };
-            List<string> textFiles = new List<string>() { "HHs/HH1.txt"};
+            List<string> textFiles = new List<string>() { "HHs/HH2.txt", "HHs/HH2.txt", "HHs/HH3.txt", "HHs/HH4.txt", "HHs/HH5.txt", "HHs/HH6.txt" };
+            //List<string> textFiles = new List<string>() { "HHs/test.txt"};
             return textFiles;
         }
         public ResultsViewModel GetWholeRangeAnaylsisModelGetter(string playerName,string position)

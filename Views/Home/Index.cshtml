@@ -11,9 +11,9 @@
 
      
 
-    string getColor(decimal value, int totalCount)
+    string getColor(decimal value, int count)
     {
-        if(totalCount == 0){ return $"hsl(0,10%,100%)";}
+        if(count == 0){ return $"hsl(0,10%,100%)";}
         if(value == 0){ return "hsl(210, 100%, 20%)";}
         string hue = ((1-(1-value))*120).ToString();
         return $"hsl("+hue+",100%,50%)";
@@ -55,7 +55,7 @@
                 count = 0;
             }
             
-            <a asp-controller="Home"  asp-action="Hand" asp-route-hand="@key" style="background-color: @getColor(@Model.Results[key].WinDecimal, @Model.Results[key].TotalCount)" class="box tooltip1">@key
+            <a asp-controller="Home"  asp-action="Hand" asp-route-hand="@key" style="background-color: @getColor(@Model.Results[key].WinDecimal, @Model.Results[key].InvolvedCount)" class="box tooltip1">@key
                 <div class ="tooltiptext1">
                     <div>Hands: @Model.Results[key].TotalCount</div> 
                     <div>W%: @Model.Results[key].WinPercent</div> 

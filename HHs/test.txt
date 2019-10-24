@@ -1,0 +1,27 @@
+*********** # 94 **************
+PokerStars Hand #203470995484:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/06 21:21:07 ET
+Table 'Icarus' 6-max Seat #6 is the button
+Seat 1: bobca1944 ($3.95 in chips)
+Seat 2: PlayTheBlues4U ($5.30 in chips)
+Seat 4: jjbenzky ($4.17 in chips)
+Seat 5: DeccaDan ($11.73 in chips)
+Seat 6: DemolishIT ($11.66 in chips)
+bobca1944: posts small blind $0.02
+PlayTheBlues4U: posts big blind $0.05
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [3d Qs]
+jjbenzky: raises $0.09 to $0.14
+DeccaDan: folds
+DemolishIT: folds
+bobca1944: folds
+PlayTheBlues4U: folds
+Uncalled bet ($0.09) returned to jjbenzky
+jjbenzky collected $0.12 from pot
+jjbenzky: doesn't show hand
+*** SUMMARY ***
+Total pot $0.12 | Rake $0
+Seat 1: bobca1944 (small blind) folded before Flop
+Seat 2: PlayTheBlues4U (big blind) folded before Flop
+Seat 4: jjbenzky collected ($0.12)
+Seat 5: DeccaDan folded before Flop (didn't bet)
+Seat 6: DemolishIT (button) folded before Flop (didn't bet)

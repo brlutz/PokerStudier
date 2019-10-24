@@ -73,7 +73,7 @@ public class RangeChart
                         this.Results[key].TotalCount++;
 
                         // TODO: Fix blinds
-                        if (phh.MoneyPutInPotTotal > 0 || phh.ReturnedMoney > 0)//)
+                        if (phh.MoneyPutInPotTotal > hh.BigBlind || phh.ReturnedMoney > 0)//)
                         {
                             this.Results[key].InvolvedCount++;
 
