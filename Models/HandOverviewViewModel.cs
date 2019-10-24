@@ -9,11 +9,11 @@ namespace PokerStudier1.Models
     {
         public string Hand {get;set;}
 
-        public HandOverviewViewModel(List<HandHistory> hh, Filter filter)
+        public HandOverviewViewModel(List<HandHistory> hh, string playerName, Filter filter)
         {
             if(filter.Hand != null)
             {
-                this.Hands = hh.Where(x=> x.HandType == filter.Hand).ToList();
+                this.Hands = hh.Where(x => x.PlayerHandHistories.Exists(y => y.PlayerName == playerName && y.HandType == filter.Hand)).ToList();
             }
             this.Hand = filter.Hand;
         }

@@ -39,6 +39,7 @@ namespace PokerStudier
                     counter++;
                 }
                 file.Close();
+                hands.Add(hand);
                 //Console.WriteLine($"File has {counter} lines.");
 
                 this.RawHands.AddRange(hands);
@@ -49,13 +50,15 @@ namespace PokerStudier
 
         public void ParseHands(int? handsToParse = null)
         {
+
+            HandParserService s = new HandParserService();
             int counter = 0;
             foreach (List<string> rawHand in this.RawHands)
             {
                 if (!rawHand[0].Contains("Tournament"))
                 {
-                    HandHistory hh = new HandHistory(rawHand, "PlayTheBlues4U");
-                    hh = hh.ParseHand();
+                    HandHistory hh = new HandHistory(rawHand);
+                    hh = s.ParseHand(rawHand);
                     if (!this.HandHistories.Exists(x => x.HandNumber == hh.HandNumber))
                     {
                         this.HandHistories.Add(hh);
