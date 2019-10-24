@@ -7,10 +7,10 @@
 
 
 
-Model.Hand
+@Model.Hand
 
 
-foreach (HandHistory hh in Model.Hands)
+@foreach (HandHistory hh in Model.Hands)
 {
     <p>
     foreach(string action in hh.Actions)
@@ -21,9 +21,9 @@ foreach (HandHistory hh in Model.Hands)
     </p>
     <p>
 
-    foreach(string line in hh.RawHand)
+    @foreach(string line in hh.RawHand)
     {
-        <span>line</span><br/>
+        <span>@line</span><br/>
     }
 
     </p>

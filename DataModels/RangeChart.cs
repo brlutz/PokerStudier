@@ -9,9 +9,9 @@ public class RangeChart
     private List<HandHistory> handHistories;
 
     public List<string> Cards = new List<string>()
-        {
+    {
         "A","K","Q","J","T","9","8","7","6","5","4","3","2"
-        };
+    };
 
 
     public Dictionary<string, TotalResultsObject> Results = new Dictionary<string, TotalResultsObject>();

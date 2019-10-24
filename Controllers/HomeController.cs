@@ -21,22 +21,16 @@ namespace PokerStudier1.Controllers
 
         [Route("/Hand/{hand}", Name = "Hand")]
         public IActionResult Hand(string hand, string playerName = "PlayTheBlues4U")
-        {
-            return null;
-            /* 
+        {     
             ViewModelService s = new ViewModelService();
-            return View(s.GetHandAnaylsisModelGetter(hand));
-            */
-
+            return View(s.GetHandAnaylsisModelGetter(playerName, hand));
         }
 
         [Route("/Hands", Name = "Hands")]
         public IActionResult Hands(string hand, string playerName = "PlayTheBlues4U")
         {
-           return null;
             ViewModelService s = new ViewModelService();
-            // return View(s.GetHandsAnaylsisModelGetter());
-
+            return View(s.GetHandsAnaylsisModelGetter(playerName));
         }
 
         public IActionResult Player(string name)

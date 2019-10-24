@@ -19,7 +19,7 @@ namespace PokerStudier
 
 
 
-        public PokerAnalyser(List<HandHistory> handHistories, Filter f, string playerName)
+        public PokerAnalyser(List<HandHistory> handHistories, string playerName, Filter f)
         {
             this.HandHistories = handHistories;
             this.HandHistories = FilterHandHistories(this.HandHistories, playerName, f);
