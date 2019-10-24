@@ -36,8 +36,8 @@ namespace PokerStudier.DataModels
                 else
                 {
                     totalCount++;
-                    aggressiveCount += phh.Actions.Where(x => x.HandAction.Contains("Bet") || x.HandAction.Contains("Raise")).Count();
-                    passiveCount += phh.Actions.Where(x => x.HandAction.Contains("Bet")).Count();
+                    aggressiveCount += phh.Actions.Where(x => x.HandAction.Contains(HandActions.Bet) || x.HandAction.Contains(HandActions.Raise)).Count();
+                    passiveCount += phh.Actions.Where(x => x.HandAction.Contains(HandActions.Bet)).Count();
                     
                 }
 
@@ -62,7 +62,7 @@ namespace PokerStudier.DataModels
                 else
                 {
                     totalHandsActive++;
-                    if (phh.Actions.Exists(x => x.HandAction.Contains("BeforeFlop")  && !x.HandAction.Contains("Raise")))
+                    if (phh.Actions.Exists(x => x.HandAction.Contains(HandActions.PreFlop)  && !x.HandAction.Contains(HandActions.Raise)))
                     {
                         pfr++;
                     }
@@ -87,7 +87,7 @@ namespace PokerStudier.DataModels
                 else
                 {
                     totalHandsActive++;
-                    if (phh.Actions.Exists(x => x.HandAction.Contains("BeforeFlop") && !x.HandAction.Contains("Fold")))
+                    if (phh.Actions.Exists(x => x.HandAction.Contains(HandActions.PreFlop) && !x.HandAction.Contains(HandActions.Fold)))
                     {
                         vpip++;
                     }

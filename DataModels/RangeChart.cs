@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using PokerStudier1.Models;
 
 public class RangeChart
@@ -17,7 +18,7 @@ public class RangeChart
 
     public RangeChart(List<HandHistory> handHistories, Filter f, string playerName)
     {
-        PutHandsIntoRangeChart(handHistories, playerName);
+        PutHandsIntoRangeChart(handHistories, playerName, f);
         this.handHistories = handHistories;
 
     }
@@ -53,8 +54,9 @@ public class RangeChart
     }
 
 
-    private void PutHandsIntoRangeChart(List<HandHistory> handHistories, string playerName)
+    private void PutHandsIntoRangeChart(List<HandHistory> handHistories, string playerName, Filter f)
     {
+
         PopulateClassification();
         foreach (HandHistory hh in handHistories)
         {
