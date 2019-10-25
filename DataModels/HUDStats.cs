@@ -62,7 +62,7 @@ namespace PokerStudier.DataModels
                 else
                 {
                     totalHandsActive++;
-                    if (phh.Actions.Exists(x => x.HandAction.Contains(HandActions.PreFlop)  && !x.HandAction.Contains(HandActions.Raise)))
+                    if (phh.Actions.Exists(x => x.Round.Contains(HandActions.PreFlop)  && x.HandAction.Contains(HandActions.Raise)))
                     {
                         pfr++;
                     }
@@ -87,7 +87,7 @@ namespace PokerStudier.DataModels
                 else
                 {
                     totalHandsActive++;
-                    if (phh.Actions.Exists(x => x.HandAction.Contains(HandActions.PreFlop) && !x.HandAction.Contains(HandActions.Fold)))
+                    if (phh.Actions.Exists(x => x.Round.Contains(HandActions.PreFlop) && !x.HandAction.Contains(HandActions.Fold)))
                     {
                         vpip++;
                     }

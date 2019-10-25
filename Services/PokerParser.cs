@@ -22,26 +22,31 @@ namespace PokerStudier
                 int counter = 0;
                 string ln;
                 List<List<string>> hands = new List<List<string>>();
-                List<string> hand = new List<string>();
+                List<string> hand = null;
 
                 while ((ln = file.ReadLine()) != null)
                 {
-                    if (ln.Contains("***********") && counter > 5)
+                    if (ln.StartsWith("*********** #"))
+                    {
+                        continue;
+                    }
+
+                    if (ln.StartsWith("PokerStars Hand #") && hand != null)
                     {
                         hands.Add(hand);
                         hand = new List<string>();
                     }
-                    else if (!ln.Contains("***********"))
+                    else if(ln.StartsWith("PokerStars Hand #") && hand == null)
                     {
-                        hand.Add(ln);
+                        hand = new List<string>();
                     }
+
+                    hand.Add(ln);
 
                     counter++;
                 }
                 file.Close();
-                hands.Add(hand);
-                //Console.WriteLine($"File has {counter} lines.");
-
+                
                 this.RawHands.AddRange(hands);
             }
 
