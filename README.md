@@ -15,15 +15,18 @@ I'm going to keep this database free for the moment and try to do any reads from
 ![Example Image](https://raw.githubusercontent.com/brlutz/PokerStudier/master/example.JPG "Example")
 
 # Currently being implimented
-* Really big refactor happening in "EnemyActions" branch. This should provide similar functionality to existing stuff, but will provide a more generic approach to parsing hands that should allow the ability to see ranges/hands for any enemy. This is a pretty big rewite and is currently ongoing. Hope to have that sorted by 10/20ish.
+* Big refactor to handle all users is "done", but untested and this is still hardcoded for the hero. When I get all the bugs worked out, I'll start adding filtering to allow you to see other players ranges and stats. 
 
 # Near Future scope
-*  Winnings Tracker for Hero (overall aka Green Line)
-* Winnings tracker for Hero (non-showdown aka Red Line)
-* Winnings tracker for Hero (showdown only aka Blue Line)
+* Allowing you to see all stats for any user not just hero
+* Fake "hud" to allow you to see multiple users at once 
+* More stats
+
 
 # Medium Range Scope
-* Ability for PFR and other stats
+* Winnings Tracker for Hero (overall aka Green Line)
+* Winnings tracker for Hero (non-showdown aka Red Line)
+* Winnings tracker for Hero (showdown only aka Blue Line)
 
 # Long Term Plan
 * Create a web database to store and upload results and stats
