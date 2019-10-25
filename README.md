@@ -11,6 +11,7 @@ I'm going to keep this database free for the moment and try to do any reads from
 * Hand reviewer for hand types
 * Actions parsing for hero
 * Filter scaffold for future hero actions filtering
+* A "Hand Compiler" utility that will allow you to merge all your hand history into one file
 
 ![Example Image](https://raw.githubusercontent.com/brlutz/PokerStudier/master/example.JPG "Example")
 
