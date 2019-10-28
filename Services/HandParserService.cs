@@ -90,9 +90,58 @@ public class HandParserService
 
 
         GetHandActions(ref phh, rawHand);
+        GetShowDownInfo(ref phh, rawHand);
 
 
         return phh;
+    }
+
+    private void GetShowDownInfo(ref List<PlayerHandHistory> phh, List<string> rawHand)
+    {
+
+        List<string> rawHandShort = rawHand.TakeLast(13).ToList();
+
+        foreach (string line in rawHandShort)
+        {
+            if (line.StartsWith("*** SUMMARY ***"))
+            {
+                continue;
+            }
+            if (line.StartsWith("Seat ") && !line.Contains("(didn't bet)") && !line.Contains("collected ($") && !line.Contains("folded on") && !line.Contains("folded before"))
+            {
+                string playerName = "";
+                if (line.Contains("(button)") || line.Contains("(small blind)") || line.Contains("(big blind)"))
+                {
+                    // Get the player name
+                    playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("(") - line.IndexOf(":") - 1).Trim();
+                }
+                else if(line.Contains("mucked ["))
+                {
+                    playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("mucked [") - line.IndexOf(":") - 1).Trim();
+                
+                }
+                else if(line.Contains("showed ["))
+                {
+                     playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("showed [") - line.IndexOf(":") - 1).Trim();
+                }
+                
+                if (playerName != "")
+                {
+                    string holeCards = GetHoleCards(line);
+                    if (phh.Any(x => x.PlayerName == playerName))
+                    {
+                        phh.Single(x => x.PlayerName == playerName).HoleCards = holeCards;
+                    }
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                        
+                    
+                }
+            }
+
+        }
     }
 
     private void GetSmallBlind(ref List<PlayerHandHistory> phh, string line)
@@ -148,11 +197,11 @@ public class HandParserService
             if (line.Contains("collected $"))
             {
                 bool hasSidePot = false;
-                if(line.Contains("side pot") || line.Contains("main pot")) {hasSidePot = true;}
+                if (line.Contains("side pot") || line.Contains("main pot")) { hasSidePot = true; }
                 // all of this is garbage and should be regex
                 int nameEnds = line.IndexOf("collected $");
                 string playerName = line.Substring(0, nameEnds).Trim();
-                string moneyString = line.Split(" ").Reverse().Skip(hasSidePot ? 3 : 2).FirstOrDefault().Replace("$","");
+                string moneyString = line.Split(" ").Reverse().Skip(hasSidePot ? 3 : 2).FirstOrDefault().Replace("$", "");
                 decimal winnings = Convert.ToDecimal(moneyString);
                 phh.Where(x => x.PlayerName == playerName).Single().Winnings = winnings;
             }
@@ -168,7 +217,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** FLOP ***"))
             {
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i+1).ToList(), HandActions.Flop);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i + 1).ToList(), HandActions.Flop);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -177,7 +226,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** TURN ***"))
             {
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i+1).ToList(), HandActions.Turn);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i + 1).ToList(), HandActions.Turn);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -186,7 +235,7 @@ public class HandParserService
             }
             else if (line.StartsWith("*** RIVER *** "))
             {
-                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i+1).ToList(), HandActions.River);
+                Dictionary<string, List<Action>> actions = GetStreetActions(rawHand.Skip(i + 1).ToList(), HandActions.River);
                 foreach (string key in actions.Keys)
                 {
                     phh.Where(x => x.PlayerName == key).Single().Actions.AddRange(actions[key]);
@@ -279,10 +328,10 @@ public class HandParserService
             if (line.Contains("joins the table")) { continue; }
             if (line.Contains("is disconnected")) { continue; }
             if (line.Contains("is connected")) { continue; }
-            if (line.Contains("collected $")) {continue;}
+            if (line.Contains("collected $")) { continue; }
             if (line.Contains("said, \"")) { continue; }
-            if (line.Contains("was removed from the table")) {continue;}
-            if (line.Contains("doesn't show hand")) {continue;}
+            if (line.Contains("was removed from the table")) { continue; }
+            if (line.Contains("doesn't show hand")) { continue; }
             string player = GetPlayerNameFromActionLine(line);
             Action action = GetPlayerActionFromActionLine(line);
             action.Round = round;
@@ -343,7 +392,7 @@ public class HandParserService
         {
             a.HandAction = HandActions.Check;
         }
-        else if(line.Contains(HandActions.Bet.ToLower()))
+        else if (line.Contains(HandActions.Bet.ToLower()))
         {
             a.HandAction = HandActions.Bet;
             int indexOfSplit = line.IndexOf(":");
@@ -353,7 +402,7 @@ public class HandParserService
         }
 
 
-        if(a.HandAction is null)
+        if (a.HandAction is null)
         {
             throw new ArgumentNullException($"There should be some sort of action. Line: {line} ");
         }

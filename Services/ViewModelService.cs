@@ -30,8 +30,8 @@ namespace PokerStudier
 
         public List<string> GetHandHistoryFiles()
         {
-            //List<string> textFiles = new List<string>() { "HHs/allHands.txt" };
-            List<string> textFiles = new List<string>() { "HHs/test.txt"};
+            List<string> textFiles = new List<string>() { "HHs/allHands.txt" };
+            //List<string> textFiles = new List<string>() { "HHs/test.txt"};
             return textFiles;
         }
         public ResultsViewModel GetWholeRangeAnaylsisModelGetter(string playerName,string position)
@@ -48,7 +48,7 @@ namespace PokerStudier
             List<Action> actionOptions = new List<Action>();
             foreach (HandHistory hh in p.HandHistories)
             {
-                actionOptions.AddRange(hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault()?.Actions);
+                actionOptions.AddRange(hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault()?.Actions ?? new List<Action>());
                 actionOptions = actionOptions.Distinct().ToList();
             }
             List<string> sortedActionOptions = new List<string>();
