@@ -43,10 +43,11 @@ namespace PokerStudier
 
                     hand.Add(ln);
 
+
                     counter++;
                 }
                 file.Close();
-                
+                hands.Add(hand);
                 this.RawHands.AddRange(hands);
             }
 
