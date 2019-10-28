@@ -1,4 +1,4 @@
-namespace PokerStudier1.Models
+namespace PokerStudier.Models
 {
     public class PaginationSettings
     {

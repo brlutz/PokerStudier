@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using PokerStudier1.Models;
+using PokerStudier.Models;
 
 public static class CardsHelper
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PokerStudier;
 
-namespace PokerStudier1.Models
+namespace PokerStudier.Models
 {     
     public class HandsOverviewViewModel
     {

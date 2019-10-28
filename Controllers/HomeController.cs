@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PokerStudier;
-using PokerStudier1.Models;
+using PokerStudier.Models;
 
-namespace PokerStudier1.Controllers
+namespace PokerStudier.Controllers
 {
     public class HomeController : Controller
     {

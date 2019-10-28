@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using PokerStudier1.Models;
+using PokerStudier.Models;
 
 public class RangeChart
 {

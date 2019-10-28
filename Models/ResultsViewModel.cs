@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using PokerStudier;
 using PokerStudier.DataModels;
 
-namespace PokerStudier1.Models
+namespace PokerStudier.Models
 {
 
     public class Filter
