@@ -12,6 +12,8 @@ namespace PokerStudier.DataModels
 
         public decimal AF { get; set; }
 
+        public int HandCount {get;set;}
+
         public HUDStats(List<HandHistory> handHistories, string playerName)
         {
             this.handHistories = handHistories;
@@ -86,6 +88,7 @@ namespace PokerStudier.DataModels
                 }
                 else
                 {
+
                     totalHandsActive++;
                     if (phh.Actions.Exists(x => x.Round.Contains(HandActions.PreFlop) && !x.HandAction.Contains(HandActions.Fold)))
                     {
@@ -98,6 +101,7 @@ namespace PokerStudier.DataModels
             }
             vpip =  totalHandsActive == 0 ? 0 : vpip / totalHandsActive;
 
+            this.HandCount = totalHandsActive;
             return Math.Round(vpip, 2);
         }
 
