@@ -18,14 +18,6 @@ namespace PokerStudier.Controllers
             return View(s.GetWholeRangeAnaylsisModelGetter(playerName, position));
         }
 
-        public IActionResult Player(string position, string playerName = "PlayTheBlues4U")
-        {
-            
-            ViewModelService s = new ViewModelService();
-            return View(s.GetWholeRangeAnaylsisModelGetter(playerName, position));
-        }
-
-
         [Route("/Hand/{hand}", Name = "Hand")]
         public IActionResult Hand(string hand, string playerName = "PlayTheBlues4U")
         {     
