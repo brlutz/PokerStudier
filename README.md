@@ -12,16 +12,16 @@ I'm going to keep this database free for the moment and try to do any reads from
 * Actions parsing for hero
 * Filter scaffold for future hero actions filtering
 * A "Hand Compiler" utility that will allow you to merge all your hand history into one file
+* Ability to see all the players you've played against and their full "seen" ranges and HUD stats
 
 ![Example Image](https://raw.githubusercontent.com/brlutz/PokerStudier/master/example.JPG "Example")
 
 # Currently being implimented
-* Big refactor to handle all users is "done", but untested and this is still hardcoded for the hero. When I get all the bugs worked out, I'll start adding filtering to allow you to see other players ranges and stats. 
+* Fake "hud" to allow you to see multiple users at once 
 
 # Near Future scope
-* Allowing you to see all stats for any user not just hero
-* Fake "hud" to allow you to see multiple users at once 
 * More stats
+* Additional Range analysis
 
 
 # Medium Range Scope
