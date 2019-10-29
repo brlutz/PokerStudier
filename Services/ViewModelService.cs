@@ -26,6 +26,24 @@ namespace PokerStudier
 
             return new HandsOverviewViewModel(p.HandHistories, playerName, f, new PaginationSettings() { PageSize = 100 });
         }
+
+        public PlayersOverviewViewModel PlayersModelGetter()
+        {
+            List<string> textFiles = GetHandHistoryFiles();
+            PokerParser p = new PokerParser();
+            foreach (string file in textFiles)
+            {
+                p.ReadInFile(file);
+            }
+
+            Filter f = new Filter(null, null, null, "Losses");
+            PokerAnalyser a = new PokerAnalyser(p.HandHistories, "", f);
+            
+            
+            List<string> actionOptions = new List<string>();
+
+            return new PlayersOverviewViewModel(p.HandHistories, new PaginationSettings() { PageSize = 100 });
+        }
         
 
         public List<string> GetHandHistoryFiles()

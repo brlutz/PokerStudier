@@ -11,7 +11,14 @@ namespace PokerStudier.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index(string position, string playerName = "zepped88")
+        public IActionResult Index(string position, string playerName = "123tiger711a")
+        {
+            
+            ViewModelService s = new ViewModelService();
+            return View(s.GetWholeRangeAnaylsisModelGetter(playerName, position));
+        }
+
+        public IActionResult Player(string position, string playerName = "PlayTheBlues4U")
         {
             
             ViewModelService s = new ViewModelService();
@@ -33,14 +40,11 @@ namespace PokerStudier.Controllers
             return View(s.GetHandsAnaylsisModelGetter(playerName));
         }
 
-        public IActionResult Player(string name)
+        [Route("/Players", Name = "Players")]
+        public IActionResult Players(string name)
         {
-            throw new NotImplementedException();
-        }
-
-        public IActionResult Players(string searchText)
-        {
-            throw new NotImplementedException();
+            ViewModelService s = new ViewModelService();
+            return View(s.PlayersModelGetter());
         }
 
 

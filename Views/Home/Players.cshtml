@@ -1,0 +1,14 @@
+﻿@model PlayersOverviewViewModel
+
+@{
+    ViewData["Title"] = "Win Percentage";
+}
+
+
+@foreach (PlayerOverviewStats stats in @Model.Players)
+{
+    <p>
+        @stats.PlayerName 
+        @stats.HandCount
+    </p>
+}
