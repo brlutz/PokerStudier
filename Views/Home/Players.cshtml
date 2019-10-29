@@ -7,8 +7,9 @@
 
 @foreach (PlayerOverviewStats stats in @Model.Players)
 {
-    <p>
+     <a asp-controller="Home"  asp-action="Player" asp-route-playername="@stats.PlayerName ">
         @stats.PlayerName 
         @stats.HandCount
-    </p>
+    </a>
+    <br/>
 }

@@ -1,0 +1,100 @@
+﻿@model ResultsViewModel
+
+@{
+    ViewData["Title"] = "Win Percentage";
+    int count = 0;
+    int count2 = 0;
+    int totalCount = 0;
+}
+
+@functions {
+
+     
+
+    string getColor(decimal value, int count)
+    {
+        if(count == 0){ return $"hsl(0,10%,100%)";}
+        if(value == 0){ return "hsl(210, 100%, 20%)";}
+        string hue = ((1-(1-value))*120).ToString();
+        return $"hsl("+hue+",100%,50%)";
+    }
+
+}
+
+<script type="text/javascript">
+
+
+    
+    function filter()
+    {
+    var url = "/";
+    var positionFilter = document.getElementById("position").value;
+            
+    console.log("positionFilter: ", positionFilter);        
+    if(positionFilter !== "" && positionFilter !== "empty")
+    {
+        url+="?Position="+positionFilter;
+    }
+    console.log(url);
+    window.location = url;
+    }
+
+</script>
+
+
+    
+
+<div class="text-center">
+  <div class="wrapper">
+        @foreach (string key in Model.Results.Keys)
+        {
+            totalCount+=@Model.Results[key].TotalCount;
+
+            if(count > 12)
+            {
+                count = 0;
+            }
+            
+            <a asp-controller="Home"  asp-action="Hand" asp-route-hand="@key" style="background-color: @getColor(@Model.Results[key].WinDecimal, @Model.Results[key].InvolvedCount)" class="box tooltip1">@key
+                <div class ="tooltiptext1">
+                    <div>Hands: @Model.Results[key].TotalCount</div> 
+                    <div>W%: @Model.Results[key].WinPercent</div> 
+                </div>
+            </a>
+            count++;
+        }
+
+    
+    </div>
+
+<div>Count: @Model.HUDStats.HandCount</div> 
+<div>VPIP: @Model.HUDStats.VPIP (~0.20 is suggested) </div>
+<div>PFR: @Model.HUDStats.PFR (~0.17 is suggested)</div>
+<div>AF: @Model.HUDStats.AF (~3 is suggested)</div>
+Position: <select type="text" id="position" value=@Model.Filters.Position>
+  <option value="empty" ></option>
+  <option id="Lojack" value="Lojack" >Lojack</option>
+  <option id="Hijack" value="Hijack">Hijack</option>
+  <option id="Cutoff" value="Cutoff">Cutoff</option>
+  <option id="Button" value="Button">Button</option>
+  <option id="SmallBlind" value="SmallBlind">SmallBlind</option>
+  <option id="BigBlind" value="BigBlind">BigBlind</option>
+</select>
+
+<br/>
+
+@foreach(string action in @Model.Actions)
+{
+    count2++;
+    <input type="checkbox" id=@action value=@action>@action
+    if(count2 == 5)
+    {
+        <br/>
+        count2 = 0;
+    }
+    
+}
+
+<br/>
+        <button onclick="filter()">Filter</button>
+</div>
