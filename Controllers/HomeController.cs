@@ -11,7 +11,7 @@ namespace PokerStudier.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index(string position, string playerName = "123tiger711a")
+        public IActionResult Index(string position, string playerName = "PlayTheBlues4U")
         {
             
             ViewModelService s = new ViewModelService();
