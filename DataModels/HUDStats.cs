@@ -12,116 +12,87 @@ namespace PokerStudier.DataModels
 
         public decimal AF { get; set; }
 
-        public int HandCount {get;set;}
+        public int HandCount { get; set; }
 
-        public decimal Winnings {get;set;}
+        public decimal Winnings { get; set; }
+
+        private int AggressiveCount { get; set; }
+        private int PassiveCount { get; set; }
+        private int VPIPHands { get; set; }
+
+        private int PFRHands { get; set; }
+
 
         public HUDStats(List<HandHistory> handHistories, string playerName)
         {
             this.handHistories = handHistories;
-            this.VPIP = CalculateVPIP(this.handHistories, playerName);
-            this.PFR = CalculatePFR(this.handHistories, playerName);
-            this.AF = CalculateAF(this.handHistories, playerName);
-            this.Winnings = CalculateWinnings(this.handHistories, playerName);
-        }
 
-        private decimal CalculateWinnings(List<HandHistory> handHistories, string playerName)
-        {
-            decimal winnings = 0;
             foreach (HandHistory hh in handHistories)
             {
                 PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
-                winnings+= phh.Earnings;
 
-
+                if (!(phh is null))
+                {
+                    this.HandCount++;
+                    CollectVPIPData(phh);
+                    CollectPFRData(phh);
+                    CollectAFData(phh);
+                    this.Winnings += GetHandWinnigs(phh);
+                }
 
             }
-            return winnings;
+
+            this.AF = CalculateAF();
+            this.VPIP = CalculateVPIP();
+            this.PFR = CalculatePFR();
         }
 
-        private decimal CalculateAF(List<HandHistory> handHistories, string playerName)
+        private void CollectVPIPData(PlayerHandHistory phh)
         {
-            decimal af = 0;
-            int aggressiveCount = 0;
-            int passiveCount = 0;
-            int totalCount = 0;
-            foreach (HandHistory hh in handHistories)
+            if (phh.Actions.Exists(x => x.Round.Contains(HandActions.PreFlop) && !x.HandAction.Contains(HandActions.Fold)))
             {
-                PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
-                if (phh is null)
-                {
-                    continue;
-                }
-                else
-                {
-                    totalCount++;
-                    aggressiveCount += phh.Actions.Where(x => x.HandAction.Contains(HandActions.Bet) || x.HandAction.Contains(HandActions.Raise)).Count();
-                    passiveCount += phh.Actions.Where(x => x.HandAction.Contains(HandActions.Bet)).Count();
-                    
-                }
-
-
+                this.VPIPHands++;
             }
-            af = passiveCount == 0 ? 1000 : (decimal)aggressiveCount / (decimal)passiveCount;
 
+        }
+
+        private decimal GetHandWinnigs(PlayerHandHistory phh)
+        {
+            return phh.Earnings;
+        }
+
+        private void CollectAFData(PlayerHandHistory phh)
+        {
+            this.AggressiveCount += phh.Actions.Where(x => x.HandAction.Contains(HandActions.Bet) || x.HandAction.Contains(HandActions.Raise)).Count();
+            this.PassiveCount += phh.Actions.Where(x => x.HandAction.Contains(HandActions.Bet)).Count();
+        }
+
+        private decimal CalculateAF()
+        {
+            decimal af = this.PassiveCount == 0 ? 1000 : (decimal)this.AggressiveCount / (decimal)this.PassiveCount;
             return Math.Round(af, 2);
         }
 
-        private decimal CalculatePFR(List<HandHistory> handHistories, string playerName)
+        private decimal CalculatePFR()
         {
             decimal pfr = 0;
-            int totalHandsActive = 0;
-            foreach (HandHistory hh in handHistories)
-            {
-                PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
-                if (phh is null)
-                {
-                    continue;
-                }
-                else
-                {
-                    totalHandsActive++;
-                    if (phh.Actions.Exists(x => x.Round.Contains(HandActions.PreFlop)  && x.HandAction.Contains(HandActions.Raise)))
-                    {
-                        pfr++;
-                    }
-                }
-            }
-            pfr = totalHandsActive == 0 ? 0 : pfr / totalHandsActive;
-
+            pfr = this.PFRHands == 0 ? 0 : (decimal)this.PFRHands / (decimal)this.HandCount;
             return Math.Round(pfr, 2);
         }
 
-        private decimal CalculateVPIP(List<HandHistory> handHistories, string playerName)
+        private void CollectPFRData(PlayerHandHistory phh)
         {
-            decimal vpip = 0;
-            int totalHandsActive = 0;
-            foreach (HandHistory hh in handHistories)
+            if (phh.Actions.Exists(x => x.Round.Contains(HandActions.PreFlop) && x.HandAction.Contains(HandActions.Raise)))
             {
-                PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
-                if (phh is null)
-                {
-                    continue;
-                }
-                else
-                {
-
-                    totalHandsActive++;
-                    if (phh.Actions.Exists(x => x.Round.Contains(HandActions.PreFlop) && !x.HandAction.Contains(HandActions.Fold)))
-                    {
-                        vpip++;
-                    }
-                }
-
-
-
+                this.PFRHands++;
             }
-            vpip =  totalHandsActive == 0 ? 0 : vpip / totalHandsActive;
-
-            this.HandCount = totalHandsActive;
-            return Math.Round(vpip, 2);
         }
 
+        private decimal CalculateVPIP()
+        {
+            decimal vpip = this.HandCount == 0 ? 0 : (decimal)this.VPIPHands / (decimal)this.HandCount;
 
+            return Math.Round(vpip, 2);
+        }
     }
 }
