@@ -9,7 +9,7 @@ namespace PokerStudier.DataModels
         private List<HandHistory> handHistories;
         public decimal VPIP { get; set; }
         public decimal PFR { get; set; }
-
+        public decimal ThreeBetPF { get; set; }
         public decimal AF { get; set; }
 
         public int HandCount { get; set; }
@@ -37,6 +37,7 @@ namespace PokerStudier.DataModels
                     CollectVPIPData(phh);
                     CollectPFRData(phh);
                     CollectAFData(phh);
+                    Collect3BetPFData(phh);
                     this.Winnings += GetHandWinnigs(phh);
                 }
 
@@ -45,6 +46,23 @@ namespace PokerStudier.DataModels
             this.AF = CalculateAF();
             this.VPIP = CalculateVPIP();
             this.PFR = CalculatePFR();
+            this.ThreeBetPF = Calculate3BetPF();
+        }
+
+        private decimal Calculate3BetPF()
+        {
+
+            decimal threeBet = (this.HandCount == 0 ? 0 : (decimal)this.ThreeBetPF / (decimal)this.HandCount)*100;
+            return Math.Round(threeBet, 2);
+        
+        }
+
+        private void Collect3BetPFData(PlayerHandHistory phh)
+        {
+            if (phh.Actions.Exists(x => x.Round.Contains(HandActions.PreFlop) && x.HandAction.Contains(HandActions.Raise) && x.RaiseCount == 3))
+            {
+                this.ThreeBetPF++;
+            }
         }
 
         private void CollectVPIPData(PlayerHandHistory phh)

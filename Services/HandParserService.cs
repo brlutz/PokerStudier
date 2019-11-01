@@ -338,7 +338,7 @@ public class HandParserService
             action.RaiseCount = raiseCount;
             if (action.HandAction == HandActions.Raise)
             {
-                raiseCount++;
+                    raiseCount++;
             }
             else if (action.HandAction == HandActions.Call)
             {
@@ -348,6 +348,7 @@ public class HandParserService
                     action.HandAction = HandActions.Limped;
                 }
             }
+            action.RaiseCount = raiseCount;
 
             List<Action> a = new List<Action>();
             if (!actions.TryGetValue(player, out a))
