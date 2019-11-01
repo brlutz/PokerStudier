@@ -14,12 +14,29 @@ namespace PokerStudier.DataModels
 
         public int HandCount {get;set;}
 
+        public decimal Winnings {get;set;}
+
         public HUDStats(List<HandHistory> handHistories, string playerName)
         {
             this.handHistories = handHistories;
             this.VPIP = CalculateVPIP(this.handHistories, playerName);
             this.PFR = CalculatePFR(this.handHistories, playerName);
             this.AF = CalculateAF(this.handHistories, playerName);
+            this.Winnings = CalculateWinnings(this.handHistories, playerName);
+        }
+
+        private decimal CalculateWinnings(List<HandHistory> handHistories, string playerName)
+        {
+            decimal winnings = 0;
+            foreach (HandHistory hh in handHistories)
+            {
+                PlayerHandHistory phh = hh.PlayerHandHistories.Where(x => x.PlayerName == playerName).SingleOrDefault();
+                winnings+= phh.Earnings;
+
+
+
+            }
+            return winnings;
         }
 
         private decimal CalculateAF(List<HandHistory> handHistories, string playerName)
