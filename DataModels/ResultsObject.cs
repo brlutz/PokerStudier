@@ -1,3 +1,5 @@
+using System;
+
 public class TotalResultsObject
 {
     public int TotalCount { get; set; }
@@ -10,13 +12,13 @@ public class TotalResultsObject
     public decimal WinDecimal {
         get{
             if(TotalCount == 0){ return 0;}
-            if(!_winDecimal.HasValue){ _winDecimal = decimal.Round((decimal)WinCount/TotalCount,1);}
+            if(!_winDecimal.HasValue){ _winDecimal = decimal.Round((decimal)WinCount/TotalCount,3);}
             return _winDecimal.Value;
     }}
 
-        public int WinPercent {
+        public decimal WinPercent {
         get{
-            return (int)(WinDecimal * 100);
+            return Math.Round((WinDecimal * (decimal)100), 1);
     }}
 
 

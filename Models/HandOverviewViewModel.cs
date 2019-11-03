@@ -13,7 +13,7 @@ namespace PokerStudier.Models
         {
             if(filter.Hand != null)
             {
-                this.Hands = hh.Where(x => x.PlayerHandHistories.Exists(y => y.PlayerName == playerName && y.HandType == filter.Hand)).ToList();
+                this.Hands = hh.Where(x => x.PlayerHandHistories.Exists(y => y.PlayerName == playerName && y.HandType == filter.Hand && y.MoneyPutInPotTotal > 0)).ToList();
             }
             this.Hand = filter.Hand;
         }
