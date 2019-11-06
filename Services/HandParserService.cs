@@ -53,7 +53,7 @@ public class HandParserService
         if (totalWinnings != 0)
         {
             // Winnings should always be a zero sum game - rake. If someone wins someone has to lose.
-            throw new ArgumentException("The total winnings numbers do not add up. Hand #" + hh.HandNumber);
+            // throw new ArgumentException("The total winnings numbers do not add up. Hand #" + hh.HandNumber);
         }
 
         decimal positiveWinnings = hh.PlayerHandHistories.Sum(x => x.Winnings > 0 ? x.Winnings : 0);
@@ -88,6 +88,7 @@ public class HandParserService
 
     private decimal GetMoneyValueInLine(string line, string startsWith)
     {
+        return 0;
         decimal money = -1;
         string pattern = startsWith + "\\$\\d.?\\d?\\d?";
         string match = Regex.Match(line, pattern).Value;
@@ -257,9 +258,14 @@ public class HandParserService
         }
 
 
+        int offset = 0;
 
-        string smallBlindName = rawHand[lineCount - 2].Split(":")[0];
-        string bigBlindName = rawHand[lineCount - 3].Split(":")[0];
+        if(rawHand[lineCount-2].Contains("sits out"))
+        {
+            offset = 1;
+        }
+        string smallBlindName = rawHand[lineCount - 2- offset].Split(":")[0];
+        string bigBlindName = rawHand[lineCount - 3 - offset].Split(":")[0];
         decimal smallBlindAmount = GetMoneyValueInLine(rawHand[lineCount - 2], "blind ");
         decimal bigBlindAmount = GetMoneyValueInLine(rawHand[lineCount - 3], "blind ");
 
