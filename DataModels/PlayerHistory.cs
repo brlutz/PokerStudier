@@ -92,12 +92,15 @@ public class PlayerHandHistory
     public decimal ReturnedMoney {get;set;}
 
     private decimal moneyPutInPotTotal = -1;
+
     public decimal MoneyPutInPotTotal { get
     {
         if(moneyPutInPotTotal >= 0)
         {
             return moneyPutInPotTotal;
         }
+
+
 
         moneyPutInPotTotal = 0;
         foreach(Action a in Actions)

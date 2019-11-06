@@ -38,7 +38,7 @@ namespace PokerStudier.DataModels
                     CollectPFRData(phh);
                     CollectAFData(phh);
                     Collect3BetPFData(phh);
-                    this.Winnings += GetHandWinnigs(phh);
+                    this.Winnings += GetHandWinnigs(phh, hh.Rake);
                 }
 
             }
@@ -74,9 +74,12 @@ namespace PokerStudier.DataModels
 
         }
 
-        private decimal GetHandWinnigs(PlayerHandHistory phh)
+        private decimal GetHandWinnigs(PlayerHandHistory phh, decimal rake)
         {
+            //TODO: Bug alert, idk how this handles split pots
+            if(phh.Earnings > 0) return phh.Earnings - rake;
             return phh.Earnings;
+            
         }
 
         private void CollectAFData(PlayerHandHistory phh)

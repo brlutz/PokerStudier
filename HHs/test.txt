@@ -1,69 +1,103 @@
-PokerStars Hand #203470994910:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/09/06 21:18:21 ET
-Table 'Icarus' 6-max Seat #3 is the button
-Seat 2: PlayTheBlues4U ($9.71 in chips)
-Seat 3: FishyFlopp ($2.61 in chips)
-Seat 4: jjbenzky ($5.17 in chips)
-Seat 5: DeccaDan ($11.83 in chips)
-Seat 6: DemolishIT ($4.41 in chips)
-jjbenzky: posts small blind $0.02
-DeccaDan: posts big blind $0.05
-bobca1944: sits out
+PokerStars Hand #204445469280:  Hold'em No Limit ($0.05/$0.10 USD) - 2019/10/11 19:22:00 ET
+Table 'Elektra' 6-max Seat #2 is the button
+Seat 1: RiverbendAA ($10.93 in chips) 
+Seat 2: TheFreeWilly ($8.89 in chips) 
+Seat 3: PlayTheBlues4U ($23.56 in chips) 
+Seat 4: wcb607a ($10.26 in chips) 
+Seat 6: KillerKlownShoe ($8.31 in chips) 
+PlayTheBlues4U: posts small blind $0.05
+wcb607a: posts big blind $0.10
 *** HOLE CARDS ***
-Dealt to PlayTheBlues4U [Qd Qc]
-DemolishIT: raises $0.20 to $0.25
-PlayTheBlues4U: raises $0.50 to $0.75
-FishyFlopp: folds
-jjbenzky: calls $0.73
-DeccaDan: folds
-DemolishIT: raises $3.66 to $4.41 and is all-in
-PlayTheBlues4U: calls $3.66
-jjbenzky: folds
-*** FLOP *** [4d Td 5c]
-*** TURN *** [4d Td 5c] [7s]
-*** RIVER *** [4d Td 5c 7s] [Kc]
-*** SHOW DOWN ***
-DemolishIT: shows [Ks Kd] (three of a kind, Kings)
-PlayTheBlues4U: shows [Qd Qc] (a pair of Queens)
-DemolishIT collected $9.14 from pot
+Dealt to PlayTheBlues4U [As Ah]
+KillerKlownShoe: folds 
+RiverbendAA: folds 
+TheFreeWilly: raises $0.20 to $0.30
+Antonmirk leaves the table
+PlayTheBlues4U: raises $0.60 to $0.90
+KillerKlownShoe leaves the table
+wcb607a: folds 
+TheFreeWilly: calls $0.60
+*** FLOP *** [7c 8d 3c]
+PlayTheBlues4U: bets $1.10
+TheFreeWilly: folds 
+Uncalled bet ($1.10) returned to PlayTheBlues4U
+PlayTheBlues4U collected $1.80 from pot
+PlayTheBlues4U: doesn't show hand 
 *** SUMMARY ***
-Total pot $9.62 | Rake $0.48
-Board [4d Td 5c 7s Kc]
-Seat 2: PlayTheBlues4U showed [Qd Qc] and lost with a pair of Queens
-Seat 3: FishyFlopp (button) folded before Flop (didn't bet)
-Seat 4: jjbenzky (small blind) folded before Flop
-Seat 5: DeccaDan (big blind) folded before Flop
-Seat 6: DemolishIT showed [Ks Kd] and won ($9.14) with three of a kind, Kings
+Total pot $1.90 | Rake $0.10 
+Board [7c 8d 3c]
+Seat 1: RiverbendAA folded before Flop (didn't bet)
+Seat 2: TheFreeWilly (button) folded on the Flop
+Seat 3: PlayTheBlues4U (small blind) collected ($1.80)
+Seat 4: wcb607a (big blind) folded before Flop
+Seat 6: KillerKlownShoe folded before Flop (didn't bet)
 
-PokerStars Hand #204330101148:  Hold'em No Limit ($0.02/$0.05 USD) - 2019/10/07 20:17:40 ET
-Table 'Sculptor' 6-max Seat #3 is the button
-Seat 1: cladams73 ($2.41 in chips)
-Seat 2: Star6543 ($4.49 in chips)
-Seat 3: skillzplumber ($6.94 in chips)
-Seat 4: PlayTheBlues4U ($5.23 in chips)
-Seat 6: DemolishIT ($1.81 in chips)
-PlayTheBlues4U: posts small blind $0.02
-DemolishIT: posts big blind $0.05
+PokerStars Hand #204445469474:  Hold'em No Limit ($0.05/$0.10 USD) - 2019/10/11 19:23:36 ET
+Table 'Elektra' 6-max Seat #4 is the button
+Seat 1: RiverbendAA ($10.83 in chips) 
+Seat 2: TheFreeWilly ($6.67 in chips) 
+Seat 3: PlayTheBlues4U ($25.79 in chips) 
+Seat 4: wcb607a ($10.11 in chips) 
+RiverbendAA: posts small blind $0.05
+TheFreeWilly: posts big blind $0.10
 *** HOLE CARDS ***
-Dealt to PlayTheBlues4U [Jd Jh]
-cladams73: calls $0.05
-Star6543: raises $0.05 to $0.10
-skillzplumber: folds
-PlayTheBlues4U: raises $0.15 to $0.25
-DemolishIT: folds
-cladams73: calls $0.20
-Star6543: calls $0.15
-*** FLOP *** [3d Th 8c]
-PlayTheBlues4U: bets $0.60
-cladams73: folds
-Star6543: folds
-Uncalled bet ($0.60) returned to PlayTheBlues4U
-PlayTheBlues4U collected $0.76 from pot
-PlayTheBlues4U: doesn't show hand
+Dealt to PlayTheBlues4U [Ad Qc]
+Ryaniam1981 joins the table at seat #5 
+PlayTheBlues4U: raises $0.20 to $0.30
+wcb607a: folds 
+RiverbendAA: folds 
+TheFreeWilly: folds 
+Uncalled bet ($0.20) returned to PlayTheBlues4U
+PlayTheBlues4U collected $0.25 from pot
+PlayTheBlues4U: doesn't show hand 
 *** SUMMARY ***
-Total pot $0.80 | Rake $0.04
-Board [3d Th 8c]
-Seat 1: cladams73 folded on the Flop
-Seat 2: Star6543 folded on the Flop
-Seat 3: skillzplumber (button) folded before Flop (didn't bet)
-Seat 4: PlayTheBlues4U (small blind) collected ($0.76)
-Seat 6: DemolishIT (big blind) folded before Flop
+Total pot $0.25 | Rake $0 
+Seat 1: RiverbendAA (small blind) folded before Flop
+Seat 2: TheFreeWilly (big blind) folded before Flop
+Seat 3: PlayTheBlues4U collected ($0.25)
+Seat 4: wcb607a (button) folded before Flop (didn't bet)
+
+PokerStars Hand #204447288188:  Hold'em No Limit ($0.05/$0.10 USD) - 2019/10/11 19:28:06 ET
+Table 'Elektra' 6-max Seat #3 is the button
+Seat 1: RiverbendAA ($11.46 in chips) 
+Seat 2: TheFreeWilly ($5.57 in chips) 
+Seat 3: PlayTheBlues4U ($25.34 in chips) 
+Seat 4: wcb607a ($8.25 in chips) 
+Seat 5: xxzuluzuluxx ($4 in chips) 
+Seat 6: Rannbankura ($11.54 in chips) 
+wcb607a: posts small blind $0.05
+xxzuluzuluxx: posts big blind $0.10
+*** HOLE CARDS ***
+Dealt to PlayTheBlues4U [Jc Ks]
+Rannbankura: folds 
+RiverbendAA: folds 
+TheFreeWilly: folds 
+PlayTheBlues4U: raises $0.20 to $0.30
+wcb607a: calls $0.25
+xxzuluzuluxx: calls $0.20
+*** FLOP *** [As 3d 4h]
+wcb607a: checks 
+xxzuluzuluxx: checks 
+PlayTheBlues4U: bets $0.50
+wcb607a: calls $0.50
+xxzuluzuluxx: folds 
+*** TURN *** [As 3d 4h] [3s]
+wcb607a: checks 
+PlayTheBlues4U: checks 
+*** RIVER *** [As 3d 4h 3s] [4d]
+wcb607a: checks 
+PlayTheBlues4U: checks 
+*** SHOW DOWN ***
+wcb607a: shows [6s 7s] (two pair, Fours and Threes)
+PlayTheBlues4U: shows [Jc Ks] (two pair, Fours and Threes)
+wcb607a collected $0.90 from pot
+PlayTheBlues4U collected $0.90 from pot
+*** SUMMARY ***
+Total pot $1.90 | Rake $0.10 
+Board [As 3d 4h 3s 4d]
+Seat 1: RiverbendAA folded before Flop (didn't bet)
+Seat 2: TheFreeWilly folded before Flop (didn't bet)
+Seat 3: PlayTheBlues4U (button) showed [Jc Ks] and won ($0.90) with two pair, Fours and Threes
+Seat 4: wcb607a (small blind) showed [6s 7s] and won ($0.90) with two pair, Fours and Threes
+Seat 5: xxzuluzuluxx (big blind) folded on the Flop
+Seat 6: Rannbankura folded before Flop (didn't bet)

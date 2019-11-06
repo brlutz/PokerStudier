@@ -27,6 +27,11 @@ public class HandParserService
         hh.FlopTurnRiverCards = GetFlopTurnRiverCards(lines);
 
         hh.PlayerHandHistories = GetPlayerHandHistories(rawHand);
+        hh.Rake = GetRake(rawHand);
+        hh.TotalPot = GetTotalPot(rawHand);
+
+        IntegrityChecks(hh);
+
         //Actions = GetActions(lines);
         // Get Hero starting amount
         //HeroStartMoney = GetHeroStartMoney(lines);
@@ -38,6 +43,89 @@ public class HandParserService
 
         return hh;
 
+    }
+
+    private void IntegrityChecks(HandHistory hh)
+    {
+
+        decimal totalWinnings = hh.PlayerHandHistories.Sum(x => x.Earnings);
+
+        if (totalWinnings != 0)
+        {
+            // Winnings should always be a zero sum game - rake. If someone wins someone has to lose.
+            throw new ArgumentException("The total winnings numbers do not add up. Hand #" + hh.HandNumber);
+        }
+
+        decimal positiveWinnings = hh.PlayerHandHistories.Sum(x => x.Winnings > 0 ? x.Winnings : 0);
+        if (hh.TotalPot - hh.Rake - positiveWinnings != 0)
+        {
+            throw new ArgumentException("The total pot numbers do not add up. Hand #" + hh.HandNumber);
+        }
+    }
+
+    private decimal GetTotalPot(List<string> rawHand)
+    {
+        decimal totalPot = -1;
+        foreach (string line in rawHand)
+        {
+            if (line.StartsWith("Total pot"))
+            {
+                string pattern = "pot \\$\\d.?\\d?\\d?";
+                string match = Regex.Match(line, pattern).Value;
+                string totalPotString = match.Replace("pot $", "");
+                totalPot = Convert.ToDecimal(totalPotString);
+
+            }
+        }
+
+        if (totalPot < 0)
+        {
+            throw new ArgumentOutOfRangeException("The rake has not been found");
+        }
+
+        return totalPot;
+    }
+
+    private decimal GetMoneyValueInLine(string line, string startsWith)
+    {
+        decimal money = -1;
+        string pattern = startsWith + "\\$\\d.?\\d?\\d?";
+        string match = Regex.Match(line, pattern).Value;
+        string moneyString = match.Replace(startsWith+"$", "");
+        money = Convert.ToDecimal(moneyString);
+
+
+        if (money < 0)
+        {
+            throw new ArgumentOutOfRangeException("The money has not been found");
+        }
+
+        return money;
+    }
+
+    private decimal GetRake(List<string> rawHand)
+    {
+        decimal rake = -1;
+        foreach (string line in rawHand)
+        {
+            if (line.StartsWith("Total pot"))
+            {
+                if (line.Contains("| Rake $"))
+                {
+                    string pattern = "Rake \\$\\d.?\\d?\\d?";
+                    string match = Regex.Match(line, pattern).Value;
+                    string rakeString = match.Replace("Rake $", "");
+                    rake = Convert.ToDecimal(rakeString);
+                }
+            }
+        }
+
+        if (rake < 0)
+        {
+            throw new ArgumentOutOfRangeException("The rake has not been found");
+        }
+
+        return rake;
     }
 
     private List<PlayerHandHistory> GetPlayerHandHistories(List<string> rawHand)
@@ -115,16 +203,16 @@ public class HandParserService
                     // Get the player name
                     playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("(") - line.IndexOf(":") - 1).Trim();
                 }
-                else if(line.Contains("mucked ["))
+                else if (line.Contains("mucked ["))
                 {
                     playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("mucked [") - line.IndexOf(":") - 1).Trim();
-                
+
                 }
-                else if(line.Contains("showed ["))
+                else if (line.Contains("showed ["))
                 {
-                     playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("showed [") - line.IndexOf(":") - 1).Trim();
+                    playerName = line.Substring(line.IndexOf(":") + 1, line.IndexOf("showed [") - line.IndexOf(":") - 1).Trim();
                 }
-                
+
                 if (playerName != "")
                 {
                     string holeCards = GetHoleCards(line);
@@ -136,11 +224,10 @@ public class HandParserService
                 else
                 {
                     throw new NotImplementedException();
-                        
-                    
+
+
                 }
             }
-
         }
     }
 
@@ -167,10 +254,31 @@ public class HandParserService
             {
                 break;
             }
-
         }
 
-        // Get rid of already processed stuff
+
+
+        string smallBlindName = rawHand[lineCount - 2].Split(":")[0];
+        string bigBlindName = rawHand[lineCount - 3].Split(":")[0];
+        decimal smallBlindAmount = GetMoneyValueInLine(rawHand[lineCount - 2], "blind ");
+        decimal bigBlindAmount = GetMoneyValueInLine(rawHand[lineCount - 3], "blind ");
+
+        //Get the actions of posting blinds
+        phh.Single(x => x.PlayerName == smallBlindName).Actions.Add(new Action() {
+            HandAction = HandActions.PostSmallBlind,
+            TotalAmount = smallBlindAmount,
+            RaiseCount = 1,
+            Round = HandActions.PreFlop
+        });
+
+        phh.Single(x => x.Position == "BigBlind").Actions.Add(new Action() {
+            HandAction = HandActions.PostBigBlind,
+            TotalAmount = bigBlindAmount,
+            RaiseCount = 1,
+            Round = HandActions.PreFlop
+        });
+
+        // Get rid of already processed stuff to save on loops later
         rawHand = rawHand.Skip(lineCount).ToList();
 
         //Get Hole cards
@@ -275,7 +383,6 @@ public class HandParserService
             {
                 phh[i].Position = positionKeys[diffBetweenPlayerAndButton];
             }
-
         }
     }
 
@@ -338,7 +445,7 @@ public class HandParserService
             action.RaiseCount = raiseCount;
             if (action.HandAction == HandActions.Raise)
             {
-                    raiseCount++;
+                raiseCount++;
             }
             else if (action.HandAction == HandActions.Call)
             {
