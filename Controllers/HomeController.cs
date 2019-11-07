@@ -33,6 +33,13 @@ namespace PokerStudier.Controllers
             return View(s.GetHandAnaylsisModelGetter(playerName, hand));
         }
 
+        [Route("/quiz", Name = "Quiz")]
+        public IActionResult Quiz(string hand, string playerName = "PlayTheBlues4U")
+        {     
+            ViewModelService s = new ViewModelService();
+            return View(s.QuizModelGetter(playerName, hand));
+        }
+
         [Route("/Hands", Name = "Hands")]
         public IActionResult Hands(string hand, string playerName = "PlayTheBlues4U")
         {

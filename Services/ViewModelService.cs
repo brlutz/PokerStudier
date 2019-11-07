@@ -100,6 +100,24 @@ namespace PokerStudier
 
             return new HandOverviewViewModel(p.HandHistories, playerName, f);
         }
+
+        public QuizViewModel QuizModelGetter(string playerName, string hand)
+        {
+            List<string> textFiles = GetHandHistoryFiles();
+
+            PokerParser p = new PokerParser();
+            foreach (string file in textFiles)
+            {
+                p.ReadInFile(file);
+            }
+
+            Filter f = new Filter(null, hand);
+            PokerAnalyser a = new PokerAnalyser(p.HandHistories, playerName, f);
+            List<string> actionOptions = new List<string>();
+
+            return new QuizViewModel(p.HandHistories, playerName, f);
+        }
+        
         
 
 

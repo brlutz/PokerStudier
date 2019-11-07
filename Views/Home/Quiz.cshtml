@@ -1,0 +1,76 @@
+﻿@model QuizViewModel
+
+@{
+    ViewData["Title"] = "Win Percentage";
+}
+
+
+    <style type="text/css">
+            .circle-container {
+    	position: relative;
+    	width: 24em;
+    	height: 24em;
+    	padding: 2.8em;
+        /*2.8em = 2em*1.4 (2em = half the width of a link with img, 1.4 = sqrt(2))*/
+    	border: dashed 1px;
+    	border-radius: 50%;
+    	margin: 12em auto 0;
+    }
+    .circle-container a {
+    	display: block;
+    	position: absolute;
+    	top: 50%; left: 50%;
+    	width: 4em; height: 4em;
+    	margin: -2em;
+    }
+    .circle-container img { display: block; width: 100%; }
+    .deg30 { transform: rotate(30deg) translate(12em) rotate(-30deg); }
+    .deg90 { transform: rotate(90deg) translate(12em) rotate(-90deg); }
+    .deg150 { transform: rotate(150deg) translate(12em) rotate(-150deg); }
+    .deg210 { transform: rotate(210deg) translate(12em) rotate(-210deg); }
+    .deg270 { transform: rotate(270deg) translate(12em) rotate(-270deg); }
+    .deg330 { transform: rotate(330deg) translate(12em) rotate(-330deg); }
+    .deg30card { transform: rotate(30deg) translate(9em) rotate(-30deg);
+    font-size: 30px; }
+    .deg90card { transform: rotate(90deg) translate(9em) rotate(-90deg);
+    font-size: 30px; }
+    .deg150card { transform: rotate(150deg) translate(9em) rotate(-150deg);
+    font-size: 30px; }
+    .deg210card { transform: rotate(210deg) translate(9em) rotate(-210deg);
+    font-size: 30px; }
+    .deg270card { transform: rotate(270deg) translate(6em) rotate(-270deg);
+    font-size: 30px; }
+    .deg330card { transform: rotate(330deg) translate(9em) rotate(-330deg);
+    font-size: 30px; }
+    .deg35small {
+         transform: rotate(35deg) translate(6em) rotate(-35deg) ;
+        font-size: 30px;
+         }
+    .deg95small { transform: rotate(95deg) translate(6em) rotate(-95deg);
+    font-size: 30px; }
+    .deg155small { transform: rotate(155deg) translate(6em) rotate(-155deg);
+    font-size: 30px; }
+    .deg215small { transform: rotate(215deg) translate(6em) rotate(-215deg);
+    font-size: 30px; }
+    .deg275small { transform: rotate(275deg) translate(6em) rotate(-275deg);
+    font-size: 30px; }
+    .deg335small { transform: rotate(335deg) translate(6em) rotate(-335deg);
+    font-size: 30px; }
+    </style>
+
+    <div class='circle-container'>
+        <a href='#' class='deg30'><img src='~/img/black_circle.png'></a>
+    	<a href='#' class='deg90'><img src='~/img/black_circle.png'></a>
+        <a href='#' class='deg90card'>AdAh</a>
+    	<a href='#' class='deg150'><img src='~/img/black_circle.png'></a>
+    	<a href='#' class='deg210'><img src='~/img/black_circle.png'></a>
+        <a href='#' class='deg270card'>XxXx</a>
+    	<a href='#' class='deg270'><img src='~/img/black_circle.png'></a>
+    	<a href='#' class='deg330'><img src='~/img/black_circle.png'></a>
+        <a href='#' class='deg35small'><em>D</em></a>
+    	<!--<a href='#' class='deg85small'><img src='~/img/black_circle.png'></a>
+    	<a href='#' class='deg145small'><img src='~/img/black_circle.png'></a>
+    	<a href='#' class='deg205small'><img src='~/img/black_circle.png'></a>
+    	<a href='#' class='deg265small'><img src='~/img/black_circle.png'></a>
+    	<a href='#' class='deg325small'><img src='~/img/black_circle.png'></a>-->
+    </div>

@@ -59,7 +59,7 @@ public class HandParserService
         decimal positiveWinnings = hh.PlayerHandHistories.Sum(x => x.Winnings > 0 ? x.Winnings : 0);
         if (hh.TotalPot - hh.Rake - positiveWinnings != 0)
         {
-            throw new ArgumentException("The total pot numbers do not add up. Hand #" + hh.HandNumber);
+           //throw new ArgumentException("The total pot numbers do not add up. Hand #" + hh.HandNumber);
         }
     }
 
@@ -268,7 +268,7 @@ public class HandParserService
         string bigBlindName = rawHand[lineCount - 3 - offset].Split(":")[0];
         decimal smallBlindAmount = GetMoneyValueInLine(rawHand[lineCount - 2], "blind ");
         decimal bigBlindAmount = GetMoneyValueInLine(rawHand[lineCount - 3], "blind ");
-
+        /* 
         //Get the actions of posting blinds
         phh.Single(x => x.PlayerName == smallBlindName).Actions.Add(new Action() {
             HandAction = HandActions.PostSmallBlind,
@@ -283,7 +283,7 @@ public class HandParserService
             RaiseCount = 1,
             Round = HandActions.PreFlop
         });
-
+        */
         // Get rid of already processed stuff to save on loops later
         rawHand = rawHand.Skip(lineCount).ToList();
 
