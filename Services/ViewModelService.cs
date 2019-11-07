@@ -115,7 +115,7 @@ namespace PokerStudier
             PokerAnalyser a = new PokerAnalyser(p.HandHistories, playerName, f);
             List<string> actionOptions = new List<string>();
 
-            return new QuizViewModel(p.HandHistories, playerName, f);
+            return new QuizViewModel();
         }
         
         

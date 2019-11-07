@@ -7,21 +7,37 @@ namespace PokerStudier.Models
 {     
     public class QuizViewModel
     {
-        public string Hand {get;set;}
-
-        public QuizViewModel(List<HandHistory> hh, string playerName, Filter filter)
+        public QuizViewModel()
         {
-            if(filter.Hand != null)
-            {
-                this.Hands = hh.Where(x => x.PlayerHandHistories.Exists(y => y.PlayerName == playerName && y.HandType == filter.Hand && y.MoneyPutInPotTotal > 0)).ToList();
-            }
-            this.Hand = filter.Hand;
+
         }
 
-        public List<string> Actions = new List<string>();
+        public List<string> Options = new List<string>()
+        {
+            PlayerOptions.Fold,
+            PlayerOptions.Call,
+            PlayerOptions.Raise+" 3x",
+            PlayerOptions.Raise+" 5x"
+        };
+        public string PlayerHand {get;set;}
 
-        //public List<TotalResultsObject Hands = new List<TotalResultsObject>();
-        public List<HandHistory> Hands = new List<HandHistory>();
-        public Filter Filters {get;set;}
+        public int PlayerPosition {get;set;}
+        public int DealerPosition {get;set;}
+
+        public int EnemyPosition {get;set;}
+        public decimal EnemyBetSize {get;set;}
+
+        public int Enemy2Position {get;set;}
+        public decimal Enemy2BetSize {get;set;}
+
+        public decimal Stakes {get;set;}
+        public int BetCount {get;set;}
+
+        public string Answer {get;set;}
+
+
+
+
     }
+    
 }

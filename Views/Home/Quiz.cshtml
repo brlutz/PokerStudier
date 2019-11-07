@@ -4,6 +4,39 @@
     ViewData["Title"] = "Win Percentage";
 }
 
+@functions {
+
+     
+
+    string getColor(decimal value, int count)
+    {
+        if(count == 0){ return $"hsl(0,10%,100%)";}
+        if(value == 0){ return "hsl(210, 100%, 20%)";}
+        string hue = ((1-(1-value))*120).ToString();
+        return $"hsl("+hue+",100%,50%)";
+    }
+
+}
+
+<script type="text/javascript">
+
+
+    
+    function filter()
+    {
+    var url = "/";
+    var positionFilter = document.getElementById("position").value;
+            
+    console.log("positionFilter: ", positionFilter);        
+    if(positionFilter !== "" && positionFilter !== "empty")
+    {
+        url+="?Position="+positionFilter;
+    }
+    console.log(url);
+    window.location = url;
+    }
+
+</script>
 
     <style type="text/css">
             .circle-container {
@@ -73,4 +106,10 @@
     	<a href='#' class='deg205small'><img src='~/img/black_circle.png'></a>
     	<a href='#' class='deg265small'><img src='~/img/black_circle.png'></a>
     	<a href='#' class='deg325small'><img src='~/img/black_circle.png'></a>-->
+    </div>
+    <div>
+    @foreach(string option in @Model.Options)
+    {
+        <button id="@option">@option</button><br/>
+    }
     </div>
