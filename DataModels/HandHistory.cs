@@ -50,6 +50,8 @@ public class HandHistory
 
     public decimal Rake { get; set; }
 
+    public decimal TotalPot {get;set;}
+
     public List<PlayerHandHistory> PlayerHandHistories = new List<PlayerHandHistory>();
 
     public List<string> FlopTurnRiverCards {get;set;}

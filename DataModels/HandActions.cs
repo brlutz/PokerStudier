@@ -3,6 +3,8 @@ using System.Collections.Generic;
 public static class HandActions
 {
     
+    public static readonly string PostSmallBlind = "PostSmallBlind";
+    public static readonly string PostBigBlind = "PostBigBlind";
 
     public static readonly string Fold = "Fold";
     public static readonly string Check = "Check";
